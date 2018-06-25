@@ -1,5 +1,5 @@
 {
-  "name": "guaranteed-income",
+  "name": "web-app",
   "type": "project:application",
   "bundler": {
     "id": "webpack",
