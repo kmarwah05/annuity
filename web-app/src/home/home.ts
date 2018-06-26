@@ -6,7 +6,7 @@ export class Home {
   private FilingStatus: typeof FilingStatus = FilingStatus;
   private FundingSource: typeof FundingSource = FundingSource;
   private AnnuityType: typeof AnnuityType = AnnuityType;
-  
+
   private _annuityType: AnnuityType = AnnuityType.Immediate;
 
   inputs: Inputs;
@@ -16,7 +16,6 @@ export class Home {
   }
 
   set annuityType(type: AnnuityType) {
-    console.log(type);
     this.showInputsFor(this._annuityType);
     this._annuityType = type;
   }
