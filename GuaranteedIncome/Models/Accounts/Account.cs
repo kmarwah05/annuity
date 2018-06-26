@@ -7,6 +7,6 @@ namespace GuaranteedIncome.Models
 {
     public abstract class Account
     {
-         public abstract decimal[] CalculateReturns();
+         public abstract double[] CalculateReturns();
     }
 }
