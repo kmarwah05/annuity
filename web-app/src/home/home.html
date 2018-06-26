@@ -1,3 +1,84 @@
 <template>
-  
+
+<require from="../components/form-fields/currency-field.html"></require>
+<require from="../components/form-fields/form-field.html"></require>
+
+<form class="form" role="form" with.bind="inputs" submit.trigger="print()">
+  <section class="form__section">
+
+  <label class="form__label">What kind of annuity are you looking for?</label>
+  <label class="form__label">
+    <input type="radio" name="annuityType" checked />
+    Immediate
+  </label>
+  <label class="form__label">
+    <input type="radio" name="annuityType" />
+    Deferred
+  </label>
+
+  </section>
+
+  <section class="form__section">
+    <currency-field value.two-way="additions" label-text="How much can you contribute yearly?"></currency-field>
+    <form-field type="number" value.two-way="yearsAdding" label-text="How many years will you contribute?"></form-field>
+  </section>
+
+  <section class="form__section">
+    <currency-field value.two-way="initialInvestment" label-text="How much do you plan to invest in an annuity?"></currency-field>
+
+    <label class="form__label">What is your principal's tax status</label>
+    <select name="funding-source" value.bind="fundingSource">
+      <option model.bind="null" selected disabled></option>
+      <option model.bind="FundingSource.Qualified">Qualified</option>
+      <option model.bind="FundingSource.NonQualified">Non-qualified</option>
+      <option model.bind="FundingSource.TaxFree">Tax-free</option>
+    </select>
+
+  </section>
+  <section class="form__section">
+
+    <label class="form__label">Please choose your gender</label>
+    <select name="sex" value.bind="sex">
+      <option model.bind="null" selected disabled></option>
+      <option model.bind="Sex.Male">Male</option>
+      <option model.bind="Sex.Female">Female</option>
+    </select>
+
+    <label class="form__label">Please choose your IRS filing status</label>
+    <select name="filing-status" value.bind="filingStatus">
+      <option model.bind="null" selected disabled></option>
+      <option model.bind="FilingStatus.Joint">Joint</option>
+      <option model.bind="FilingStatus.HeadOfHousehold">Head of household</option>
+      <option model.bind="FilingStatus.Unmarried">Unmarried</option>
+      <option model.bind="FilingStatus.MarriedSeparate">Married filing separately</option>
+    </select>
+
+  </section>
+  <section class="form__section">
+
+    <label class="form__label">Please rate each of the following concerns</label>
+
+    <ul class="form__concerns">
+      <li>
+        <label class="form__label">Concern 1</label>
+        <input type="range" name="concern1" />
+      </li>
+      <li>
+        <label class="form__label">Concern 2</label>
+        <input type="range" name="concern2" />
+      </li>
+      <li>
+        <label class="form__label">Concern 3</label>
+        <input type="range" name="concern3" />
+      </li>
+    </ul>
+
+  </section>
+  <section class="form__section">
+
+    <button type="submit" class="form__submit">Submit</button>
+
+  </section>
+</form>
+
 </template>

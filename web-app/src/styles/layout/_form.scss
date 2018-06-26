@@ -1,0 +1,16 @@
+.form {
+  width: 85%;
+  margin: 0 auto;
+
+  &__section {
+    margin: 1% auto;
+  }
+
+  &__label {
+    display: block;
+  }
+
+  &__concerns {
+    list-style: none;
+  }
+}
