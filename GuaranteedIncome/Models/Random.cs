@@ -7,23 +7,40 @@ namespace GuaranteedIncome.Models
 {
     public class Random
     {
-        
-        //public decimal[] populateArray(decimal mean, decimal stdDeviation, Boolean isDeferred,decimal amount,int time, double interestRate)
-        //{
-        //    double NormalVariable = 0;
-        //    decimal[] arr = new decimal[1000];
-        //    for(int i=0; i < 1000; i++)
-        //    {
-        //        NormalVariable = BoxMuller();
-        //        FinalSpot = SpotTick * Math.Exp(Math.Sqrt(Var) * NormalVariable);
 
-        //        if ((FinalSpot - Strike) < 0)
-        //            Payoff = 0;
-        //        else
-        //            Payoff = FinalSpot - Strike;
-        //        Results = Payoff + Results;
-        //    }
-        //}
+        public double[] populateArray(double mean, double stdDeviation, Boolean isDeferred, double amount, int time, double interestRate)
+        {
+            
+            double[] arr = new double[1000];
+            double randomNumber = 0;
+
+
+            //if deferred
+            if (isDeferred == true)
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    double temp = amount * (mean + stdDeviation * randomNumber);
+                    for (int j = 1; j <= time; j++)
+                    {
+                        randomNumber = BoxMuller();
+                        temp = (temp + amount) * (mean + stdDeviation * randomNumber);
+                    }
+                    arr[i] = temp;
+                }
+            }
+            //if immediate
+            else
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    arr[i] = amount * (mean * time + stdDeviation * BoxMuller() * Math.Sqrt(time));
+                }
+            }
+
+            return arr;
+
+        }
 
         public double BoxMuller()
         {
