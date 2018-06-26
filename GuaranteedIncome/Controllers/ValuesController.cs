@@ -9,11 +9,13 @@ namespace GuaranteedIncome.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+
         // POST api/values
         [HttpPost]
         public void Post([FromBody]string value)
         {
+        }
 
-        }      
+        
     }
 }

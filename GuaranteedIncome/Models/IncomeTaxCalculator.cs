@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuaranteedIncome.Models;
+using System;
 using System.Linq;
 
 namespace GuaranteedIncome.Models
