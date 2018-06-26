@@ -29,24 +29,8 @@
     "@types/lodash": "^4.14.105",
     "@types/webpack": "^4.1.1",
     "typescript": "^2.7.2",
-    "jest": "^22.4.2",
-    "jest-cli": "^23.0.0-alpha.0",
-    "gulp-util": "^3.0.8",
-    "aurelia-loader-nodejs": "^1.0.1",
-    "aurelia-pal-nodejs": "^1.0.0-beta.3.2.0",
-    "ts-jest": "^22.4.1",
-    "@types/jest": "^22.2.0",
-    "jasmine-core": "^3.1.0",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "latest",
-    "karma-jasmine": "^1.1.1",
-    "karma-mocha-reporter": "latest",
-    "karma-webpack": "latest",
-    "karma-coverage-istanbul-reporter": "^1.4.2",
-    "jest-jasmine2": "^23.0.0-alpha.0",
-    "jest-matchers": "^20.0.3",
-    "karma-typescript-preprocessor": "^0.3.1",
+    "sass-loader": "^6.0.7",
+    "node-sass": "^4.7.2",
     "gulp-rename": "^1.2.2",
     "html-webpack-plugin": "^3.0.6",
     "copy-webpack-plugin": "^4.5.1",
@@ -68,39 +52,6 @@
     "istanbul-instrumenter-loader": "^3.0.0",
     "opn": "^5.3.0",
     "webpack-bundle-analyzer": "latest"
-  },
-  "jest": {
-    "modulePaths": [
-      "<rootDir>/src",
-      "<rootDir>/node_modules"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "\\.spec\\.(ts|js)x?$",
-    "setupFiles": [
-      "<rootDir>/test/jest-pretest.ts"
-    ],
-    "testEnvironment": "node",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,ts}",
-      "!**/*.spec.{js,ts}",
-      "!**/node_modules/**",
-      "!**/test/**"
-    ],
-    "coverageDirectory": "<rootDir>/test/coverage-jest",
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "html"
-    ]
   },
   "engines": {
     "node": ">= 6.0.0"
