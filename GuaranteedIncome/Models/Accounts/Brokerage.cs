@@ -10,6 +10,8 @@ namespace GuaranteedIncome.Models
         public override decimal[] CalculateReturns()
         {
             throw new NotImplementedException();
+
         }
+        
     }
 }

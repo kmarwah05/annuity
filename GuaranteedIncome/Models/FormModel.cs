@@ -25,7 +25,8 @@ namespace GuaranteedIncome.Models
         public decimal? YearlyAdditioins { get; set; }
 
         [Required]
-        //public Riders? Riders { get; set; }
+        [EnumDataType(typeof(Riders))]
+        public IEnumerable<Riders> Riders { get; set; }
 
         public decimal? Qualified { get; set; }
 

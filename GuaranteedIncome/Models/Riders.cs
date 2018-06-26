@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class Riders
+    public enum Riders
     {
-        List<string> riders = new List<string>();
+        rider1,
+        rider2,
+        rider3
 
     }
 }
