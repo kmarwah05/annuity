@@ -4,6 +4,11 @@
 
   &__section {
     margin: 1% auto;
+
+    &--hidden {
+      display: none;
+      margin: 0;
+    }
   }
 
   &__label {
