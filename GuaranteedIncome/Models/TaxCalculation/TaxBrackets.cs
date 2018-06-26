@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace tax_planning.Models
+namespace GuaranteedIncome.Models
 {
     /*
      * Properties are 

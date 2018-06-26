@@ -1,4 +1,4 @@
-﻿namespace tax_planning.Models
+﻿namespace GuaranteedIncome.Models
 {
     public enum FilingStatus
     {
