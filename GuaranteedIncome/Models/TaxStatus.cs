@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public abstract class Annuity :Account
+    public enum TaxStatus
     {
-        public abstract override decimal[] CalculateReturns();
-
+        roth,
+        unqualified,
+        qualified
     }
 }

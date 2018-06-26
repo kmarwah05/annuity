@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class DeferredFixed :Annuity
+    public class DeferredFixed :Account
     {
         public override decimal[] CalculateReturns()
         {

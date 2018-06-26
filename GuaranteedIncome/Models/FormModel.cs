@@ -28,11 +28,7 @@ namespace GuaranteedIncome.Models
         [EnumDataType(typeof(Riders))]
         public IEnumerable<Riders> Riders { get; set; }
 
-        public decimal? Qualified { get; set; }
-
-        public decimal? NonQualified { get; set; }
-
-        public decimal? Roth { get; set; }
+        public TaxStatus? TaxType { get; set; }
 
 
     }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class ImmediateFixed: Annuity
+    public class ImmediateFixed: Account
     {
         public override decimal[] CalculateReturns()
         {
