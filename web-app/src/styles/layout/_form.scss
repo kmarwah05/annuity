@@ -18,4 +18,8 @@
   &__concerns {
     list-style: none;
   }
+
+  &__input {
+    font-family: $text-font-stack;
+  }
 }
