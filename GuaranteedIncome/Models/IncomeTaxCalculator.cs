@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace tax_planning.Models.Tax_Calculation
+namespace GuaranteedIncome.Models
 {
     public class IncomeTaxCalculator
     {
