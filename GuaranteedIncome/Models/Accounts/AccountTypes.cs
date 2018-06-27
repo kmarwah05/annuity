@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class ImmediateFixed
+    public abstract class AccountTypes
     {
-        public decimal[] CalculateReturns()
-        {
-            throw new NotImplementedException();
-        }
+         public abstract decimal[] CalculateReturns();
+
+
     }
 }

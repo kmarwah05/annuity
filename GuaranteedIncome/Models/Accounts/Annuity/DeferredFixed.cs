@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class DeferredFixed :Annuity
+    public class DeferredFixed 
     {
-        public override decimal[] CalculateReturns()
+        public decimal[] CalculateReturns()
         {
             throw new NotImplementedException();
         }

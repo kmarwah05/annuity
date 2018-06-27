@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class Brokerage:Account
+    public class Brokerage:AccountTypes
     {
         public override decimal[] CalculateReturns()
         {

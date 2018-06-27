@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public abstract class Account
+    public class Random
     {
-         public abstract decimal[] CalculateReturns();
     }
 }
