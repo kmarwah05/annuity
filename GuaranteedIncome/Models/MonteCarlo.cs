@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class Random
+    public static class MonteCarlo
     {
 
-        public double[] populateArray(double mean, double stdDeviation, Boolean isDeferred, double amount, int time, double interestRate)
+        public static double[] populateArray(double mean, double stdDeviation, Boolean isDeferred, double amount, int time)
         {
             
             double[] arr = new double[1000];
@@ -24,7 +24,7 @@ namespace GuaranteedIncome.Models
                     for (int j = 1; j <= time; j++)
                     {
                         randomNumber = BoxMuller();
-                        temp = (temp + amount) * (mean + stdDeviation * randomNumber);
+                        temp+= (temp + amount) * (mean + stdDeviation * randomNumber);
                     }
                     arr[i] = temp;
                 }
@@ -42,7 +42,7 @@ namespace GuaranteedIncome.Models
 
         }
 
-        public double BoxMuller()
+        public static double BoxMuller()
         {
             double result_value = 0;
             double x1, x2, squared;

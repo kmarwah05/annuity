@@ -9,7 +9,9 @@ namespace GuaranteedIncome.Models
     {
         public override double[] CalculateReturns()
         {
-            throw new NotImplementedException();
+           // MonteCarlo m = new MonteCarlo();
+            //return m.populateArray()
+            return null;
         }
     }
 }
