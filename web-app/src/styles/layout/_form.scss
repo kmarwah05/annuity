@@ -1,0 +1,25 @@
+.form {
+  width: 85%;
+  margin: 0 auto;
+
+  &__section {
+    margin: 1% auto;
+
+    &--hidden {
+      display: none;
+      margin: 0;
+    }
+  }
+
+  &__label {
+    display: block;
+  }
+
+  &__concerns {
+    list-style: none;
+  }
+
+  &__input {
+    font-family: $text-font-stack;
+  }
+}
