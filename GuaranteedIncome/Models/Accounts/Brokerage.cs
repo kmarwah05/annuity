@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class Brokerage:AccountTypes
     {
-        public override decimal[] CalculateReturns()
+        public override double[] CalculateReturns()
         {
             throw new NotImplementedException();
 

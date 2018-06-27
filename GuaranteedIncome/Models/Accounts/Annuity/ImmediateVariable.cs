@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class ImmediateVariable
+    public class ImmediateVariable: Account
     {
-        public decimal[] CalculateReturns()
+        public override double[] CalculateReturns()
         {
             throw new NotImplementedException();
         }

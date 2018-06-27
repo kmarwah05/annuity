@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public abstract class Account
+    public enum TaxStatus
     {
-         public abstract double[] CalculateReturns();
+        roth,
+        unqualified,
+        qualified
     }
 }

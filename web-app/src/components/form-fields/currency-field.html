@@ -1,0 +1,8 @@
+<template bindable="value, labelText">
+  <div class="form__field">
+      <label class="form__label">${labelText}</label>
+      <div class="form__number-input--currency">
+        $<input type="number" class="form__number-input" value.bind="value" />
+      </div>
+  </div>
+</template>

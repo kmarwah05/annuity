@@ -1,0 +1,21 @@
+.form__number-input {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  background: #fefefe;
+  text-align: right;
+  font-family: $text-font-stack;
+
+  &--currency {
+    display: inline;
+    padding: 0;
+    border-bottom: 2px solid #333;
+    background: #fefefe;
+
+    .form__number-input {
+      border: none;
+    }
+  }
+}

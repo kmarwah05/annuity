@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class DeferredVariable
+    public class DeferredVariable:Account
     {
-        public decimal[] CalculateReturns()
+        public override double[] CalculateReturns()
         {
-            throw new NotImplementedException();
+           // MonteCarlo m = new MonteCarlo();
+            //return m.populateArray()
+            return null;
         }
     }
 }

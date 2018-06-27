@@ -4,8 +4,6 @@ module.exports = {
   scripts: {
     default: 'nps webpack',
     test: {
-
-
       lint: {
         default: 'eslint src',
         fix: 'eslint --fix'

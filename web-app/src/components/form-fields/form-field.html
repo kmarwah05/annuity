@@ -1,0 +1,6 @@
+<template bindable="value, type, labelText">
+  <div class="form-field">
+      <label class="form__label">${labelText}</label>
+      <input type="${type}" class="form__${type}-input" value.bind="value" />
+  </div>
+</template>
