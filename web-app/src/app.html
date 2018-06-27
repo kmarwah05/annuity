@@ -1,4 +1,9 @@
 <template>
   <require from="./styles/main.scss"></require>
-  <compose view-model.bind="viewModel"></compose>
+  <require from="./components/header/header.html"></require>
+
+  <header></header>
+  <section class="container">
+    <compose view-model.bind="viewModel"></compose>
+  </section>
 </template>
