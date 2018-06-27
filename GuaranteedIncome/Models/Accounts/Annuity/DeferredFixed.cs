@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class DeferredFixed :Account
+    public class DeferredFixed
     {
-        public override decimal[] CalculateReturns()
+        public decimal calcYearlyIncome(decimal rate, decimal presentValue, FormModel myModel)
         {
-            throw new NotImplementedException();
+            Setup s = new Setup(myModel);
+           return  s.CalcTaxedWithdrawals(rate, presentValue);
         }
     }
 }

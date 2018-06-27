@@ -7,9 +7,11 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredVariable:Account
     {
-        public override decimal[] CalculateReturns()
+        public override double[] CalculateReturns()
         {
-            throw new NotImplementedException();
+           // MonteCarlo m = new MonteCarlo();
+            //return m.populateArray()
+            return null;
         }
     }
 }
