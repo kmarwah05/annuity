@@ -11,7 +11,7 @@ namespace GuaranteedIncome.Models
         {
 
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[deathAge - age];
+            double[] account = new double[deathAge];
             for (int i = 0; i < 100; i++)
             {
                 double temp = amount;

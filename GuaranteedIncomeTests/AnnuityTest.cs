@@ -9,11 +9,7 @@ namespace GuaranteedIncomeTests
 {
    public class AnnuityTest
     {
-        [Fact]
-        public static void addMethod()
-        {
-           
-        }
+        
     }
 
 }

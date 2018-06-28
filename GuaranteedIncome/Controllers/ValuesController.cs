@@ -21,7 +21,39 @@ namespace GuaranteedIncome.Controllers
             //{
             //    Console.WriteLine("i: " + i + " value: " + arr[i]);
             //}
+            FormModel myModel = new FormModel();
+            myModel.CurrentAge = 30;
+            myModel.RetireAge = 65;
+            myModel.isMale = true;
+            myModel.Income = 100000;
+            myModel.FilingStatus = FilingStatus.Joint;
+            myModel.Amount = 3000;
+            myModel.TaxType = TaxStatus.qualified;
+            myModel.isDeferred = true;
+            Setup s = new Setup(myModel);
+            Data data = s.ReturnData();
+            double[] arrF= data.Fixed.First();
+            double[] arrV = data.Variable.First();
+            double[] arrFI = data.FixedIndexed.First();
+            double[] b = data.Brokerage.First();
 
+            
+            for(int i = 30; i< s.deathAge; i++)
+            {
+                Console.WriteLine("i= "+arrF[i]);
+            }
+            for (int i = 30; i < s.deathAge; i++)
+            {
+                Console.WriteLine("j= "+arrV[i]);
+            }
+            for (int i = 30; i < s.deathAge; i++)
+            {
+                Console.WriteLine("k= "+arrFI[i]);
+            }
+            for (int i = 30; i < s.deathAge; i++)
+            {
+                Console.WriteLine("f= "+b[i]);
+            }
 
             return new string[] { "hi" };
         }
