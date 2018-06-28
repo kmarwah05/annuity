@@ -7,11 +7,11 @@ namespace GuaranteedIncome.Models
 {
     public class ImmediateVariable:Account
     {
-        public override double[] CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income)
+        public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income)
         {
-            
-            double[] trials = new double[100];
-            for(int i = 0; i < 100; i++)
+            List<double[]> trials = new List<double[]>();
+            double[] account = new double[deathAge - age];
+            for (int i = 0; i < 100; i++)
             {
                 double temp = amount;
                 double withdrawalSum=0;
@@ -25,15 +25,18 @@ namespace GuaranteedIncome.Models
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
+                        account[j]=temp;
                     }
                     if(j>=retireAge)
                     {
-                        withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
+                      //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
                         temp -= CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
                         temp = temp * Math.Pow(1 + rate, 1);
+                        account[j] = temp;
                     }
                 }
-                trials[i] = withdrawalSum / (deathAge - retireAge);
+                //  trials[i] = withdrawalSum / (deathAge - retireAge);
+                trials.Add(account);
             }
             return trials;
         }
