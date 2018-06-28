@@ -1,0 +1,61 @@
+.form {
+  &__dropbtn {
+    width: 60%;
+    border: none;
+    padding: 2%;
+
+    background-color: $brand-color;
+
+    cursor: pointer;
+
+    text-align: left;
+    font-family: $text-font-stack;
+  }
+
+  &__arrow {
+    float: right;
+
+    font-size: 75%;
+    line-height: 170%;
+  }
+
+  &__dropbtn:hover, &__dropbtn:focus {
+    background-color: $brand-color;
+  }
+
+  &__dropdown {
+    position: relative;
+    display: inline-block;
+
+    width: 48%;
+
+    &-content {
+      display: none;
+      position: absolute;
+
+      width: 60%;
+
+      background-color: #f1f1f1;
+      z-index: 1;
+    }
+
+    &-content button {
+      width: 100%;
+      padding: 3%;
+      border: none;
+
+      cursor: pointer;
+
+      text-align: left;
+      font-family: $text-font-stack;
+    }
+
+    &-content button:hover {
+      background-color: #ddd
+    }
+  }
+
+  &__show {
+    display: block;
+  }
+}
