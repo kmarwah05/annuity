@@ -27,7 +27,11 @@ $text-color: rgb(34, 34, 34) !default;
 
 /// Main brand color
 /// @type Color
-$brand-color: rgb(175, 210, 154) !default;
+$brand-color: rgb(78, 205, 196) !default;
+
+/// Secondary brand color
+/// @type Color
+$brand-color-light: rgb(125, 235, 215) !default;
 
 /// Primary background color
 /// @type color

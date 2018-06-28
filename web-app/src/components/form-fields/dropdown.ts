@@ -11,6 +11,7 @@ export class Dropdown {
       let button = dropdown.previousElementSibling;
       if ((event.target as HTMLElement) != button) {
         dropdown.classList.remove("form__show");
+        button.classList.remove("form__dropbtn--open");
         button.lastElementChild.innerHTML = "&#9660;";
       }
       if ((event.target as HTMLElement).parentElement == dropdown) {
@@ -24,6 +25,7 @@ export class Dropdown {
     let dropdown = document.getElementById(this.dropdownId);
     let button = dropdown.previousElementSibling;
     dropdown.classList.add("form__show");
+    button.classList.add("form__dropbtn--open");
     button.lastElementChild.innerHTML = "&#9650;";
   }
 }
