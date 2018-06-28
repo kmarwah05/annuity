@@ -1,21 +1,37 @@
 .form__number-input {
   -moz-appearance: textfield;
   -webkit-appearance: none;
-  margin: 0;
+
+  margin: 1%;
   border: none;
-  border-bottom: 2px solid #333;
-  background: #fefefe;
+  border-bottom: 2px solid $text-color;
+  padding: 1%;
+
   text-align: right;
   font-family: $text-font-stack;
+  line-height: 1.4;
+  color: $text-color;
 
-  &--currency {
-    display: inline;
-    padding: 0;
-    border-bottom: 2px solid #333;
-    background: #fefefe;
-
-    .form__number-input {
-      border: none;
-    }
+  &--focus-on-input, &:focus {
+    -webkit-animation: underline 0.2s forwards;
+    animation: underline 0.2s forwards;
   }
+
+  &-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+}
+
+.form__decorator--number-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1% 0 0 1%;
+  padding: 1% 0 0 1%;
+}
+
+@keyframes underline {
+  from {border-color: $text-color;}
+  to {border-color: $brand-color;}
 }
