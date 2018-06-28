@@ -34,6 +34,5 @@ namespace GuaranteedIncome.Controllers
             return null; 
         }
 
-        
     }
 }

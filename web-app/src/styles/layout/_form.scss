@@ -4,11 +4,17 @@
 
   &__section {
     margin: 1% auto;
+    display: flex;
+    justify-content: space-between;
 
     &--hidden {
       display: none;
       margin: 0;
     }
+  }
+
+  &__field {
+    width: 48%;
   }
 
   &__label {
@@ -21,5 +27,20 @@
 
   &__input {
     font-family: $text-font-stack;
+    background-color: $bg-color;
+  }
+
+  &__main {
+    background-color: $bg-color;
+    padding: 2% 5%;
+    border-radius: 5px;
+  }
+
+  &__top {
+    text-align: center;
+  }
+
+  option {
+    font: inherit;
   }
 }

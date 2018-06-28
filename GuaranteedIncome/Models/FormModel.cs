@@ -14,7 +14,8 @@ namespace GuaranteedIncome.Models
 
         public int DeathAge { get; set; }
 
-        public bool Gender { get; set; }
+        [EnumDataType(typeof(Gender))]
+        public Gender? Gender { get; set; }
 
         public double Income { get; set; }
 
