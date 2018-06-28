@@ -7,13 +7,15 @@ namespace GuaranteedIncome.Models
 {
     public class Brokerage:Account
     {
-        public override double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status)
+        public override double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status,double income)
         {
 
             double[] trials = new double[100];
             for (int i = 0; i < 100; i++)
             {
                 double temp = 0;
+                double returns = 0;
+                double taxableAmount = 0;
                 double withdrawalSum = 0;
                 for (int j = age; j < deathAge; j++)
                 {
@@ -25,7 +27,9 @@ namespace GuaranteedIncome.Models
                     }
                     if (j < retireAge)
                     {
-                        temp = (temp + amount) * Math.Pow(1 + rate, 1);
+                        returns= (temp + amount) * Math.Pow(1 + rate, 1);
+                        taxableAmount = returns - temp;
+                        temp= returns-Convert.ToDouble(IncomeTaxCalculator.CapitalGainsTaxFor(status, (decimal)taxableAmount, (decimal)income));
                     }
                     if (j >= retireAge)
                     {

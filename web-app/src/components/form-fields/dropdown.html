@@ -1,0 +1,7 @@
+<template class="form__dropdown form__field">
+  <label class="form__label">${labelText}</label>
+  <button click.delegate="dropdown()" class="form__dropbtn">${placeholderText}<span class="form__arrow">&#9660;</span></button>
+  <div id="${dropdownId}" class="form__dropdown-content">
+    <slot></slot>
+  </div>
+</template> 

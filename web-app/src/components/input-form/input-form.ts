@@ -10,11 +10,12 @@ export class InputForm {
   inputs: Inputs;
   annuityType: AnnuityType = AnnuityType.Immediate;
 
+  testDropdown: Sex;
+
   constructor() {
     this.inputs = new Inputs();
   }
-
-
+  
   print(): void {
     Object.keys(this.inputs).forEach(element => {
       console.log(element);
