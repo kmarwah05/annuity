@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredVariable:Account
     {
-        public override double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status)
+        public override double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status,double income)
         {
 
             double[] trials = new double[100];
