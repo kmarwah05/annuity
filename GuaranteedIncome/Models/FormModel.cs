@@ -16,15 +16,15 @@ namespace GuaranteedIncome.Models
 
         public bool Gender { get; set; }
 
-        public decimal Income { get; set; }
+        public double Income { get; set; }
 
         [Required]
         [EnumDataType(typeof(FilingStatus))]
         public FilingStatus FilingStatus { get; set; }
 
-        public decimal InitialAmount { get; set; }
+        public double InitialAmount { get; set; }
 
-        public decimal YearlyAdditioins { get; set; }
+        public double YearlyAdditioins { get; set; }
 
         [Required]
         [EnumDataType(typeof(Riders))]

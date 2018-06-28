@@ -7,10 +7,6 @@ namespace GuaranteedIncome.Models
 {
     public class ImmediateFixed
     {
-        public decimal calcYearlyIncome(decimal rate, decimal presentValue, FormModel myModel)
-        {
-            Setup s = new Setup(myModel);
-            return s.CalcTaxedWithdrawals(rate, presentValue);
-        }
+        
     }
 }

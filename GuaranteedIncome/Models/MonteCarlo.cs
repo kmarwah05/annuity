@@ -7,40 +7,11 @@ namespace GuaranteedIncome.Models
 {
     public static class MonteCarlo
     {
-
-        public static double[] populateArray(double mean, double stdDeviation, Boolean isDeferred, double amount, int time)
+        public static double generateInterestRate(double mean, double stdDeviation)
         {
-            
-            double[] arr = new double[1000];
-            double randomNumber = 0;
-
-
-            //if deferred
-            if (isDeferred == true)
-            {
-                for (int i = 0; i < 1000; i++)
-                {
-                    double temp = amount * (mean + stdDeviation * randomNumber);
-                    for (int j = 1; j <= time; j++)
-                    {
-                        randomNumber = BoxMuller();
-                        temp+= (temp + amount) * (mean + stdDeviation * randomNumber);
-                    }
-                    arr[i] = temp;
-                }
-            }
-            //if immediate
-            else
-            {
-                for (int i = 0; i < 1000; i++)
-                {
-                    arr[i] = amount * (mean * time + stdDeviation * BoxMuller() * Math.Sqrt(time));
-                }
-            }
-
-            return arr;
-
+            return (BoxMuller() * stdDeviation + mean);
         }
+    
 
         public static double BoxMuller()
         {
