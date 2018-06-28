@@ -3,6 +3,8 @@
 <require from="../form-fields/currency-field.html"></require>
 <require from="../form-fields/form-field.html"></require>
 
+<require from="../form-fields/dropdown"></require>
+
 <form class="form" role="form" with.bind="inputs" submit.trigger="print()">
   <!-- These are not the forms you are looking for -->
   <!--
@@ -51,14 +53,11 @@
 
   </section>
   <section class="form__section">
-    <div class="form__field">
-      <label class="form__label">I am</label>
-      <select name="sex" class="form__input form__select-input" value.bind="sex">
-        <option model.bind="null" selected disabled>Choose a sex</option>
-        <option model.bind="Sex.Male">Male</option>
-        <option model.bind="Sex.Female">Female</option>
-      </select>
-    </div>
+
+    <dropdown chosen-value.bind="sex" label-text="I am" placeholder-text="Choose a sex" dropdown-id="sex">
+      <button click.trigger="sex = Sex.Male">Male</button>
+      <button click.trigger="sex = Sex.Female">Female</button>
+    </dropdown>
 
     <div class="form__field">
       <label class="form__label">My IRS filing status is</label>

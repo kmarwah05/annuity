@@ -2,6 +2,7 @@
   -moz-appearance: textfield;
   -webkit-appearance: none;
 
+  width: 60%;
   margin: 1%;
   border: none;
   border-bottom: 2px solid $text-color;
@@ -20,6 +21,8 @@
   &-wrapper {
     position: relative;
     display: inline-block;
+
+    width: 100%;
   }
 }
 
