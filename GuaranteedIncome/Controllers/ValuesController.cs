@@ -15,8 +15,9 @@ namespace GuaranteedIncome.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            double[] arr = MonteCarlo.populateArray(.05, .05, false, 20000, 30);
-            for (int i = 0; i < 1000l; i++)
+
+            double[] arr = ImmediateVariable.CalculateReturns(30, 65, 90, .05, .02, 30000, TaxStatus.roth, FilingStatus.Joint);
+            for (int i = 0; i < 100; i++)
             {
                 Console.WriteLine("i: " + i + " value: " + arr[i]);
             }
@@ -29,11 +30,7 @@ namespace GuaranteedIncome.Controllers
         [HttpPost]
         public JsonResult Post([FromBody] FormModel value)
         {
-           double[] arr= MonteCarlo.populateArray(.05, .01, false, 20000, 30);
-            for(int i = 0; i < 1000l; i++)
-            {
-                Console.WriteLine("i: " + i + " value: " + arr[i]);
-            }
+         
             return null; 
         }
 
