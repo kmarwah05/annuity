@@ -10,7 +10,7 @@ namespace GuaranteedIncome.Models
         private int CurrentAge { get; set; }
         private int RetireAge { get; set; }
         private int DeathAge { get; set; }
-        private bool Gender { get; set; }
+        private Gender Gender { get; set; }
         private FilingStatus FilingStatus { get; set; }
         private decimal InitialAmount { get; set; }
         private decimal YearlyAdditions { get; set; }
@@ -24,7 +24,7 @@ namespace GuaranteedIncome.Models
             CurrentAge = myModel.CurrentAge;
             RetireAge = myModel.RetireAge;
             //DeathAge=calculateDeathAge();
-            Gender = myModel.Gender;
+            //Gender = myModel.Gender;
             FilingStatus = myModel.FilingStatus;
             InitialAmount = myModel.InitialAmount;
             YearlyAdditions = myModel.YearlyAdditioins;

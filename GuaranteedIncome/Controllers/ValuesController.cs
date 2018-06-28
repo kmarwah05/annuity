@@ -16,7 +16,7 @@ namespace GuaranteedIncome.Controllers
         public IEnumerable<string> Get()
         {
             double[] arr = MonteCarlo.populateArray(.05, .05, false, 20000, 30);
-            for (int i = 0; i < 1000l; i++)
+            for (int i = 0; i < 1000L; i++)
             {
                 Console.WriteLine("i: " + i + " value: " + arr[i]);
             }
@@ -30,7 +30,7 @@ namespace GuaranteedIncome.Controllers
         public JsonResult Post([FromBody] FormModel value)
         {
            double[] arr= MonteCarlo.populateArray(.05, .01, false, 20000, 30);
-            for(int i = 0; i < 1000l; i++)
+            for(int i = 0; i < 1000L; i++)
             {
                 Console.WriteLine("i: " + i + " value: " + arr[i]);
             }
