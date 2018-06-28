@@ -30,7 +30,6 @@ namespace GuaranteedIncome.Models.Accounts.Annuity
                         rate = 6;
                     }
 
-
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
