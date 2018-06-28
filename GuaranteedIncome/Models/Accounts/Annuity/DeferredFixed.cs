@@ -18,7 +18,8 @@ namespace GuaranteedIncome.Models
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
-                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+                    //double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+                    double rate = mean;
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
