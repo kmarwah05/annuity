@@ -3,9 +3,12 @@
   margin: 0 auto;
 
   &__section {
-    margin: 1% auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+
+    margin: 1% auto;
+    padding: 2% 0;
 
     &--hidden {
       display: none;
@@ -15,6 +18,7 @@
 
   &__field {
     width: 48%;
+    margin: 2% 0;
   }
 
   &__label {
@@ -40,7 +44,23 @@
     text-align: center;
   }
 
-  option {
-    font: inherit;
+  &__submit {
+    width: 30%;
+    margin: 0 auto;
+    border: none;
+    border-radius: 3px;
+    padding: 2%;
+
+    background-color: $brand-color;
+
+    cursor: pointer;
+    font-family: $text-font-stack;
   }
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
