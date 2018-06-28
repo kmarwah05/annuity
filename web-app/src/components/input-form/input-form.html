@@ -41,34 +41,25 @@
   <section class="form__section" if.bind="annuityType == AnnuityType.Immediate">
 
     <currency-field value.two-way="initialInvestment" label-text="I plan to invest"></currency-field>
-    <div class="form__field">
-      <label class="form__label">The money I will invest is</label>
-      <select name="funding-source" class="form__input form__select-input" value.bind="fundingSource">
-        <option model.bind="null" selected disabled>Choose a tax status</option>
-        <option model.bind="FundingSource.Qualified">Qualified</option>
-        <option model.bind="FundingSource.NonQualified">Non-qualified</option>
-        <option model.bind="FundingSource.TaxFree">Tax-free</option>
-      </select>
-    </div>
+    <dropdown label-text="The money I will invest is" placeholder-text="Choose a tax status" dropdown-id="funding-source">
+      <button click.trigger="fundingSource = FundingSource.Qualified">Qualified</button>
+      <button click.trigger="fundingSource = FundingSource.NonQualified">Non-qualified</button>
+      <button click.trigger="fundingSource = FundingSource.TaxFree">Tax-free</button>
+    </dropdown>
 
   </section>
   <section class="form__section">
 
-    <dropdown chosen-value.bind="sex" label-text="I am" placeholder-text="Choose a sex" dropdown-id="sex">
+    <dropdown label-text="I am" placeholder-text="Choose a sex" dropdown-id="sex">
       <button click.trigger="sex = Sex.Male">Male</button>
       <button click.trigger="sex = Sex.Female">Female</button>
     </dropdown>
-
-    <div class="form__field">
-      <label class="form__label">My IRS filing status is</label>
-      <select name="filing-status" class="form__input form__select-input" value.bind="filingStatus">
-        <option model.bind="null" selected disabled>Choose a filing status</option>
-        <option model.bind="FilingStatus.Joint">Joint</option>
-        <option model.bind="FilingStatus.HeadOfHousehold">Head of household</option>
-        <option model.bind="FilingStatus.Unmarried">Unmarried</option>
-        <option model.bind="FilingStatus.MarriedSeparate">Married filing separately</option>
-      </select>
-    </div>
+    <dropdown label-text="My IRS filing status is" placeholder-text="Choose a filing status" dropdown-id="filing-status">
+      <button click.trigger="filingStatus = FilingStatus.Joint">Joint</button>
+      <button click.trigger="filingStatus = FilingStatus.HeadOfHousehold">Head of household</button>
+      <button click.trigger="filingStatus = FilingStatus.Unmarried">Unmarried</button>
+      <button click.trigger="filingStatus = FilingStatus.MarriedSeparate">Married filing separately</button>
+    </dropdown>
 
   </section>
   <section class="form__section">

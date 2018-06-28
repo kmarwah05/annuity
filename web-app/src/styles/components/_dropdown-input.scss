@@ -9,6 +9,7 @@
     cursor: pointer;
 
     text-align: left;
+    font-family: $text-font-stack;
   }
 
   &__arrow {
@@ -46,6 +47,7 @@
       cursor: pointer;
 
       text-align: left;
+      font-family: $text-font-stack;
     }
 
     &-content button:hover {
