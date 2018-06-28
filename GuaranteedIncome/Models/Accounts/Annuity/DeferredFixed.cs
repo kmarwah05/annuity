@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredFixed:Account
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
+        public  override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
         {
             List <double[]> trials= new List<double[]>();
             double[] account = new double[deathAge - age];
@@ -42,7 +42,7 @@ namespace GuaranteedIncome.Models
             }
             return trials;
         }
-        public override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
+        public static override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
             return TaxHelper.CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }

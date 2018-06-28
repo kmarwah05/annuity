@@ -16,11 +16,11 @@ namespace GuaranteedIncome.Controllers
         public IEnumerable<string> Get()
         {
 
-            double[] arr = ImmediateVariable.CalculateReturns(30, 65, 90, .05, .02, 30000, TaxStatus.roth, FilingStatus.Joint);
-            for (int i = 0; i < 100; i++)
-            {
-                Console.WriteLine("i: " + i + " value: " + arr[i]);
-            }
+            //double[] arr = ImmediateVariable.CalculateReturns(30, 65, 90, .05, .02, 30000, TaxStatus.roth, FilingStatus.Joint,100000);
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    Console.WriteLine("i: " + i + " value: " + arr[i]);
+            //}
 
 
             return new string[] { "hi" };
@@ -30,8 +30,10 @@ namespace GuaranteedIncome.Controllers
         [HttpPost]
         public JsonResult Post([FromBody] FormModel value)
         {
-         
-            return null; 
+            Setup s = new Setup(value);
+            Data data = s.ReturnData();
+
+            return Json(data); 
         }
 
     }

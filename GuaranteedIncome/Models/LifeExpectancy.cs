@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class LifeExpectancy
     {
-       public static (double lowerBound, double upperBound)[] GenderLifeExpectancy(Gender gender)
+       public static (double age, double lifeExpectancy)[] GenderLifeExpectancy(Gender gender)
         {
             switch (gender)
             {
