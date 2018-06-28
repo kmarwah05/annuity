@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public static class ImmediateVariable
+    public class ImmediateVariable:Account
     {
-        public static double[] CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status)
+        public override double[] CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status)
         {
             
             double[] trials = new double[100];
@@ -21,7 +21,6 @@ namespace GuaranteedIncome.Models
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
-                        Console.WriteLine("money at retirement" + assetAtRetire);
                     }
                     if (j < retireAge)
                     {
@@ -33,14 +32,12 @@ namespace GuaranteedIncome.Models
                         temp -= CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
                         temp = temp * Math.Pow(1 + rate, 1);
                     }
-
-                    Console.WriteLine("year j=" + j + " value of: " + temp);
                 }
                 trials[i] = withdrawalSum / (deathAge - retireAge);
             }
             return trials;
         }
-        public static double CalcWithdrawal(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType,FilingStatus status,double principle)
+        public override double CalcWithdrawal(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType,FilingStatus status,double principle)
         {
             return TaxHelper.CalcWithdrawalAmount(rate,presentValue,yearsWithdrawing)- TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }
