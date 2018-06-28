@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GuaranteedIncome.Models
+namespace GuaranteedIncome.Models.Accounts.Annuity
 {
-    public class ImmediateFixed:Account
+    public class ImmediateFixedIndexed: Account
     {
         public override double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
         {
@@ -19,6 +19,18 @@ namespace GuaranteedIncome.Models
                 {
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+
+                    //if rate is less than 1 
+                    if (rate < 1)
+                    {
+                        rate = 1;
+                    }
+                    else if (rate > 6)
+                    {
+                        rate = 6;
+                    }
+
+
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
