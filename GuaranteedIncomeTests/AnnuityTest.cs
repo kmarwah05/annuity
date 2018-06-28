@@ -2,18 +2,57 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-//using GuaranteedIncomeTests;
 using GuaranteedIncome.Models;
 
 namespace GuaranteedIncomeTests
 {
-   public class AnnuityTest
+    public class AnnuityTest
     {
+        Data data = new Data();
+        public int age;
+        public int retireAge;
+        public int deathAge;
+        public Gender Gender;
+        public double income;
+        public FilingStatus status;
+        public double amount;
+        public TaxStatus TaxType;
+        public Boolean isDeferred;
+
+        public Data ReturnData()
+        {
+            Data data = new Data();
+            if (isDeferred == true)
+            {
+                DeferredFixed df = new DeferredFixed();
+                DeferredVariable dv = new DeferredVariable();
+                DeferredFixedIndexed dfi = new DeferredFixedIndexed();
+                Brokerage b = new Brokerage();
+                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+            }
+            else
+            {
+                ImmediateFixed df = new ImmediateFixed();
+                ImmediateVariable dv = new ImmediateVariable();
+                ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
+                Brokerage b = new Brokerage();
+                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+            }
+            return data;
+        }
+
         [Fact]
-        public static void addMethod()
+        public void DeffFixedTesting()
         {
            
         }
+
     }
 
 }
