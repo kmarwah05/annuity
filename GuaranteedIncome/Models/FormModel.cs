@@ -11,12 +11,11 @@ namespace GuaranteedIncome.Models
         public int CurrentAge { get; set; } = 0;
 
         public int RetireAge { get; set; }
-
-        [EnumDataType(typeof(Gender))]
+        
         public Boolean isMale { get; set; }
 
         public double Income { get; set; }
-
+        
         [Required]
         [EnumDataType(typeof(FilingStatus))]
         public FilingStatus FilingStatus { get; set; }
@@ -24,9 +23,9 @@ namespace GuaranteedIncome.Models
         public double Amount { get; set; }
 
         [Required]
-        [EnumDataType(typeof(Riders))]
         public List<Riders> Riders { get; set; }
 
+        [EnumDataType(typeof(FilingStatus))]
         public TaxStatus TaxType { get; set; }//how the funds being added can be taxed : tax free, qualified, unqualified
 
         public int WithdrawalUntil { get; set; }//zero if you get withdrawal until death age . any other value for fixed withdrawal timeline
