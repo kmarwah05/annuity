@@ -50,7 +50,7 @@ namespace GuaranteedIncomeTests
         [Fact]
         public void DeffFixedTesting()
         {
-           
+            
         }
 
     }

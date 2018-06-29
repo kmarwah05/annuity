@@ -42,10 +42,13 @@ namespace GuaranteedIncome.Models
             }
             return trials;
         }
+
+
         public override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
             return TaxHelper.CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }
 
     }
+
 }

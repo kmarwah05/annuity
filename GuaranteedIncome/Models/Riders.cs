@@ -7,9 +7,8 @@ namespace GuaranteedIncome.Models
 {
     public enum Riders
     {
-        rider1,
-        rider2,
-        rider3
-
+        DeathBenefit,
+        GMAB, // Guaranteed Minimum Accumulation Benefit
+        GMWB // Guaranteed Minimum Withdrawal Benefit 
     }
 }
