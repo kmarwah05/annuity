@@ -1,4 +1,4 @@
-﻿using GuaranteedIncome.Models.Accounts.Annuity;
+﻿using GuaranteedIncome.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +75,6 @@ namespace GuaranteedIncome.Models
                 data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
             }
             return data;
-
 
         }
     }

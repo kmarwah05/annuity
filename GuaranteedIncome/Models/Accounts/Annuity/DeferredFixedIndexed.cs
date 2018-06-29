@@ -7,8 +7,12 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredFixedIndexed: Account
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
+        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> riders)
         {
+
+         
+
+
             List<double[]> trials = new List<double[]>();
             double[] account = new double[150];
             for (int i = 0; i < 100; i++)

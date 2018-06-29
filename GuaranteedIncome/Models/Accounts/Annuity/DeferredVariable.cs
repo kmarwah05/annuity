@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredVariable:Account
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
+        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> rider)
         {
 
             List<double[]> trials = new List<double[]>();
