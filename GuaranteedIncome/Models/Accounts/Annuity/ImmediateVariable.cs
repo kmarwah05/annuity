@@ -38,9 +38,10 @@ namespace GuaranteedIncome.Models
                 double temp = amountWithFees;
                 double principle = amountWithFees;
                 double withdrawalSum=0;
+                double minWithdrawal = 0;
                 for (int j = age; j < deathAge; j++)
                 { Random rand = new Random();
-                    double rate = mean+stdDeviation*(rand.NextDouble()*(6)-3);
+                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
@@ -49,7 +50,10 @@ namespace GuaranteedIncome.Models
                             assetAtRetire = principle;
                             temp = principle;
                         }
+
+                         minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);
                     }
+                
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
@@ -57,8 +61,17 @@ namespace GuaranteedIncome.Models
                     }
                     if(j>=retireAge)
                     {
-                      //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
-                        temp -= CalcWithdrawal(rate, temp,deathAge-j+1, taxType, status, principle);
+
+                        double withdrawal = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
+                        if (isGMWB)
+                        {
+                            if (withdrawal< minWithdrawal)
+                            {
+                                withdrawal = minWithdrawal;
+                            }
+                        }
+                        temp -= (withdrawal-withdrawal*.03);
                         temp = temp * Math.Pow(1 + rate, 1);
                         account[j] = temp;
                     }

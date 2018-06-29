@@ -11,6 +11,16 @@ namespace GuaranteedIncome.Models
         {
             double amountWithFees = amount;
             double principle = 0;
+            Boolean isGMWB;
+            if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider
+            {
+                isGMWB = true;
+                amountWithFees -= amountWithFees * .005;
+            }
+            else
+            {
+                isGMWB = false;
+            }
 
             Boolean isGMAB;
             if (Riders.Contains(Models.Riders.GMAB))
@@ -22,12 +32,24 @@ namespace GuaranteedIncome.Models
             {
                 isGMAB = false;
             }
+
+            Boolean isDeath;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeath = true;
+                amountWithFees -= amountWithFees * .005;
+            }
+            else
+            {
+                isDeath = false;
+            }
             List<double[]> trials = new List<double[]>();
             double[] account = new double[150];
             for (int i = 0; i < 100; i++)
             {
                 double temp = 0;
                 double withdrawalSum = 0;
+                double minWithdrawal = 0;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
@@ -41,6 +63,8 @@ namespace GuaranteedIncome.Models
                             assetAtRetire = principle;
                             temp = principle;
                         }
+
+                        minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);
                     }
                     if (j < retireAge)
                     {
@@ -50,7 +74,18 @@ namespace GuaranteedIncome.Models
                     if (j >= retireAge)
                     {
                       //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                        temp -= CalcWithdrawal(rate, temp, deathAge - j+1, taxType, status, principle);
+                        
+
+                        double withdrawal = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
+                        if (isGMWB)
+                        {
+                            if (withdrawal < minWithdrawal)
+                            {
+                                withdrawal = minWithdrawal;
+                            }
+                        }
+                        temp -= (withdrawal-withdrawal*.03);
                         temp = temp * Math.Pow(1 + rate, 1);
                         account[j] = temp;
                     }
