@@ -30,13 +30,13 @@
   <section class="form__main">
   <section class="form__section" if.bind="annuityType == AnnuityType.Deferred">
 
-    <currency-field value.bind="additions" label-text="I will annually set aside"></currency-field>
-    <form-field type="number" value.bind="yearsAdding" label-text="How many years will you contribute?"></form-field>
+    <currency-field input-value.two-way="additions" label-text="I will annually set aside"></currency-field>
+    <form-field type="number" input-value.two-way="yearsAdding" label-text="How many years will you contribute?"></form-field>
 
   </section>
   <section class="form__section" if.bind="annuityType == AnnuityType.Immediate">
 
-    <currency-field value.bind="initialInvestment" label-text="I plan to invest"></currency-field>
+    <currency-field input-value.two-way="initialInvestment" label-text="I plan to invest"></currency-field>
     <dropdown label-text="The money I will invest is" placeholder-text="Choose a tax status" dropdown-id="funding-source">
       <button click.trigger="fundingSource = FundingSource.Qualified">Qualified</button>
       <button click.trigger="fundingSource = FundingSource.NonQualified">Non-qualified</button>
@@ -51,7 +51,7 @@
       <button click.trigger="sex = Sex.Male">Male</button>
       <button click.trigger="sex = Sex.Female">Female</button>
     </dropdown>
-    <form-field type="number" value.bind="age" label-text="My current age is"></form-field>
+    <form-field type="number" input-value.two-way="age" label-text="My current age is"></form-field>
 
     <dropdown label-text="My IRS filing status is" placeholder-text="Choose a filing status" dropdown-id="filing-status">
       <button click.trigger="filingStatus = FilingStatus.Joint">Joint</button>
@@ -59,31 +59,10 @@
       <button click.trigger="filingStatus = FilingStatus.Unmarried">Unmarried</button>
       <button click.trigger="filingStatus = FilingStatus.MarriedSeparate">Married filing separately</button>
     </dropdown>
-    <currency-field value.bind="income" label-text="My current income is"></currency-field>
+    <currency-field input-value.two-way="income" label-text="My current income is"></currency-field>
 
   </section>
   <hr />
-  <!-- <section class="form__section">
-    <div class="form__field">
-      <label class="form__label">Please rate each of the following concerns</label>
-
-      <ul class="form__concerns">
-        <li>
-          <label class="form__label">Concern 1</label>
-          <input type="range" class="form__input" name="concern1" min="0" max="2" step="1" />
-        </li>
-        <li>
-          <label class="form__label">Concern 2</label>
-          <input type="range" class="form__input" name="concern2"  min="0" max="2" step="1" />
-        </li>
-        <li>
-          <label class="form__label">Concern 3</label>
-          <input type="range" class="form__input" name="concern3"  min="0" max="2" step="1" />
-        </li>
-      </ul>
-    </div>
-
-  </section> -->
   <section class="form__section">
 
     <button type="submit" class="form__submit">Submit</button>

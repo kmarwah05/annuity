@@ -25,10 +25,14 @@
     margin: 2% auto;
     text-align: center;
 
+    @media screen and (max-width: 1028px) {
+      width: 100%;
+    }
+
     &--container {
       display: inline-block;
 
-      width: 100%;
+      width: 70%;
 
       text-align: left;
     }
@@ -40,6 +44,8 @@
 
   &__label {
     display: block;
+    margin-bottom: 1%;
+    width: 100%;
   }
 
   &__concerns {
@@ -49,6 +55,7 @@
   &__input {
     font-family: $text-font-stack;
     background-color: $bg-color;
+    width: 100%;
   }
 
   &__tab-bar {
