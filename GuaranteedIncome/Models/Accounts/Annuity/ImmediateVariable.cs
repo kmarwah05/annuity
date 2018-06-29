@@ -9,6 +9,19 @@ namespace GuaranteedIncome.Models
     {
         public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
         {
+            //Fees added to death benefit rider
+            double deathBenefitPenaltyFee = amount;
+            Boolean isDeathBenefit;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeathBenefit = true;
+                deathBenefitPenaltyFee -= deathBenefitPenaltyFee * .005;
+            }
+            else
+            {
+                isDeathBenefit = false;
+            }
+
             double amountWithFees = amount;
             Boolean isGMWB;
             if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider
@@ -38,18 +51,22 @@ namespace GuaranteedIncome.Models
                 double temp = amountWithFees;
                 double principle = amountWithFees;
                 double withdrawalSum=0;
+                double minWithdrawal = 0;
                 for (int j = age; j < deathAge; j++)
                 { Random rand = new Random();
-                    double rate = mean+stdDeviation*(rand.NextDouble()*(6)-3);
+                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
-                        if (assetAtRetire < principle && isGMAB)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
+                        if (assetAtRetire < principle && isGMAB && isDeathBenefit)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
                         {
                             assetAtRetire = principle;
                             temp = principle;
                         }
+
+                         minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);
                     }
+                
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
@@ -57,8 +74,17 @@ namespace GuaranteedIncome.Models
                     }
                     if(j>=retireAge)
                     {
-                      //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
-                        temp -= CalcWithdrawal(rate, temp,deathAge-j+1, taxType, status, principle);
+
+                        double withdrawal = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
+                        if (isGMWB)
+                        {
+                            if (withdrawal< minWithdrawal)
+                            {
+                                withdrawal = minWithdrawal;
+                            }
+                        }
+                        temp -= (withdrawal-withdrawal*.03);
                         temp = temp * Math.Pow(1 + rate, 1);
                         account[j] = temp;
                     }

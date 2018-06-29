@@ -11,8 +11,17 @@ namespace GuaranteedIncome.Models
         {
             double amountWithFees = amount;
             double principle = 0;
-           
-       
+            Boolean isDeath;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeath = true;
+                amountWithFees -= amountWithFees * .005;
+            }
+            else
+            {
+                isDeath = false;
+            }
+
             List <double[]> trials= new List<double[]>();
             double[] account = new double[deathAge+1];
             for (int i = 0; i < 100; i++)
@@ -38,7 +47,7 @@ namespace GuaranteedIncome.Models
                     {
                         //withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
                         temp = temp * Math.Pow(1 + rate, 1);
-                        temp = temp- CalcWithdrawal(rate, temp, deathAge-j+1, taxType, status, principle);
+                        temp = temp- CalcWithdrawal(rate, temp, deathAge-j+1, taxType, status, principle/(deathAge-retireAge));
                         
                         account[j] = temp;
                     }

@@ -76,7 +76,6 @@ namespace GuaranteedIncome.Models
             }
             return data;
 
-
         }
     }
 }
