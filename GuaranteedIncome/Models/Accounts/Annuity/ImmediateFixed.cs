@@ -7,8 +7,20 @@ namespace GuaranteedIncome.Models
 {
     public class ImmediateFixed:Account
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income)
+        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
+            //Fees added to death benefit rider
+            double deathBenefitPenaltyFee = amount;
+            Boolean isDeathBenefit;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeathBenefit = true;
+                deathBenefitPenaltyFee -= deathBenefitPenaltyFee * .005;
+            }
+            else
+            {
+                isDeathBenefit = false;
+            }
 
             List<double[]> trials = new List<double[]>();
             double[] account = new double[150];
@@ -30,7 +42,7 @@ namespace GuaranteedIncome.Models
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
                     }
-                    if (j >= retireAge)
+                    if (j >= retireAge && isDeathBenefit) //DeathBenefit also added
                     {
                        // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
                         temp -= CalcWithdrawal(rate, temp, deathAge - j+1, taxType, status, amount);

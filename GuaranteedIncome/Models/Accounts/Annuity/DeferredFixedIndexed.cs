@@ -7,10 +7,21 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredFixedIndexed: Account
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> riders)
+        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
 
-         
+            //Fees added to death benefit rider 
+            double deathBenefitPenaltyFee = amount;
+            Boolean isDeathBenefit;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeathBenefit = true;
+                deathBenefitPenaltyFee -= deathBenefitPenaltyFee * .005;
+            }
+            else
+            {
+                isDeathBenefit = false;
+            }
 
 
             List<double[]> trials = new List<double[]>();
@@ -39,7 +50,7 @@ namespace GuaranteedIncome.Models
                         double assetAtRetire = temp;
                         account[j] = temp;
                     }
-                    if (j < retireAge)
+                    if (j < retireAge && isDeathBenefit) //DeathBenefit also added 
                     {
                         temp = (temp + amount) * Math.Pow(1 + rate, 1);
                     }
@@ -51,7 +62,7 @@ namespace GuaranteedIncome.Models
                         account[j] = temp;
                     }
                 }
-                //  trials[i] = withdrawalSum / (deathAge - retireAge);
+                // trials[i] = withdrawalSum / (deathAge - retireAge);
                 account[deathAge] = 0;
 
                 trials.Add(account);
