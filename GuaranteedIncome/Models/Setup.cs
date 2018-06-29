@@ -34,11 +34,14 @@ namespace GuaranteedIncome.Models
 
             (double age, double lifeExpectancy)[] life= LifeExpectancy.GenderLifeExpectancy(Gender);
 
-            if(Gender==Gender.Male)
-            deathAge = Convert.ToInt32(age + life[age + 7].lifeExpectancy);
+            if (Gender == Gender.Male)
+            {
+                deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
+            }
             else
-            deathAge = Convert.ToInt32(age + life[age + 12].lifeExpectancy);
-
+            {
+                deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
+            }
             income = myModel.Income;
             status = myModel.FilingStatus;
             isDeferred = myModel.isDeferred;

@@ -28,7 +28,7 @@ namespace GuaranteedIncome.Controllers
             myModel.Income = 100000;
             myModel.FilingStatus = FilingStatus.Joint;
             myModel.Amount = 3000;
-            myModel.TaxType = TaxStatus.qualified;
+            myModel.TaxType = TaxStatus.roth;
             myModel.isDeferred = true;
             Setup s = new Setup(myModel);
             Data data = s.ReturnData();
@@ -54,7 +54,12 @@ namespace GuaranteedIncome.Controllers
             {
                 Console.WriteLine("f= "+b[i]);
             }
-
+            DeferredFixed Def = new DeferredFixed();
+           double[]Fixed= (Def.CalculateReturns(30, 65, 95, .05, .01, 2000, TaxStatus.roth, FilingStatus.Joint, 10000)).First();
+            for (int i = 30; i <= 95; i++)
+            {
+                Console.WriteLine(i+" ewq= " +Fixed[i]);
+            }
             return new string[] { "hi" };
         }
 
