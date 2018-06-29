@@ -16,13 +16,24 @@ namespace GuaranteedIncome.Models
         public FilingStatus status;
         public double amount;
         public TaxStatus TaxType;
-        public Boolean isDeferred; 
+        public List<Riders> Riders;
+        public Boolean isDeferred;
+
+        public int WithdrawalUntil;
 
         public Setup(FormModel myModel)
         {
             age = myModel.CurrentAge;
             retireAge = myModel.RetireAge;
-
+            Riders = myModel.Riders;
+            if (myModel.WithdrawalUntil==0)
+            {
+                WithdrawalUntil = deathAge;
+            }
+            else
+            {
+                WithdrawalUntil = retireAge + myModel.WithdrawalUntil;
+            }
             if (myModel.isMale)
             {
                 Gender = Gender.Male;
@@ -58,10 +69,10 @@ namespace GuaranteedIncome.Models
                 DeferredVariable dv = new DeferredVariable();
                 DeferredFixedIndexed dfi = new DeferredFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
             }
             else
             {
@@ -69,10 +80,10 @@ namespace GuaranteedIncome.Models
                 ImmediateVariable dv = new ImmediateVariable();
                 ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
-                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, .01, amount, TaxType, status, income);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
             }
             return data;
 
