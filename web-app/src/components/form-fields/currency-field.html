@@ -1,7 +1,9 @@
 <template class="form__field" bindable="value, labelText">
-  <label class="form__label">${labelText}</label>
-  <div class="form__number-input-wrapper">
-    <input type="number" class="form__number-input" placeholder="0.00" value.bind="value" />
-    <div class="form__decorator--number-input">$</div>
+  <div class="form__field--container">
+    <label class="form__label">${labelText}</label>
+    <div class="form__number-input-wrapper">
+      <input type="number" class="form__number-input" placeholder="0.00" value.bind="value" />
+      <div class="form__decorator--number-input">$</div>
+    </div>
   </div>
 </template>

@@ -8,6 +8,7 @@ export class Dropdown {
   constructor() {
     window.addEventListener("click", (event) => {
       let dropdown = document.getElementById(this.dropdownId);
+      if (dropdown == null) { return; }
       let button = dropdown.previousElementSibling;
       if ((event.target as HTMLElement) != button) {
         dropdown.classList.remove("form__show");

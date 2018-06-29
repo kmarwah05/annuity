@@ -16,6 +16,10 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+
+    @media screen and (max-width: 1028px) {
+      width: 80%;
+    }
   }
 
   &__arrow {
@@ -35,6 +39,10 @@
 
     width: 48%;
 
+    @media screen and (max-width: 1028px) {
+      width: 80%;
+    }
+
     &-content {
       display: none;
       position: absolute;
@@ -44,10 +52,11 @@
       border-bottom-right-radius: 3px;
       
       z-index: 1;
-      -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.5);
-      -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.5);
-      box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.5);
 
+      @media screen and (max-width: 1028px) {
+        width: 80%;
+      }
+      
       & button:last-child {
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;

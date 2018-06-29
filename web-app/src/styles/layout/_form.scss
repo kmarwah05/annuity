@@ -14,11 +14,28 @@
       display: none;
       margin: 0;
     }
+
+    @media screen and (max-width: 1028px) {
+      flex-direction: column;
+    }
   }
 
   &__field {
     width: 48%;
-    margin: 2% 0;
+    margin: 2% auto;
+    text-align: center;
+
+    &--container {
+      display: inline-block;
+
+      width: 100%;
+
+      text-align: left;
+    }
+
+    @media screen and (max-width: 1028px) {
+      width: 80%;
+    }
   }
 
   &__label {
@@ -34,19 +51,55 @@
     background-color: $bg-color;
   }
 
+  &__tab-bar {
+    margin: 0.5% auto;
+
+    button {
+
+      border-top: 2px solid $brand-color;
+      border-bottom: 2px solid $brand-color;
+      border-left: none;
+      border-right: none;
+      padding: 0.6%;
+
+      background-color: rgba(0, 0, 0, 0);
+      cursor: pointer;
+
+      font-family: $text-font-stack;
+
+      &:first-child {
+        border-left: 2px solid $brand-color;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+      }
+
+      &:last-child {
+        border-right: 2px solid $brand-color;
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+    }
+
+    &--selected {
+      background-color: $brand-color !important; // you never saw this
+    }
+  }
+
   &__main {
-    background-color: $bg-color;
+    background-color: rgba(0, 0, 0, 0);
     padding: 2% 5%;
     border-radius: 5px;
   }
 
   &__top {
+    margin: 15px;
+
     text-align: center;
   }
 
   &__submit {
     width: 30%;
-    margin: 0 auto;
+    margin: 4% auto;
     border: none;
     border-radius: 3px;
     padding: 2%;
@@ -61,6 +114,6 @@
 hr {
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
