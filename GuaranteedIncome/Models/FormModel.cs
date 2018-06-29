@@ -12,19 +12,15 @@ namespace GuaranteedIncome.Models
 
         public int RetireAge { get; set; }
 
-        [EnumDataType(typeof(Gender))]
+      
         public Boolean isMale { get; set; }
 
         public double Income { get; set; }
 
-        [Required]
-        [EnumDataType(typeof(FilingStatus))]
         public FilingStatus FilingStatus { get; set; }
 
         public double Amount { get; set; }
 
-        [Required]
-        [EnumDataType(typeof(Riders))]
         public List<Riders> Riders { get; set; }
 
         public TaxStatus TaxType { get; set; }//how the funds being added can be taxed : tax free, qualified, unqualified
