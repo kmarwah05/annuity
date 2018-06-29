@@ -1,4 +1,4 @@
-import { bindable } from "aurelia-framework";
+import { bindable , bindingMode} from "aurelia-framework";
 import { FundingSource, Sex, FilingStatus, Inputs } from "scripts/inputs";
 
 export class InputForm {
@@ -8,10 +8,16 @@ export class InputForm {
   private FundingSource: typeof FundingSource = FundingSource;
   private AnnuityType: typeof AnnuityType = AnnuityType;
 
+  // Bindable attributes
   @bindable onSubmit: () => void
   @bindable inputs: Inputs;
+
   annuityType: AnnuityType = AnnuityType.Immediate;
   
+  constructor() {
+    this.inputs = new Inputs();
+  }
+
   selected(type: AnnuityType) {
     this.annuityType = type;
     let immediate = document.getElementById("immediate");

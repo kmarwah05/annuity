@@ -1,10 +1,12 @@
 import { Inputs } from "scripts/inputs";
+import { inject } from "aurelia-framework";
 
+@inject(Inputs)
 export class App {
   inputs: Inputs;
 
-  constructor() {
-    this.inputs = new Inputs();
+  constructor(inputs){
+    this.inputs = inputs;
   }
 
   onSubmit() {
