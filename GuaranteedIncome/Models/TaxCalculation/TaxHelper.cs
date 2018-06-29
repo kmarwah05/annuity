@@ -13,7 +13,7 @@ namespace GuaranteedIncome.Models
             
             if (TaxStatus.roth==taxType)//no taxes taken out
             {
-                return yearlyIncome;
+                return 0;
             }
             else if(TaxStatus.qualified == taxType)//taxed on all withdrawals
             {
@@ -30,17 +30,17 @@ namespace GuaranteedIncome.Models
         }
         public static double CalcWithdrawalAmount(double rate, double presentValue, int yearsWithdrawing)//loan payment calculator
         {
-            //if (rate < 0)
-            //{
-            //    rate = 0;
-            //}
+            if (rate < 0)
+            {
+                rate = 0;
+            }
             return rate * presentValue / (1 - Math.Pow((Convert.ToDouble(1 + rate)), -yearsWithdrawing));
 
         }
 
         public static double CalcTaxedWithdrawals(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
-            return CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing) - CalcTaxes(CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing), taxType,status,principle);
+            return CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - CalcTaxes(CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing), taxType,status,principle);
         }
 
     }
