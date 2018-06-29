@@ -25,8 +25,12 @@ export class Dropdown {
   dropdown() {
     let dropdown = document.getElementById(this.dropdownId);
     let button = dropdown.previousElementSibling;
-    dropdown.classList.add("form__show");
-    button.classList.add("form__dropbtn--open");
-    button.lastElementChild.innerHTML = "&#9650;";
+    dropdown.classList.toggle("form__show");
+    button.classList.toggle("form__dropbtn--open");
+    if (dropdown.classList.contains("form__show")) {
+      button.lastElementChild.innerHTML = "&#9650;";
+    } else {
+      button.lastElementChild.innerHTML = "&#9660;";
+    }
   }
 }
