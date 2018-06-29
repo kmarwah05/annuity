@@ -1,5 +1,13 @@
-import {PLATFORM} from 'aurelia-pal';
+import { Inputs } from "scripts/inputs";
 
 export class App {
-  viewModel: string = PLATFORM.moduleName('components/input-form/input-form');
+  inputs: Inputs;
+
+  constructor() {
+    this.inputs = new Inputs();
+  }
+
+  onSubmit() {
+    console.log(this.inputs.age);
+  }
 }

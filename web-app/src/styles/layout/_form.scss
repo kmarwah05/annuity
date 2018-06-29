@@ -74,6 +74,10 @@
 
       font-family: $text-font-stack;
 
+      &:hover {
+        animation: "highlight-tab" 0.1s forwards;
+      }
+      
       &:first-child {
         border-left: 2px solid $brand-color;
         border-bottom-left-radius: 3px;
@@ -88,6 +92,7 @@
     }
 
     &--selected {
+      border-color: $brand-color !important;
       background-color: $brand-color !important; // you never saw this
     }
   }
@@ -115,6 +120,10 @@
 
     cursor: pointer;
     font-family: $text-font-stack;
+
+    &:hover {
+      animation: "highlight" 0.1s forwards;
+    }
   }
 }
 
@@ -123,4 +132,15 @@ hr {
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes highlight-tab {
+  from {
+    background-color: $brand-color;
+    border-color: $brand-color;
+  }
+  to {
+    background-color: $brand-color-dark;
+    border-color: $brand-color-dark;
+  }
 }

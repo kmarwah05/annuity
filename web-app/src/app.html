@@ -2,13 +2,14 @@
   <require from="./styles/main.scss"></require>
   <require from="./components/header/header.html"></require>
   <require from="./components/chart-background/chart-background"></require>
+  <require from="./components/input-form/input-form"></require>
 
   <header></header>
   
   <chart-background>
 
-  <section class="container">
-    <compose view-model.bind="viewModel"></compose>
+  <section id="container" class="container">
+    <input-form on-submit.bind="onSubmit()" inputs.bind="inputs"></input-form>
   </section>
 
   </chart-background>

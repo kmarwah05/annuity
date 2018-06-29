@@ -31,7 +31,11 @@ $brand-color: rgb(135, 211, 124) !default;
 
 /// Secondary brand color
 /// @type Color
-$brand-color-light: rgba(200, 247, 197, 0.95) !default;
+$brand-color-light: rgba(170, 224, 162, 0.95) !default;
+
+/// Secondary brand color
+/// @type Color
+$brand-color-dark: rgb(83, 192, 67) !default;
 
 /// Primary background color
 /// @type color

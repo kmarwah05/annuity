@@ -3,7 +3,7 @@
     width: 100%;
     border: none;
     border-radius: 3px;
-    padding: 2%;
+    padding: 3%;
 
     background-color: $brand-color;
 
@@ -16,8 +16,6 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-
-    
   }
 
   &__arrow {
@@ -28,7 +26,7 @@
   }
 
   &__dropbtn:hover, &__dropbtn:focus {
-    background-color: $brand-color;
+    animation: "highlight" 0.1s forwards;
   }
 
   &__dropdown {
@@ -81,4 +79,9 @@
   &__show {
     display: block;
   }
+}
+
+@keyframes highlight {
+  from {background-color: $brand-color;}
+  to {background-color: $brand-color-dark;}
 }
