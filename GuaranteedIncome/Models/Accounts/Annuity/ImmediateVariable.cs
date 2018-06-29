@@ -10,7 +10,7 @@ namespace GuaranteedIncome.Models
         public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income)
         {
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[deathAge - age];
+            double[] account = new double[deathAge];
             for (int i = 0; i < 100; i++)
             {
                 double temp = amount;
