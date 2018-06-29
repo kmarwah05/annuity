@@ -1,4 +1,4 @@
-﻿using GuaranteedIncome.Models.Accounts.Annuity;
+﻿using GuaranteedIncome.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

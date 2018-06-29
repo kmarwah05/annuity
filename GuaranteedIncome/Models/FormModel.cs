@@ -25,7 +25,7 @@ namespace GuaranteedIncome.Models
 
         [Required]
         [EnumDataType(typeof(Riders))]
-        public IEnumerable<Riders> Riders { get; set; }
+        public List<Riders> Riders { get; set; }
 
         public TaxStatus TaxType { get; set; }//how the funds being added can be taxed : tax free, qualified, unqualified
 
