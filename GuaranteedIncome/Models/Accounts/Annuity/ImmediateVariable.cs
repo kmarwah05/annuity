@@ -9,6 +9,19 @@ namespace GuaranteedIncome.Models
     {
         public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
         {
+            //Fees added to death benefit rider
+            double deathBenefitPenaltyFee = amount;
+            Boolean isDeathBenefit;
+            if (Riders.Contains(Models.Riders.DeathBenefit))
+            {
+                isDeathBenefit = true;
+                deathBenefitPenaltyFee -= deathBenefitPenaltyFee * .005;
+            }
+            else
+            {
+                isDeathBenefit = false;
+            }
+
             double amountWithFees = amount;
             Boolean isGMWB;
             if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider
@@ -45,7 +58,7 @@ namespace GuaranteedIncome.Models
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
-                        if (assetAtRetire < principle && isGMAB)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
+                        if (assetAtRetire < principle && isGMAB && isDeathBenefit)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
                         {
                             assetAtRetire = principle;
                             temp = principle;

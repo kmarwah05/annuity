@@ -19,22 +19,18 @@
   -->
   <section class="form__top">
 
-  <label class="form__label">I'm looking for a</label>
-  <label class="form__label">
-    <input type="radio" class="form__input" model.bind="AnnuityType.Immediate" checked.bind="annuityType" />
-    Immediate
-  </label>
-  <label class="form__label">
-    <input type="radio" class="form__input" model.bind="AnnuityType.Deferred" checked.bind="annuityType" />
-    Deferred
-  </label>
+  <label id="looking-for" class="form__label">I'm looking for an</label>
+  <div class="form__tab-bar">
+    <button id="immediate" class="form__tab-bar--selected" click.trigger="selected(AnnuityType.Immediate)">Immediate</button><!--no space for u
+    --><button id="deferred" click.trigger="selected(AnnuityType.Deferred)">Deferred</button>
+  </div>
   <label class="form__label">annuity</label>
 
   </section>
   <section class="form__main">
   <section class="form__section" if.bind="annuityType == AnnuityType.Deferred">
 
-    <currency-field value.bind="additions" label-text="How much can you contribute yearly?"></currency-field>
+    <currency-field value.bind="additions" label-text="I will annually set aside"></currency-field>
     <form-field type="number" value.bind="yearsAdding" label-text="How many years will you contribute?"></form-field>
 
   </section>
@@ -67,7 +63,7 @@
 
   </section>
   <hr />
-  <section class="form__section">
+  <!-- <section class="form__section">
     <div class="form__field">
       <label class="form__label">Please rate each of the following concerns</label>
 
@@ -87,7 +83,7 @@
       </ul>
     </div>
 
-  </section>
+  </section> -->
   <section class="form__section">
 
     <button type="submit" class="form__submit">Submit</button>
