@@ -5,6 +5,18 @@
     "id": "webpack",
     "displayName": "Webpack"
   },
+  "bundles": {
+    "prepend": [
+      "node_modules/chart.js/dist/Chart.min.js"
+    ],
+    "dependencies": [
+      {
+        "name": "chart.js",
+        "path": "../node_modules/chart.js/dist",
+        "main": "Chart.min.js"
+      }
+    ]
+  },
   "build": {
     "options": {
       "server": "dev",

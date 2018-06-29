@@ -10,12 +10,27 @@ export class InputForm {
   inputs: Inputs;
   annuityType: AnnuityType = AnnuityType.Immediate;
 
-  testDropdown: Sex;
-
   constructor() {
     this.inputs = new Inputs();
   }
   
+  selected(type: AnnuityType) {
+    this.annuityType = type;
+    let immediate = document.getElementById("immediate");
+    let deferred = document.getElementById("deferred");
+    let label = document.getElementById("looking-for");
+    if (type == AnnuityType.Deferred) {
+      label.innerHTML = "I'm looking for a";
+      deferred.classList.add("form__tab-bar--selected");
+      immediate.classList.remove("form__tab-bar--selected");
+    }
+    else {
+      label.innerHTML = "I'm looking for an";
+      immediate.classList.add("form__tab-bar--selected");
+      deferred.classList.remove("form__tab-bar--selected");
+    }
+  }
+
   print(): void {
     Object.keys(this.inputs).forEach(element => {
       console.log(element);
@@ -25,6 +40,6 @@ export class InputForm {
 }
 
 enum AnnuityType {
-  Immediate = 1,
+  Immediate = 0,
   Deferred
 }
