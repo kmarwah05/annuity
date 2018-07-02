@@ -1,6 +1,8 @@
-import { bindable , bindingMode} from "aurelia-framework";
+import { bindable , bindingMode, Container} from "aurelia-framework";
 import { FundingSource, Sex, FilingStatus, Inputs } from "scripts/inputs";
 import { Validator } from "scripts/validator";
+import { App } from "app";
+import { Module } from "webpack";
 
 export class InputForm {
   // Bring types into VM scope
@@ -8,8 +10,6 @@ export class InputForm {
   private FilingStatus: typeof FilingStatus = FilingStatus;
   private FundingSource: typeof FundingSource = FundingSource;
   private AnnuityType: typeof AnnuityType = AnnuityType;
-
-  @bindable onSubmit: (Inputs) => void
 
   inputs: Inputs;
   annuityType: AnnuityType = AnnuityType.Immediate;
@@ -20,7 +20,7 @@ export class InputForm {
 
   clickedSubmit() {
     if (Validator.areValidInputs(this.inputs)) {
-      this.onSubmit(this.inputs);
+      ((Container.instance as any).viewModel as App).onSubmit(this.inputs);
     } else {
       console.log("Invalid inputs");
     }
