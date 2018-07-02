@@ -1,3 +1,4 @@
+import { bindable , bindingMode} from "aurelia-framework";
 import { FundingSource, Sex, FilingStatus, Inputs } from "scripts/inputs";
 
 export class InputForm {
@@ -7,13 +8,16 @@ export class InputForm {
   private FundingSource: typeof FundingSource = FundingSource;
   private AnnuityType: typeof AnnuityType = AnnuityType;
 
-  inputs: Inputs;
-  annuityType: AnnuityType = AnnuityType.Immediate;
+  // Bindable attributes
+  @bindable onSubmit: () => void
+  @bindable inputs: Inputs;
 
+  annuityType: AnnuityType = AnnuityType.Immediate;
+  
   constructor() {
     this.inputs = new Inputs();
   }
-  
+
   selected(type: AnnuityType) {
     this.annuityType = type;
     let immediate = document.getElementById("immediate");
@@ -29,13 +33,6 @@ export class InputForm {
       immediate.classList.add("form__tab-bar--selected");
       deferred.classList.remove("form__tab-bar--selected");
     }
-  }
-
-  print(): void {
-    Object.keys(this.inputs).forEach(element => {
-      console.log(element);
-      console.log(this.inputs[element]);
-    });
   }
 }
 
