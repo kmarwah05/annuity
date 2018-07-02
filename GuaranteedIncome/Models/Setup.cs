@@ -57,6 +57,7 @@ namespace GuaranteedIncome.Models
             income = myModel.Income;
             status = myModel.FilingStatus;
             isDeferred = myModel.isDeferred;
+            amount = myModel.Amount;
         }
 
 
@@ -69,7 +70,7 @@ namespace GuaranteedIncome.Models
                 DeferredVariable dv = new DeferredVariable();
                 DeferredFixedIndexed dfi = new DeferredFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders).First();
                 data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
                 data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
                 data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
@@ -80,7 +81,7 @@ namespace GuaranteedIncome.Models
                 ImmediateVariable dv = new ImmediateVariable();
                 ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders).First();
                 data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
                 data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
                 data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);

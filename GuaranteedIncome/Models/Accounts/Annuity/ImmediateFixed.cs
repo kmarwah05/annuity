@@ -21,8 +21,8 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[150];
-            for (int i = 0; i < 100; i++)
+            double[] account = new double[deathAge+1];
+            for (int i = 0; i < 1; i++)
             {
                 double temp = amountWithFees;
                 double withdrawalSum = 0;
@@ -40,6 +40,7 @@ namespace GuaranteedIncome.Models
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
+                        account[j] = temp;
                     }
                     if (j >= retireAge)
                     {

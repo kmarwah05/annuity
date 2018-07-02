@@ -21,25 +21,25 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[150];
-            for (int i = 0; i < 100; i++)
+            double[] account = new double[deathAge+1];
+            for (int i = 0; i < 1; i++)
             {
-                double temp = amountWithFees;
+                double temp = 0;
+                temp = amountWithFees;
                 double withdrawalSum = 0;
                 double principle = amountWithFees;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
-
                     //if rate is less than 1 
-                    if (rate < 1)
+                    if (rate < .01)
                     {
-                        rate = 1;
+                        rate = .01;
                     }
-                    else if (rate > 6)
+                    else if (rate > .06)
                     {
-                        rate = 6;
+                        rate = .06;
                     }
 
                     if (j == retireAge)
@@ -51,12 +51,12 @@ namespace GuaranteedIncome.Models
                         temp = temp * Math.Pow(1 + rate, 1);
                         account[j] = temp;
                     }
-                    if (j >= retireAge)
+                    else
                     {
-                       // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
+                        // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
                         temp -= CalcWithdrawal(rate, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[i] = temp;
+                        account[j] = temp;
                     }
                 }
                 //  trials[i] = withdrawalSum / (deathAge - retireAge);

@@ -44,7 +44,7 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[150];
+            double[] account = new double[deathAge+1];
             for (int i = 0; i < 100; i++)
             {
                 double temp = amountWithFees;

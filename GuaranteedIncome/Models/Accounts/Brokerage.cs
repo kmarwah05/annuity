@@ -11,32 +11,35 @@ namespace GuaranteedIncome.Models
         {
             List<double[]> trials = new List<double[]>();
             double[] account = new double[deathAge+1];
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1; i++)
             {
                 double temp = 0;
                 double returns = 0;
                 double taxableAmount = 0;
                 double withdrawalSum = 0;
+                double principle = 0;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
                     }
                     if (j < retireAge)
                     {
+                        principle += amount;
                         returns= (temp + amount) * Math.Pow(1 + rate, 1);
                         taxableAmount = returns - temp;
                         temp= returns-Convert.ToDouble(IncomeTaxCalculator.CapitalGainsTaxFor(status, (decimal)taxableAmount, (decimal)income));
                         account[j] = temp;
 
                     }
-                    if (j >= retireAge)
+                    else
                     {
-                       // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                        temp -= CalcWithdrawal(rate, temp, deathAge - j+1, taxType, status, amount);
+                        // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
+                        temp -= CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle/(deathAge-retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
                         account[j] = temp;
 
@@ -50,8 +53,9 @@ namespace GuaranteedIncome.Models
         }
         public override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
-            return TaxHelper.CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
+            return TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }
+
 
     }
 }
