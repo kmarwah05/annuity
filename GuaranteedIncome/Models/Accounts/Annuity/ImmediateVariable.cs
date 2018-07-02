@@ -44,12 +44,12 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[150];
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 500; i++)
             {
+                double[] account = new double[deathAge-retireAge];
+                int count = 0;
                 double temp = amountWithFees;
                 double principle = amountWithFees;
-                double withdrawalSum=0;
                 double minWithdrawal = 0;
                 for (int j = age; j < deathAge; j++)
                 { Random rand = new Random();
@@ -69,13 +69,12 @@ namespace GuaranteedIncome.Models
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[j]=temp;
                     }
-                    if(j>=retireAge)
+                    else
                     {
 
-                        double withdrawal = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
+                        double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        temp -= temp * .03;//adds 3% charge on withdrawals
                         if (isGMWB)
                         {
                             if (withdrawal< minWithdrawal)
@@ -83,14 +82,12 @@ namespace GuaranteedIncome.Models
                                 withdrawal = minWithdrawal;
                             }
                         }
-                        temp -= (withdrawal-withdrawal*.03);
+                        account[count] = withdrawal;
+                        temp -= withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[j] = temp;
+                        count++;
                     }
                 }
-                //  trials[i] = withdrawalSum / (deathAge - retireAge);
-                account[deathAge] = 0;
-
                 trials.Add(account);
             }
             return trials;
