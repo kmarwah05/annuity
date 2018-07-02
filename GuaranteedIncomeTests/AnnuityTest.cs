@@ -51,8 +51,7 @@ namespace GuaranteedIncomeTests
         [Fact]
         public void IFAnnuityTest()
         {
-            Assert.Equal(168826.32.ToString(),(61, 65, 80, .05, .01, 150000, TaxStatus.roth, FilingStatus.Unmarried, 80000, Riders).ToString());
+            Assert.Equal(168826.32.ToString(),(61, 65, 80, .05, .01, 150000, TaxStatus.qualified, FilingStatus.Unmarried, 80000, Riders).ToString());
         }
-
     }
 }

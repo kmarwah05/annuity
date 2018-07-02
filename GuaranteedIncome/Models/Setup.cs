@@ -50,10 +50,11 @@ namespace GuaranteedIncome.Models
             {
                 deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
             }
-            else
+            else if(Gender  == Gender.Female)
             {
                 deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
             }
+
             income = myModel.Income;
             status = myModel.FilingStatus;
             isDeferred = myModel.isDeferred;
