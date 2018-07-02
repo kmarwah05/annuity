@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class Brokerage:Account
+    public class Brokerage
     {
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
+        public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             List<double[]> trials = new List<double[]>();
             double[] account = new double[deathAge+1];
             for (int i = 0; i < 1; i++)
             {
-                double temp = 0;
+                double temp = lumpSum;
                 double returns = 0;
                 double taxableAmount = 0;
                 double withdrawalSum = 0;
-                double principle = 0;
+                double principle = lumpSum;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
@@ -51,7 +51,7 @@ namespace GuaranteedIncome.Models
             }
             return trials;
         }
-        public override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
+        public double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
             return TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }

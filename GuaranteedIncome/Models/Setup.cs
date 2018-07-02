@@ -70,10 +70,10 @@ namespace GuaranteedIncome.Models
                 DeferredVariable dv = new DeferredVariable();
                 DeferredFixedIndexed dfi = new DeferredFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders).First();
-                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
-                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate,MarketData.FixedDeviation, amount, TaxType, status, income,Riders).First();
+                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.VariableRate, MarketData.VariableDeviation, amount, TaxType, status, income,Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income,Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, amount,0, TaxStatus.qualified, status, income,Riders);
             }
             else
             {
@@ -81,10 +81,10 @@ namespace GuaranteedIncome.Models
                 ImmediateVariable dv = new ImmediateVariable();
                 ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders).First();
-                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
-                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, .05, .01, amount, TaxType, status, income,Riders);
+                data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate, MarketData.FixedDeviation, amount, TaxType, status, income,Riders).First();
+                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.VariableRate, MarketData.VariableDeviation, amount, TaxType, status, income,Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income,Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, 0,amount, TaxStatus.qualified, status, income,Riders);
             }
             return data;
 
