@@ -56,18 +56,18 @@ namespace GuaranteedIncome.Controllers
             //ImmediateFixed Def = new ImmediateFixed();
             // double[] arrF = Def.CalculateReturns(61, 65, 85, .03, 0, 150000, TaxStatus.qualified, FilingStatus.Joint, 80000, new List<Riders>()).First();
 
-            //for (int i = 30; i < 86; i++)
-            //{
-            //    Console.WriteLine("i= " + i + "  " + arrF[i]);
-            //}
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine("i= " + i + "  " + arrF[i]);
+            }
             //for (int i = 30; i < 86; i++)
             //{
             //    Console.WriteLine("j= " + i + "   " + arrV[i]);
             //}
-            for (int i = 30; i < 86; i++)
-            {
-                Console.WriteLine("k= " + i + "   " + arrFI[i]);
-            }
+            //for (int i = 30; i < 86; i++)
+            //{
+            //    Console.WriteLine("k= " + i + "   " + arrFI[i]);
+            //}
             //for (int i = 30; i < 86; i++)
             //{
             //    Console.WriteLine("f= " + i + "   " + b[i]);
