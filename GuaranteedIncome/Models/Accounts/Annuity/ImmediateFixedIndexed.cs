@@ -21,9 +21,11 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[deathAge+1];
-            for (int i = 0; i < 1; i++)
+           
+            for (int i = 0; i < 500; i++)
             {
+                double[] account = new double[deathAge-retireAge];
+                int count = 0;
                 double temp = 0;
                 temp = amountWithFees;
                 double withdrawalSum = 0;
@@ -49,19 +51,17 @@ namespace GuaranteedIncome.Models
                     if (j < retireAge)
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[j] = temp;
                     }
                     else
                     {
                         // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                        temp -= CalcWithdrawal(rate, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
+                        account[count]= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        temp -= CalcWithdrawal(mean, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[j] = temp;
+                        count++;
                     }
                 }
                 //  trials[i] = withdrawalSum / (deathAge - retireAge);
-                account[deathAge] = 0;
-
                 trials.Add(account);
             }
             return trials;

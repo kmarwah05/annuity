@@ -27,9 +27,9 @@ namespace GuaranteedIncome.Controllers
             myModel.isMale = false;
             myModel.Income = 80000;
             myModel.FilingStatus = FilingStatus.Joint;
-            myModel.Amount = 1500;
+            myModel.Amount = 3000;
             myModel.TaxType = TaxStatus.roth;
-            myModel.isDeferred = true;
+            myModel.isDeferred = false;
             myModel.WithdrawalUntil = 20;
             myModel.Riders = new List<Riders>();
             Setup s = new Setup(myModel);
@@ -49,29 +49,30 @@ namespace GuaranteedIncome.Controllers
 
 
 
-            double[] arrF = data.Fixed;
+          double fix = data.Fixed;
             double[] arrV = data.Variable.First();
             double[] arrFI = data.FixedIndexed.First();
-            double[] b = data.Brokerage.First();
+             double[] b = data.Brokerage.First();
             //ImmediateFixed Def = new ImmediateFixed();
             // double[] arrF = Def.CalculateReturns(61, 65, 85, .03, 0, 150000, TaxStatus.qualified, FilingStatus.Joint, 80000, new List<Riders>()).First();
 
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    Console.WriteLine("ii= " + i + "  " + arrF[i]);
+            //}
+            Console.WriteLine("Fixed amount" + fix);
             for (int i = 0; i < 20; i++)
             {
-                Console.WriteLine("i= " + i + "  " + arrF[i]);
+                Console.WriteLine("j= " + i + "   " + arrV[i]);
             }
-            //for (int i = 30; i < 86; i++)
-            //{
-            //    Console.WriteLine("j= " + i + "   " + arrV[i]);
-            //}
-            //for (int i = 30; i < 86; i++)
-            //{
-            //    Console.WriteLine("k= " + i + "   " + arrFI[i]);
-            //}
-            //for (int i = 30; i < 86; i++)
-            //{
-            //    Console.WriteLine("f= " + i + "   " + b[i]);
-            //}
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine("k= " + i + "   " + arrFI[i]);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Console.WriteLine("f= " + i + "   " + b[i]);
+            }
             //DeferredFixed Def = new DeferredFixed();
             //double[] Fixed = (Def.CalculateReturns(30, 65, 95, .05, .01, 2000, TaxStatus.roth, FilingStatus.Joint, 10000)).First();
             //for (int i = 30; i <= 95; i++)
