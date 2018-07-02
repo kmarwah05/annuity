@@ -23,10 +23,12 @@ namespace GuaranteedIncome.Models
             }
 
             List <double[]> trials= new List<double[]>();
-            double[] account = new double[deathAge-retireAge+1];
+            
             for (int i = 0; i < 1; i++)
             {
+                double[] account = new double[deathAge - retireAge];
                 double temp = 0;
+                int count = 0;
                 double withdrawalSum = 0;
                 for (int j = age; j < deathAge; j++)
                 {
@@ -46,22 +48,23 @@ namespace GuaranteedIncome.Models
                     }else
                     {
                         //withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                        int count = 0;
-                        Console.WriteLine("insert  " + j);
-                        Console.WriteLine(CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge)));
+                     //   Console.WriteLine("insert  " + j);
+                       // Console.WriteLine(CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge)));
                         account[count] = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-
+                       // Console.WriteLine("account at " + account[count]);
                         temp = temp - CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
 
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
-                        
-                        
                     }
+                   
                 }
                 //trials[i] = withdrawalSum / (deathAge - retireAge);
-               // account[deathAge] = 0;
-
+                // account[deathAge] = 0;
+                for (int k = 0; k < 20; k++)
+                {
+                    Console.WriteLine("k " + k + "  " + account[k]);
+                }
                 trials.Add(account);
             }
             return trials;
