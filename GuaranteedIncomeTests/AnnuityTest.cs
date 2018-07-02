@@ -18,6 +18,7 @@ namespace GuaranteedIncomeTests
         public double amount;
         public TaxStatus TaxType;
         public Boolean isDeferred;
+        public List<Riders> Riders;
 
         public Data ReturnData()
         {
@@ -28,10 +29,10 @@ namespace GuaranteedIncomeTests
                 DeferredVariable dv = new DeferredVariable();
                 DeferredFixedIndexed dfi = new DeferredFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
             }
             else
             {
@@ -39,20 +40,19 @@ namespace GuaranteedIncomeTests
                 ImmediateVariable dv = new ImmediateVariable();
                 ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
-                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
-                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income);
+                data.Fixed = df.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.Variable = dv.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
+                data.Brokerage = b.CalculateReturns(age, retireAge, deathAge, .05, 0, amount, TaxType, status, income, Riders);
             }
             return data;
         }
-
+       
         [Fact]
-        public void DeffFixedTesting()
+        public void IFAnnuityTest()
         {
-            
+            Assert.Equal(168826.32.ToString(),(61, 65, 80, .05, .01, 150000, TaxStatus.roth, FilingStatus.Unmarried, 80000, Riders).ToString());
         }
 
     }
-
 }

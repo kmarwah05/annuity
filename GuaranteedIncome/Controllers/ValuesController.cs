@@ -11,16 +11,19 @@ namespace GuaranteedIncome.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+       
         //// GET api/values
         //[HttpGet]
         //public IEnumerable<string> Get()
         //{
+        //    //List<Riders> Riders = new List<Riders>();
+        //    //Riders.Add(Models.Riders.DeathBenefit);
 
-        //    //double[] arr = ImmediateVariable.CalculateReturns(30, 65, 90, .05, .02, 30000, TaxStatus.roth, FilingStatus.Joint,100000);
-        //    //for (int i = 0; i < 100; i++)
-        //    //{
-        //    //    Console.WriteLine("i: " + i + " value: " + arr[i]);
-        //    //}
+        //    double[] arr = ImmediateVariable.CalculateReturns(30, 65, 90, .05, .02, 30000, TaxStatus.roth, FilingStatus.Joint, 100000);
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        Console.WriteLine("i: " + i + " value: " + arr[i]);
+        //    }
         //    FormModel myModel = new FormModel();
         //    myModel.CurrentAge = 30;
         //    myModel.RetireAge = 65;
@@ -32,39 +35,39 @@ namespace GuaranteedIncome.Controllers
         //    myModel.isDeferred = true;
         //    Setup s = new Setup(myModel);
         //    Data data = s.ReturnData();
-        //    double[] arrF= data.Fixed.First();
+        //    double[] arrF = data.Fixed.First();
         //    double[] arrV = data.Variable.First();
         //    double[] arrFI = data.FixedIndexed.First();
         //    double[] b = data.Brokerage.First();
 
-            
-        //    for(int i = 30; i< s.deathAge; i++)
+
+        //    for (int i = 30; i < s.deathAge; i++)
         //    {
-        //        Console.WriteLine("i= "+arrF[i]);
+        //        Console.WriteLine("i= " + arrF[i]);
         //    }
         //    for (int i = 30; i < s.deathAge; i++)
         //    {
-        //        Console.WriteLine("j= "+arrV[i]);
+        //        Console.WriteLine("j= " + arrV[i]);
         //    }
         //    for (int i = 30; i < s.deathAge; i++)
         //    {
-        //        Console.WriteLine("k= "+arrFI[i]);
+        //        Console.WriteLine("k= " + arrFI[i]);
         //    }
         //    for (int i = 30; i < s.deathAge; i++)
         //    {
-        //        Console.WriteLine("f= "+b[i]);
+        //        Console.WriteLine("f= " + b[i]);
         //    }
         //    DeferredFixed Def = new DeferredFixed();
-        //   double[]Fixed= (Def.CalculateReturns(30, 65, 95, .05, .01, 2000, TaxStatus.roth, FilingStatus.Joint, 10000)).First();
+        //    double[] Fixed = (Def.CalculateReturns(30, 65, 95, .05, .01, 2000, TaxStatus.roth, FilingStatus.Joint, 10000)).First();
         //    for (int i = 30; i <= 95; i++)
         //    {
-        //        Console.WriteLine(i+" ewq= " +Fixed[i]);
+        //        Console.WriteLine(i + " ewq= " + Fixed[i]);
         //    }
         //    return new string[] { "hi" };
         //}
 
-        // POST api/values
-        [HttpPost]
+        //POST api/values
+       [HttpPost]
         public JsonResult Post([FromBody] FormModel value)
         {
             Setup s = new Setup(value);
