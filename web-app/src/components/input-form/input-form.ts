@@ -1,5 +1,6 @@
 import { bindable , bindingMode} from "aurelia-framework";
 import { FundingSource, Sex, FilingStatus, Inputs } from "scripts/inputs";
+import { Validator } from "scripts/validator";
 
 export class InputForm {
   // Bring types into VM scope
@@ -8,14 +9,21 @@ export class InputForm {
   private FundingSource: typeof FundingSource = FundingSource;
   private AnnuityType: typeof AnnuityType = AnnuityType;
 
-  // Bindable attributes
-  @bindable onSubmit: () => void
-  @bindable inputs: Inputs;
+  @bindable onSubmit: (Inputs) => void
 
+  inputs: Inputs;
   annuityType: AnnuityType = AnnuityType.Immediate;
   
   constructor() {
     this.inputs = new Inputs();
+  }
+
+  clickedSubmit() {
+    if (Validator.areValidInputs(this.inputs)) {
+      this.onSubmit(this.inputs);
+    } else {
+      console.log("Invalid inputs");
+    }
   }
 
   selected(type: AnnuityType) {
@@ -34,6 +42,8 @@ export class InputForm {
       deferred.classList.remove("form__tab-bar--selected");
     }
   }
+  
+
 }
 
 enum AnnuityType {
