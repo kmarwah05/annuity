@@ -1,15 +1,18 @@
 import { Inputs } from "scripts/inputs";
-import { inject } from "aurelia-framework";
 
-@inject(Inputs)
 export class App {
+  private Pages: typeof Pages = Pages;
+
   inputs: Inputs;
+  currentPage: Pages = Pages.Input;
 
-  constructor(inputs){
+  onSubmit(inputs: Inputs) {
     this.inputs = inputs;
+    this.currentPage = Pages.Results;
   }
+}
 
-  onSubmit() {
-    console.log(this.inputs.age);
-  }
+enum Pages {
+  Input = 0,
+  Results
 }

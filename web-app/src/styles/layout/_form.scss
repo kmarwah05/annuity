@@ -102,6 +102,10 @@
     background-color: rgba(0, 0, 0, 0);
     padding: 2% 5%;
     border-radius: 5px;
+
+    @media screen and (max-width: 1900px) {
+      background-color: $bg-color;
+    }
   }
 
   &__top {
