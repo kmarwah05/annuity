@@ -4,7 +4,7 @@ export class App {
   private Pages: typeof Pages = Pages;
 
   inputs: Inputs;
-  currentPage: Pages = Pages.Input;
+  currentPage: Pages = Pages.Results;
 
   onSubmit(inputs: Inputs) {
     this.inputs = inputs;
