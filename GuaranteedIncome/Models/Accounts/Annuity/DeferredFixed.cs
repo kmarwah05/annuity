@@ -21,8 +21,41 @@ namespace GuaranteedIncome.Models
             {
                 isDeath = false;
             }
+            double withdrawalPercentageFee =0;
 
-                double[] account = new double[deathAge - retireAge];
+            /*surrender fee:*/
+            if (age+7 < retireAge)
+            {
+                withdrawalPercentageFee = 0.07;
+            }
+            else if (age+6 < retireAge)
+            {
+                withdrawalPercentageFee = 0.06;
+            }
+            else if (age+5 < retireAge)
+            {
+                withdrawalPercentageFee = 0.05;
+            }
+            else if (age+4 < retireAge)
+            {
+                withdrawalPercentageFee = 0.04;
+            }
+            else if (age+3 < retireAge)
+            {
+                withdrawalPercentageFee = 0.03;
+            }
+            else if (age+2 < retireAge )
+            {
+                withdrawalPercentageFee = 0.02;
+            }
+            else if (age+1 < retireAge )
+            {
+                withdrawalPercentageFee = 0.01;
+            }
+            /*surender fee:*/
+
+
+            double[] account = new double[deathAge - retireAge];
                 double temp = 0;
                 int count = 0;
                 for (int j = age; j < deathAge; j++)
@@ -38,8 +71,10 @@ namespace GuaranteedIncome.Models
                         principle += amountWithFees;
                     }else
                     {
-                        account[count] = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        temp = temp - CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                    double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                    withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;
+                    account[count] = withdrawal;
+                    temp = temp - withdrawal;
                         temp = temp * Math.Pow(1 + mean, 1);
                         count++;
                     }

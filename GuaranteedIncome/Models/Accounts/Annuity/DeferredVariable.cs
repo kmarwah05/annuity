@@ -9,7 +9,38 @@ namespace GuaranteedIncome.Models
     {
         public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
         {
-           
+            double withdrawalPercentageFee = 0;
+            /*surrender fee:*/
+            if (age + 7 < retireAge)
+            {
+                withdrawalPercentageFee = 0.07;
+            }
+            else if (age + 6 < retireAge)
+            {
+                withdrawalPercentageFee = 0.06;
+            }
+            else if (age + 5 < retireAge)
+            {
+                withdrawalPercentageFee = 0.05;
+            }
+            else if (age + 4 < retireAge)
+            {
+                withdrawalPercentageFee = 0.04;
+            }
+            else if (age + 3 < retireAge)
+            {
+                withdrawalPercentageFee = 0.03;
+            }
+            else if (age + 2 < retireAge)
+            {
+                withdrawalPercentageFee = 0.02;
+            }
+            else if (age + 1 < retireAge)
+            {
+                withdrawalPercentageFee = 0.01;
+            }
+            /*surender fee:*/
+
 
             double amountWithFees = amount;
             double principle = 0;
@@ -77,9 +108,11 @@ namespace GuaranteedIncome.Models
                     if (j >= retireAge)
                     {
 
-                        temp -= temp * .03;//withdrawal charge of 3% for variable accounts
+                        
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        Console.WriteLine("withdrawal j= " + j + "  " + withdrawal);
+                        withdrawal = withdrawal - withdrawal * withdrawal;
+                        temp -= withdrawal;
+                        withdrawal = withdrawal - withdrawal * .03;
                         if (isGMWB)
                         {
                             if (withdrawal < minWithdrawal)
@@ -89,7 +122,7 @@ namespace GuaranteedIncome.Models
                         }
 
                         account[count] = withdrawal;
-                        temp -= withdrawal;
+                       
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                         

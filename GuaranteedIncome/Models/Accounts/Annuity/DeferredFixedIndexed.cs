@@ -9,6 +9,38 @@ namespace GuaranteedIncome.Models
     {
         public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
+            double withdrawalPercentageFee = 0;
+            /*surrender fee:*/
+            if (age + 7 < retireAge)
+            {
+                withdrawalPercentageFee = 0.07;
+            }
+            else if (age + 6 < retireAge)
+            {
+                withdrawalPercentageFee = 0.06;
+            }
+            else if (age + 5 < retireAge)
+            {
+                withdrawalPercentageFee = 0.05;
+            }
+            else if (age + 4 < retireAge)
+            {
+                withdrawalPercentageFee = 0.04;
+            }
+            else if (age + 3 < retireAge)
+            {
+                withdrawalPercentageFee = 0.03;
+            }
+            else if (age + 2 < retireAge)
+            {
+                withdrawalPercentageFee = 0.02;
+            }
+            else if (age + 1 < retireAge)
+            {
+                withdrawalPercentageFee = 0.01;
+            }
+            /*surender fee:*/
+
             double amountWithFees = amount;
             Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))
@@ -32,40 +64,7 @@ namespace GuaranteedIncome.Models
                 for (int j = age; j < deathAge; j++)
                 {
 
-                    double withdrawalPercentageFee;
-
-                    /*surrender fee:*/
-                    if (age < retireAge + 7)
-                    {
-                        withdrawalPercentageFee = 0.07;
-                    }
-                    else if (age < retireAge + 6)
-                    {
-                        withdrawalPercentageFee = 0.06;
-                    }
-                    else if (age < retireAge + 5)
-                    {
-                        withdrawalPercentageFee = 0.05;
-                    }
-                    else if (age < retireAge + 4)
-                    {
-                        withdrawalPercentageFee = 0.04;
-                    }
-                    else if (age < retireAge + 3)
-                    {
-                        withdrawalPercentageFee = 0.03;
-                    }
-                    else if (age < retireAge + 2)
-                    {
-                        withdrawalPercentageFee = 0.02;
-                    }
-                    else if (age < retireAge + 1)
-                    {
-                        withdrawalPercentageFee = 0.01;
-                    }
-
-                    /*surender fee:*/
-
+                   
 
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
@@ -91,8 +90,10 @@ namespace GuaranteedIncome.Models
                     }
                     if (j >= retireAge)
                     {
-                        account[count] = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        temp -= CalcWithdrawal(mean, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
+                        double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;
+                        account[count] = withdrawal;
+                        temp -= withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
