@@ -1,14 +1,20 @@
 import { Inputs } from "scripts/inputs";
+import { Validator } from "scripts/validator";
 
 export class App {
   private Pages: typeof Pages = Pages;
 
-  inputs: Inputs;
-  currentPage: Pages = Pages.Results;
+  inputs: Inputs = new Inputs();
+  currentPage: Pages = Pages.Input;
 
-  onSubmit(inputs: Inputs) {
-    this.inputs = inputs;
-    this.currentPage = Pages.Results;
+  onSubmit() {
+    if (Validator.areValidInputs(this.inputs)) {
+      this.currentPage = Pages.Results;
+    }
+  }
+
+  onNewInputs() {
+    this.currentPage = Pages.Input;
   }
 }
 

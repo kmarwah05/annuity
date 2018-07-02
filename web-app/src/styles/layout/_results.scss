@@ -1,17 +1,140 @@
 .charts {
+  background-color: $bg-color;
+
   &__hero {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    -webkit-box-pack: left;
+    -ms-flex-pack: left;
+    justify-content: left;
   
     width: 100%;
   }
   
-  
+
   &__chart {
     width: 30%;
+  }
+}
+
+.details {
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+
+  background-color: $bg-color;
+
+  .stats {
+    float: left;
+    width: 50%;
+    padding: 0 5%;
+
+    &__number-large {
+      font-size: 200%;
+    }
+
+    &__heading {
+      font-family: $title-font-stack;
+      font-size: 150%;
+      margin: 10px 0;
+    }
+
+    &__percent-large {
+      color: $brand-color;
+      font-size: 400%;
+      margin: 30px 0;
+    }
+    
+    section {
+      text-align: center;
+      padding: 6% 15%;
+
+      p {
+        margin: 10px 0;
+      }
+    }
+
+    &__categories {
+      float: left;
+
+      padding: 0;
+
+      font-weight: bold;
+      list-style: none;
+    }
+
+    &__stats {
+      float: right;
+
+      padding: 0;
+
+      text-align: right;
+      list-style: none;
+    }
+  }
+
+  .riders {
+    float: right;
+  
+    width: 50%;
+    padding: 5%;
+  
+    &__heading {
+      font-family: $title-font-stack;
+      font-size: 150%;
+      margin: 10px 0 40px 0;
+    }
+
+    label {
+      font-family: $title-font-stack;
+      font-weight: bold;
+    }
+
+    &--pos-fixed {
+      position: fixed;
+    }
+  
+    &__checkbox {
+      display: inline;
+  
+      margin-right: 2%;
+      border: 1px solid $mid-grey;
+      border-radius: 100px;
+      padding: 9px 15px;
+      
+      cursor: pointer;
+
+      &:hover {
+        border-color: $brand-color-dark;
+        background-color: $brand-color-dark;
+        color: $bg-color;
+      }
+  
+      &--checked {
+        border-color: $brand-color;
+        background-color: $brand-color;
+        color: $bg-color;
+      }
+    }
+  }
+  
+}
+
+.new-inputs {
+  float: right;
+
+  width: 40%;
+  margin: 0 5%;
+  border: none;
+  border-radius: 3px;
+  padding: 2%;
+
+  background-color: $brand-color;
+
+  cursor: pointer;
+  font-family: $text-font-stack;
+
+  &:hover {
+    animation: "highlight" 0.1s forwards;
   }
 }

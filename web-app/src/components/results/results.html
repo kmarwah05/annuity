@@ -1,18 +1,85 @@
 <template>
-  <section class="charts">
+  <require from="../rider/rider"></require>
+
+  <section id="charts" class="charts">
     <div class="charts__hero">
+    <div class="charts__chart"><canvas id="brokerage-account-chart" width="100px" height="100px"></canvas></div>
     <div class="charts__chart"><canvas id="variable-annuity-chart" width="100px" height="100px"></canvas></div>
     <div class="charts__chart"><canvas id="fixed-indexed-annuity-chart" width="100px" height="100px"></canvas></div>
-    <div class="charts__chart"><canvas id="brokerage-account-chart" width="100px" height="100px"></canvas></div>
     </div>
-    <p>We ran through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Enable any rider to see its effect on the payouts, or scroll down to read more details.</p>
+    <p>We ran through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Enable any rider to see its effect on yearly payout, or scroll down to read more details.</p>
   </section>
-  <section class="details">
-    <section class="stats">
-
+  <div class="details clearfix">
+    <div class="stats">
+      <section class="stats__fixed clearfix">
+        <h3 class="stats__heading">Brokerage Account</h3>
+        <h1 class="stats__number-large">$35,938.63</h1>
+        <p>Median yearly payout, after tax.</p>
+      </section>
+      <hr />
+      <section class="stats__variable clearfix">
+        <h3 class="stats__heading">Fixed Annuity</h3>
+        <h1 class="stats__percent-large">72%</h1>
+        <caption>of trials have a higher median yearly payout than a brokerage account.</caption>
+        <ul class="stats__categories">
+          <li>Median yearly payout:</li>
+        </ul>
+        <ul class="stats__stats">
+          <li>$36,883.09</li>
+        </ul>
+      </section>
+      <hr />
+      <section class="stats__fixed-indexed clearfix">
+          <h3 class="stats__heading">Variable Annuity</h3>
+        <h1 class="stats__percent-large">72%</h1>
+        <caption>of trials have a higher median yearly payout than a brokerage account.</caption>
+        <ul class="stats__categories">
+          <li>Median yearly payout:</li>
+        </ul>
+        <ul class="stats__stats">
+          <li>$36,883.09</li>
+        </ul>
+      </section>
+      <hr />
+      <section class="stats__brokerage">
+          <h3 class="stats__heading">Fixed-Indexed Annuity</h3>
+        <h1 class="stats__percent-large">72%</h1>
+        <caption>of trials have a higher median yearly payout than a brokerage account.</caption>
+        <ul class="stats__categories">
+          <li>Median yearly payout:</li>
+        </ul>
+        <ul class="stats__stats">
+          <li>$36,883.09</li>
+        </ul>
+      </section>
+    </div>
+    <section id="riders" class="riders">
+      <h2 class="riders__heading">Add some riders!</h2>
+      <rider rider="0">
+        <label slot="name">You get a rider!</label>
+        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+      </rider>
+      <rider rider="1">
+        <label slot="name">You get a rider!</label>
+        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+      </rider>
+      <rider rider="2">
+        <label slot="name">You get a rider!</label>
+        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+      </rider>
+      <rider rider="3">
+        <label slot="name">You get a rider!</label>
+        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+      </rider>
+      <rider rider="4">
+        <label slot="name">Everyone gets a rider!</label>
+        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+      </rider>
     </section>
-    <section class="riders">
+    <button class="new-inputs" click.trigger="newInputs()">
+      Or enter new inputs
+    </button>
+  </div>
 
-    </section>
-  </section>
+
 </template>

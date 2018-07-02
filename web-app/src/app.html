@@ -10,8 +10,8 @@
   <chart-background>
 
   <section id="container" class="container">
-    <input-form on-submit.bind="onSubmit" if.to-view="currentPage == Pages.Input"></input-form>
-    <results if.to-view="currentPage == Pages.Results"></results>
+    <input-form if.to-view="currentPage == Pages.Input" inputs.two-way="inputs"></input-form>
+    <results if.to-view="currentPage == Pages.Results" inputs.two-way="inputs"></results>
   </section>
 
   </chart-background>
