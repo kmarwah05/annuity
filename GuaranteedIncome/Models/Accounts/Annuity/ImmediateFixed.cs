@@ -25,7 +25,7 @@ namespace GuaranteedIncome.Models
             for (int i = 0; i < 1; i++)
             {
                 double temp = amountWithFees;
-                double withdrawalSum = 0;
+               // double withdrawalSum = 0;
                 double principle = amountWithFees;
                 for (int j = age; j < deathAge; j++)
                 {

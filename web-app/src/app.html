@@ -2,13 +2,16 @@
   <require from="./styles/main.scss"></require>
   <require from="./components/header/header.html"></require>
   <require from="./components/chart-background/chart-background"></require>
+  <require from="./components/input-form/input-form"></require>
+  <require from="./components/results/results"></require>
 
   <header></header>
   
   <chart-background>
 
-  <section class="container">
-    <compose view-model.bind="viewModel"></compose>
+  <section id="container" class="container">
+    <input-form on-submit.bind="onSubmit" if.to-view="currentPage == Pages.Input"></input-form>
+    <results if.to-view="currentPage == Pages.Results"></results>
   </section>
 
   </chart-background>

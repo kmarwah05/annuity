@@ -1,5 +1,18 @@
-import {PLATFORM} from 'aurelia-pal';
+import { Inputs } from "scripts/inputs";
 
 export class App {
-  viewModel: string = PLATFORM.moduleName('components/input-form/input-form');
+  private Pages: typeof Pages = Pages;
+
+  inputs: Inputs;
+  currentPage: Pages = Pages.Input;
+
+  onSubmit(inputs: Inputs) {
+    this.inputs = inputs;
+    this.currentPage = Pages.Results;
+  }
+}
+
+enum Pages {
+  Input = 0,
+  Results
 }

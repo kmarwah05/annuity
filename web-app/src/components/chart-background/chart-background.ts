@@ -110,11 +110,10 @@ export class ChartBackground {
       }
     }
 
-    let bgChart = new Chart(ctx, {
+    new Chart(ctx, {
       type: "line",
       data: data,
       options: options
     });
-    console.log(bgChart.data);
   }
 }
