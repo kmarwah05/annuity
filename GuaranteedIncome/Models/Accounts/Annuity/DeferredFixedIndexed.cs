@@ -15,6 +15,7 @@ namespace GuaranteedIncome.Models
             {
                 isDeath = true;
                 amountWithFees -= amountWithFees * .005;
+               
             }
             else
             {
