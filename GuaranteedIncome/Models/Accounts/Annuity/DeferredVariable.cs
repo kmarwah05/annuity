@@ -50,6 +50,42 @@ namespace GuaranteedIncome.Models
             double[] account = new double[deathAge+1];
             for (int i = 0; i < 1; i++)
             {
+
+                double withdrawalPercentageFee;
+
+                /*surrender fee:*/
+                if (age < retireAge + 7)
+                {
+                    withdrawalPercentageFee = 0.07;
+                }
+                else if (age < retireAge + 6)
+                {
+                    withdrawalPercentageFee = 0.06;
+                }
+                else if (age < retireAge + 5)
+                {
+                    withdrawalPercentageFee = 0.05;
+                }
+                else if (age < retireAge + 4)
+                {
+                    withdrawalPercentageFee = 0.04;
+                }
+                else if (age < retireAge + 3)
+                {
+                    withdrawalPercentageFee = 0.03;
+                }
+                else if (age < retireAge + 2)
+                {
+                    withdrawalPercentageFee = 0.02;
+                }
+                else if (age < retireAge + 1)
+                {
+                    withdrawalPercentageFee = 0.01;
+                }
+
+                /*surender fee:*/
+
+
                 double temp = 0;
                 double withdrawalSum = 0;
                 double minWithdrawal = 0;

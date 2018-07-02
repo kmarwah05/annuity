@@ -7,11 +7,9 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredFixed:Account
     {
-
         
         public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
         {
-           
 
             double amountWithFees = amount;
             double principle = 0;
@@ -35,14 +33,10 @@ namespace GuaranteedIncome.Models
                 int count = 0;
                 double withdrawalSum = 0;
 
-              
-
-
 
                 for (int j = age; j < deathAge; j++)
                 {
-
-                    double withdrawalPercentageFee = 0.00;
+                    double withdrawalPercentageFee;
 
                     /*surrender fee:*/
                     if (age < retireAge + 7)
@@ -73,6 +67,7 @@ namespace GuaranteedIncome.Models
                     {
                         withdrawalPercentageFee = 0.01;
                     }
+                  
                     /*surender fee:*/
 
                     Random rand = new Random();

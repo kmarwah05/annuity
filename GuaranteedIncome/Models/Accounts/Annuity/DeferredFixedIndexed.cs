@@ -30,6 +30,42 @@ namespace GuaranteedIncome.Models
                 double principle = 0;
                 for (int j = age; j < deathAge; j++)
                 {
+
+                    double withdrawalPercentageFee;
+
+                    /*surrender fee:*/
+                    if (age < retireAge + 7)
+                    {
+                        withdrawalPercentageFee = 0.07;
+                    }
+                    else if (age < retireAge + 6)
+                    {
+                        withdrawalPercentageFee = 0.06;
+                    }
+                    else if (age < retireAge + 5)
+                    {
+                        withdrawalPercentageFee = 0.05;
+                    }
+                    else if (age < retireAge + 4)
+                    {
+                        withdrawalPercentageFee = 0.04;
+                    }
+                    else if (age < retireAge + 3)
+                    {
+                        withdrawalPercentageFee = 0.03;
+                    }
+                    else if (age < retireAge + 2)
+                    {
+                        withdrawalPercentageFee = 0.02;
+                    }
+                    else if (age < retireAge + 1)
+                    {
+                        withdrawalPercentageFee = 0.01;
+                    }
+
+                    /*surender fee:*/
+
+
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
 
