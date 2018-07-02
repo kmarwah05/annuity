@@ -7,8 +7,28 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredFixed:Account
     {
-        public  override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
+
+        
+        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
         {
+            double withdrawalPercentageFee = 0.00;
+
+            /*surrender fee:*/
+            if (age < age + 7)
+            {
+              while(withdrawalPercentageFee < 0.08)
+                {
+                    withdrawalPercentageFee++;
+                }
+            }
+            else
+            {
+                withdrawalPercentageFee = 0;
+            }
+
+            /*surender fee:*/
+
+
             double amountWithFees = amount;
             double principle = 0;
             Boolean isDeath;
@@ -48,10 +68,10 @@ namespace GuaranteedIncome.Models
                     }else
                     {
                         //withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                     //   Console.WriteLine("insert  " + j);
-                       // Console.WriteLine(CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge)));
+                       //Console.WriteLine("insert  " + j);
+                       //Console.WriteLine(CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge)));
                         account[count] = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                       // Console.WriteLine("account at " + account[count]);
+                       //Console.WriteLine("account at " + account[count]);
                         temp = temp - CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
 
                         temp = temp * Math.Pow(1 + rate, 1);
