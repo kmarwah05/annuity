@@ -1,15 +1,26 @@
 import { Chart } from 'chart.js';
 import { Inputs } from 'scripts/inputs';
 import { Data } from 'scripts/data';
-import { bindable, Container } from 'aurelia-framework';
-import { App } from 'app';
+import { bindable, inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Results {
   chartMax: number = 10;
   
   response: Data;
 
   @bindable inputs: Inputs;
+
+  ea: EventAggregator;
+
+  constructor(EventAggregator) {
+    this.ea = EventAggregator;
+  }
+
+  newInputs() {
+    this.ea.publish("new inputs");
+  }
 
   attached() {
     this.buildChart("Brokerage Account",
@@ -24,10 +35,6 @@ export class Results {
       "fixed-indexed-annuity-chart",
       [[2, 3, 4, 6], [4, 6, 6, 8]],
       false);
-  }
-
-  newInputs() {
-    ((Container.instance as any).viewModel as App).onNewInputs();
   }
 
   buildChart(title: string,
