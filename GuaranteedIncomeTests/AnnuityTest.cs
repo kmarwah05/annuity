@@ -31,7 +31,7 @@ namespace GuaranteedIncomeTests
             Setup s = new Setup(myModel);
             Data data = s.ReturnData();
             double[] arrF = data.Fixed;
-            //double[] arrV = data.Variable.First();
+           // double[] arrV = data.Variable.First();
             //double[] arrFI = data.FixedIndexed.First();
             //double[] b = data.Brokerage.First();
 
