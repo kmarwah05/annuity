@@ -21,9 +21,9 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] MedianAverageWithdrawal = new double[500];
+            double[] MedianAverageWithdrawal = new double[2000];
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
@@ -63,8 +63,10 @@ namespace GuaranteedIncome.Models
                         count++;
                     }
                 }
-               
-                trials.Add(account);//adds one trial to the list
+                if (i < 50)
+                {
+                    trials.Add(account);//adds one trial to the list
+                }
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }

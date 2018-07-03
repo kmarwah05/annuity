@@ -7,15 +7,21 @@ namespace GuaranteedIncome.Models
 {
     public class Data
     {
+        public double VariableMedian;
+        public double FixedIndexedMedian;
+        public double BrokerageMedian;
+
+
+       // public 
+
+
+
         public double Fixed;
         public List<double[]> Variable;
         public List<double[]> FixedIndexed;
         public List<double[]> Brokerage;
 
 
-        public double VariableMedian;
-        public double FixedIndexedMedian;
-        public double BrokerageMedian;
-
+        
     }
 }

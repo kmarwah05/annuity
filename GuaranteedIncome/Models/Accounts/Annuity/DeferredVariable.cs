@@ -79,9 +79,9 @@ namespace GuaranteedIncome.Models
             }
 
             List<double[]> trials = new List<double[]>();
-            double[] MedianAverageWithdrawal = new double[500];
+            double[] MedianAverageWithdrawal = new double[2000];
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
@@ -115,7 +115,7 @@ namespace GuaranteedIncome.Models
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
                         withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;
                         temp -= withdrawal;
-                        withdrawal = withdrawal - withdrawal * .03;//3% fee for variable account
+                        withdrawal = withdrawal - withdrawal * .04;//3% fee for variable account
                         if (isGMWB)//if they have the GMWb rider then they won't have a withdrawal less than principle
                         {
                             if (withdrawal < minWithdrawal)
@@ -132,7 +132,10 @@ namespace GuaranteedIncome.Models
                         
                     }
                 }
-                trials.Add(account);
+                if (i < 50)
+                {
+                    trials.Add(account);
+                }
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }
