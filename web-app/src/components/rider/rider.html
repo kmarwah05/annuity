@@ -1,0 +1,7 @@
+<template class="riders__li">
+  <div>
+    <div class="riders__checkbox" id="${rider}" click.trigger="toggleRider(rider)">&#10004;</div>
+    <slot name="name"></slot>
+  </div>
+  <div><slot name="caption"></slot></div>
+</template>

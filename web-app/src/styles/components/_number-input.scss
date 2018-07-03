@@ -37,6 +37,10 @@
 }
 
 @keyframes underline {
-  from {border-color: $text-color;}
-  to {border-color: $brand-color;}
+  from {
+    border-color: $text-color;
+  }
+  to {
+    border-color: $brand-color;
+  }
 }

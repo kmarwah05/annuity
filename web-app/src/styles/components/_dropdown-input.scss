@@ -82,6 +82,10 @@
 }
 
 @keyframes highlight {
-  from {background-color: $brand-color;}
-  to {background-color: $brand-color-dark;}
+  from {
+    background-color: $brand-color;
+  }
+  to {
+    background-color: $brand-color-dark;
+  }
 }
