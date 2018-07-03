@@ -70,10 +70,26 @@ namespace GuaranteedIncome.Models
                 DeferredVariable dv = new DeferredVariable();
                 DeferredFixedIndexed dfi = new DeferredFixedIndexed();
                 Brokerage b = new Brokerage();
+                
                 data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate,MarketData.FixedDeviation, amount, TaxType, status, income,Riders);
+
+
+                //Variable calculations
                 data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.VariableRate, MarketData.VariableDeviation, amount, TaxType, status, income,Riders);
+                data.VariableMedian = AverageMedian.calcAverageMedian(data.Variable[data.Variable.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.Variable.RemoveAt(data.Variable.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
+                //Fixed Indexed Calculations
                 data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income,Riders);
+                data.FixedIndexedMedian = AverageMedian.calcAverageMedian(data.FixedIndexed[data.FixedIndexed.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.FixedIndexed.RemoveAt(data.FixedIndexed.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
+                //brokerage calculations
                 data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, amount,0, TaxStatus.qualified, status, income,Riders);
+                data.BrokerageMedian = AverageMedian.calcAverageMedian(data.Brokerage[data.Brokerage.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.Brokerage.RemoveAt(data.Brokerage.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
+
             }
             else
             {
@@ -82,10 +98,24 @@ namespace GuaranteedIncome.Models
                 ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
                 data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate, MarketData.FixedDeviation, amount, TaxType, status, income,Riders);
-                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.VariableRate, MarketData.VariableDeviation, amount, TaxType, status, income,Riders);
-                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income,Riders);
-                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, 0,amount, TaxStatus.qualified, status, income,Riders);
+              
+                //Variable calculations
+                data.Variable = dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.VariableRate, MarketData.VariableDeviation, amount, TaxType, status, income, Riders);
+                data.VariableMedian = AverageMedian.calcAverageMedian(data.Variable[data.Variable.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.Variable.RemoveAt(data.Variable.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
+                //Fixed Indexed Calculations
+                data.FixedIndexed = dfi.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income, Riders);
+                data.FixedIndexedMedian = AverageMedian.calcAverageMedian(data.FixedIndexed[data.FixedIndexed.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.FixedIndexed.RemoveAt(data.FixedIndexed.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
+                //brokerage calculations
+                data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, 0, amount, TaxStatus.qualified, status, income, Riders);
+                data.BrokerageMedian = AverageMedian.calcAverageMedian(data.Brokerage[data.Brokerage.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
+                data.Brokerage.RemoveAt(data.Brokerage.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
+
             }
+
             return data;
         }
     }

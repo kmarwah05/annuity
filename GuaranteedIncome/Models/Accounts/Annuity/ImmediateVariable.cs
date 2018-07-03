@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class ImmediateVariable:Account
+    public class ImmediateVariable
     {
-        public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
+        public List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
         {//same as deferred variable except lumpsum instead of continuous payments
            
 
@@ -44,6 +44,8 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
+            double[] MedianAverageWithdrawal = new double[500];
+
             for (int i = 0; i < 500; i++)
             {
                 double[] account = new double[deathAge-retireAge];
@@ -51,6 +53,7 @@ namespace GuaranteedIncome.Models
                 double temp = amountWithFees;
                 double principle = amountWithFees;
                 double minWithdrawal = 0;
+                double withdrawalAmount = 0;
                 for (int j = age; j < deathAge; j++)
                 { Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
@@ -86,15 +89,19 @@ namespace GuaranteedIncome.Models
                             }
                         }
                         account[count] = withdrawal;
+                        withdrawalAmount += withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
                 }
                 trials.Add(account);
+                withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
+                MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }
+            trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
             return trials;
         }
-        public override double CalcWithdrawal(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType,FilingStatus status,double principle)
+        public double CalcWithdrawal(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType,FilingStatus status,double principle)
         {
             return  TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }
