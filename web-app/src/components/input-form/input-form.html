@@ -64,7 +64,7 @@
       <button type="button" click.trigger="isFixed = false">The rest of my life</button>
       <button type="button" click.trigger="isFixed = true">A fixed duration</button>
     </dropdown>
-    <form-field type="number" input-value.two-way="fixedDuration" label-text="I want a payout until my age is" if.bind="isFixed"></form-field>
+    <form-field type="number" input-value.two-way="endAge" label-text="I want a payout until my age is" if.bind="isFixed"></form-field>
 
   </section>
   <hr />
