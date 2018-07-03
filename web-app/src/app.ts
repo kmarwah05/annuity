@@ -13,6 +13,9 @@ export class App {
   currentPage: Pages = Pages.Input;
   data: Data = new Data();
 
+  isFixed: boolean;
+  endAge: number;
+
   ea: EventAggregator;
   onSubmit: Subscription;
   onNewInputs: Subscription;
@@ -24,9 +27,12 @@ export class App {
 
   attached() {
     this.onSubmit = this.ea.subscribe("submit", () => {
+      this.inputs.complete(this.isFixed, this.endAge);
+
       if (Validator.areValidInputs(this.inputs)) {
         APIRequest.postInputs(this.inputs)
         .then(() => {
+          console.log(APIRequest.response);
           this.data = APIRequest.response;
           console.log(this.data);
           this.currentPage = Pages.Results;

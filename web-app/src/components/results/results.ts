@@ -51,7 +51,7 @@ export class Results {
       data.datasets.push({
         data: trial,
         fill: false,
-        borderColor: "rgba(0, 150, 0, 0.5)",
+        borderColor: "rgba(0, 150, 0, 0.15)",
         pointRadius: 0,
         pointHitRadius: 0,
         pointHoverRadius: 0

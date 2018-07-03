@@ -9,6 +9,8 @@ export class InputForm {
   private TaxType: typeof TaxType = TaxType;
 
   @bindable inputs: Inputs;
+  @bindable isFixed: boolean;
+  @bindable endAge: number;
 
   ea: EventAggregator;
 
