@@ -20,8 +20,8 @@
 
   <label id="looking-for" class="form__label">I'm looking for an</label>
   <div class="form__tab-bar">
-    <button id="immediate" class="form__tab-bar--selected" click.trigger="selected()">Immediate</button><!--no space for u
-    --><button id="deferred" click.trigger="selected()">Deferred</button>
+    <button type="button" id="immediate" class="form__tab-bar--selected" click.trigger="selected()">Immediate</button><!--no space for u
+    --><button type="button" id="deferred" click.trigger="selected()">Deferred</button>
   </div>
   <label class="form__label">annuity</label>
 
@@ -37,9 +37,9 @@
 
     <currency-field input-value.two-way="amount" label-text="I plan to invest"></currency-field>
     <dropdown label-text="The money I will invest is" placeholder-text="Choose a tax status" dropdown-id="tax-type">
-      <button click.trigger="taxType = TaxType.qualified">Qualified</button>
-      <button click.trigger="taxType = TaxType.unqualified">Non-qualified</button>
-      <button click.trigger="taxType = TaxType.roth">Tax-free</button>
+      <button type="button" click.trigger="taxType = TaxType.qualified">Qualified</button>
+      <button type="button" click.trigger="taxType = TaxType.unqualified">Non-qualified</button>
+      <button type="button" click.trigger="taxType = TaxType.roth">Tax-free</button>
     </dropdown>
 
   </section>
@@ -47,30 +47,30 @@
   <section class="form__section">
 
     <dropdown label-text="I am" placeholder-text="Choose a sex" dropdown-id="sex">
-      <button click.trigger="isMale = true">Male</button>
-      <button click.trigger="isMale = false">Female</button>
+      <button type="button" click.trigger="isMale = true">Male</button>
+      <button type="button" click.trigger="isMale = false">Female</button>
     </dropdown>
     <form-field type="number" input-value.two-way="currentAge" label-text="My current age is"></form-field>
 
     <dropdown label-text="My IRS filing status is" placeholder-text="Choose a filing status" dropdown-id="filing-status">
-      <button click.trigger="filingStatus = FilingStatus.Joint">Joint</button>
-      <button click.trigger="filingStatus = FilingStatus.HeadOfHousehold">Head of household</button>
-      <button click.trigger="filingStatus = FilingStatus.Unmarried">Unmarried</button>
-      <button click.trigger="filingStatus = FilingStatus.MarriedSeparate">Married filing separately</button>
+      <button type="button" click.trigger="filingStatus = FilingStatus.Joint">Joint</button>
+      <button type="button" click.trigger="filingStatus = FilingStatus.HeadOfHousehold">Head of household</button>
+      <button type="button" click.trigger="filingStatus = FilingStatus.Unmarried">Unmarried</button>
+      <button type="button" click.trigger="filingStatus = FilingStatus.MarriedSeparate">Married filing separately</button>
     </dropdown>
     <currency-field input-value.two-way="income" label-text="My household income is"></currency-field>
 
     <dropdown label-text="I want a payout for" placeholder-text="Choose a duration" dropdown-id="duration">
-        <button click.trigger="isFixed = false">The rest of my life</button>
-        <button click.trigger="isFixed = true">A fixed duration</button>
-      </dropdown>
-      <form-field type="number" input-value.two-way="fixedDuration" label-text="I want a payout until my age is" if.bind="isFixed"></form-field>
+      <button type="button" click.trigger="isFixed = false">The rest of my life</button>
+      <button type="button" click.trigger="isFixed = true">A fixed duration</button>
+    </dropdown>
+    <form-field type="number" input-value.two-way="fixedDuration" label-text="I want a payout until my age is" if.bind="isFixed"></form-field>
 
   </section>
   <hr />
   <section class="form__section">
 
-    <button type="submit" class="form__submit">Submit</button>
+    <input type="submit" value="Submit" class="form__submit">
 
   </section>
   </section>
