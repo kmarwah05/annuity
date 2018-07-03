@@ -2,7 +2,6 @@
 
 <require from="../form-fields/currency-field.html"></require>
 <require from="../form-fields/form-field.html"></require>
-
 <require from="../form-fields/dropdown"></require>
 
 <form class="form" role="form" with.bind="inputs" submit.trigger="clickedSubmit()">
@@ -28,13 +27,13 @@
 
   </section>
   <section class="form__main">
-  <section class="form__section" if.bind="annuityType == AnnuityType.Deferred">
+  <section class="form__section form__switch" if.bind="annuityType == AnnuityType.Deferred">
 
     <currency-field input-value.two-way="additions" label-text="I will annually set aside"></currency-field>
-    <form-field type="number" input-value.two-way="yearsAdding" label-text="How many years will you contribute?"></form-field>
+    <form-field type="number" input-value.two-way="yearsAdding" label-text="I will contribute until my age is"></form-field>
 
   </section>
-  <section class="form__section" if.bind="annuityType == AnnuityType.Immediate">
+  <section class="form__section form__switch" if.bind="annuityType == AnnuityType.Immediate">
 
     <currency-field input-value.two-way="initialInvestment" label-text="I plan to invest"></currency-field>
     <dropdown label-text="The money I will invest is" placeholder-text="Choose a tax status" dropdown-id="funding-source">
@@ -59,7 +58,13 @@
       <button click.trigger="filingStatus = FilingStatus.Unmarried">Unmarried</button>
       <button click.trigger="filingStatus = FilingStatus.MarriedSeparate">Married filing separately</button>
     </dropdown>
-    <currency-field input-value.two-way="income" label-text="My current income is"></currency-field>
+    <currency-field input-value.two-way="income" label-text="My household income is"></currency-field>
+
+    <dropdown label-text="I want a payout for" placeholder-text="Choose a duration" dropdown-id="duration">
+        <button click.trigger="annuityDuration = AnnuityDuration.Lifetime">The rest of my life</button>
+        <button click.trigger="annuityDuration = AnnuityDuration.Fixed">A fixed duration</button>
+      </dropdown>
+      <form-field type="number" input-value.two-way="fixedDuration" label-text="I want a payout until my age is" if.bind="annuityDuration == AnnuityDuration.Fixed"></form-field>
 
   </section>
   <hr />

@@ -9,12 +9,44 @@ namespace GuaranteedIncome.Models
     {
         public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
         {
-           
+            double withdrawalPercentageFee = 0;
+            /*surrender fee:*/
+            //fee for withdrawing early
+            if (age + 7 < retireAge)
+            {
+                withdrawalPercentageFee = 0.07;
+            }
+            else if (age + 6 < retireAge)
+            {
+                withdrawalPercentageFee = 0.06;
+            }
+            else if (age + 5 < retireAge)
+            {
+                withdrawalPercentageFee = 0.05;
+            }
+            else if (age + 4 < retireAge)
+            {
+                withdrawalPercentageFee = 0.04;
+            }
+            else if (age + 3 < retireAge)
+            {
+                withdrawalPercentageFee = 0.03;
+            }
+            else if (age + 2 < retireAge)
+            {
+                withdrawalPercentageFee = 0.02;
+            }
+            else if (age + 1 < retireAge)
+            {
+                withdrawalPercentageFee = 0.01;
+            }
+            /*surender fee:*/
+
 
             double amountWithFees = amount;
             double principle = 0;
             Boolean isGMWB;
-            if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider
+            if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider and charges fee
             {
                 isGMWB = true;
                 amountWithFees -= amountWithFees * .005;
@@ -25,7 +57,7 @@ namespace GuaranteedIncome.Models
             }
 
             Boolean isGMAB;
-            if (Riders.Contains(Models.Riders.GMAB))
+            if (Riders.Contains(Models.Riders.GMAB))//checks to see if GMAb is a rider and charges fee
             {
                 isGMAB = true;
                 amountWithFees -= amountWithFees * .005;
@@ -36,7 +68,7 @@ namespace GuaranteedIncome.Models
             }
 
             Boolean isDeath;
-            if (Riders.Contains(Models.Riders.DeathBenefit))
+            if (Riders.Contains(Models.Riders.DeathBenefit))//checks to see if death benefit is a rider and charges fee
             {
                 isDeath = true;
                 amountWithFees -= amountWithFees * .005;
@@ -47,52 +79,17 @@ namespace GuaranteedIncome.Models
             }
 
             List<double[]> trials = new List<double[]>();
-            double[] account = new double[deathAge+1];
-            for (int i = 0; i < 1; i++)
+           
+            for (int i = 0; i < 500; i++)
             {
-
-                double withdrawalPercentageFee;
-
-                /*surrender fee:*/
-                if (age < retireAge + 7)
-                {
-                    withdrawalPercentageFee = 0.07;
-                }
-                else if (age < retireAge + 6)
-                {
-                    withdrawalPercentageFee = 0.06;
-                }
-                else if (age < retireAge + 5)
-                {
-                    withdrawalPercentageFee = 0.05;
-                }
-                else if (age < retireAge + 4)
-                {
-                    withdrawalPercentageFee = 0.04;
-                }
-                else if (age < retireAge + 3)
-                {
-                    withdrawalPercentageFee = 0.03;
-                }
-                else if (age < retireAge + 2)
-                {
-                    withdrawalPercentageFee = 0.02;
-                }
-                else if (age < retireAge + 1)
-                {
-                    withdrawalPercentageFee = 0.01;
-                }
-
-                /*surender fee:*/
-
-
+                double[] account = new double[deathAge-retireAge];
+                int count = 0;
                 double temp = 0;
-                double withdrawalSum = 0;
-                double minWithdrawal = 0;
+                double minWithdrawal = 0;//minimum withdrawal. used if they have the GMWB rider
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
-                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);//random number from -3 to 3 
                     if (j == retireAge)
                     {
                         double assetAtRetire = temp;
@@ -101,37 +98,36 @@ namespace GuaranteedIncome.Models
                             assetAtRetire = principle;
                             temp = principle;
                         }
-
-                        minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);
+                        minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);//minimum withdrawal used for GMWB rider
                     }
                     if (j < retireAge)
                     {
                         temp = (temp+amountWithFees) * Math.Pow(1 + rate, 1);
                         principle += amountWithFees;
-                        account[j] = temp;
                     }
                     if (j >= retireAge)
                     {
-                      //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                        
 
-                        double withdrawal = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        //  withdrawalSum += CalcWithdrawal(rate, temp, deathAge-j, taxType, status, amount);
-                        if (isGMWB)
+                        
+                        double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;
+                        temp -= withdrawal;
+                        withdrawal = withdrawal - withdrawal * .03;//3% fee for variable account
+                        if (isGMWB)//if they have the GMWb rider then they won't have a withdrawal less than principle
                         {
                             if (withdrawal < minWithdrawal)
                             {
                                 withdrawal = minWithdrawal;
                             }
                         }
-                        temp -= (withdrawal-withdrawal*.03);
+
+                        account[count] = withdrawal;
+                       
                         temp = temp * Math.Pow(1 + rate, 1);
-                        account[j] = temp;
+                        count++;
+                        
                     }
                 }
-                // trials[i] = withdrawalSum / (deathAge - retireAge);
-                account[deathAge] = 0;
-
                 trials.Add(account);
             }
             return trials;

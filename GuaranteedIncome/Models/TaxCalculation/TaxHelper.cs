@@ -30,10 +30,7 @@ namespace GuaranteedIncome.Models
         }
         public static double CalcWithdrawalAmount(double rate, double presentValue, int yearsWithdrawing)//loan payment calculator
         {
-            if (rate < 0)
-            {
-                rate = 0;
-            }
+            
             return rate * presentValue / (1 - Math.Pow((Convert.ToDouble(1 + rate)), -yearsWithdrawing));
 
         }

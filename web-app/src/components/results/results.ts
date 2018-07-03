@@ -1,24 +1,33 @@
 import { Chart } from 'chart.js';
 import { Inputs } from 'scripts/inputs';
 import { Data } from 'scripts/data';
+import { bindable, Container } from 'aurelia-framework';
+import { App } from 'app';
 
 export class Results {
+  chartMax: number = 10;
+  
   response: Data;
-  inputs: Inputs;
+
+  @bindable inputs: Inputs;
 
   attached() {
-    this.buildChart("Variable",
-      "variable-annuity-chart",
-      [[2, 3, 4, 5], [4, 5, 6, 8]],
-      true);
-    this.buildChart("Fixed Indexed",
-      "fixed-indexed-annuity-chart",
-      [[2, 3, 4, 5], [4, 5, 6, 8]],
-      false);
-    this.buildChart("Brokerage",
+    this.buildChart("Brokerage Account",
       "brokerage-account-chart",
-      [[2, 3, 4, 5], [4, 5, 6, 8]],
+      [[2, 3, 4, 1], [4, 5, 8, 3]],
+      true);
+    this.buildChart("Variable Annuity",
+      "variable-annuity-chart",
+      [[2, 3, 4, 2], [4, 5, 8, 7]],
       false);
+    this.buildChart("Fixed Indexed Annuity",
+      "fixed-indexed-annuity-chart",
+      [[2, 3, 4, 6], [4, 6, 6, 8]],
+      false);
+  }
+
+  newInputs() {
+    ((Container.instance as any).viewModel as App).onNewInputs();
   }
 
   buildChart(title: string,
@@ -36,7 +45,7 @@ export class Results {
       data.datasets.push({
         data: trial,
         fill: false,
-        borderColor: "rgba(0, 255, 0, 0.05)",
+        borderColor: "rgba(0, 150, 0, 0.5)",
         pointRadius: 0,
         pointHitRadius: 0,
         pointHoverRadius: 0
@@ -84,6 +93,8 @@ export class Results {
           },
           ticks: {
             display: isFirst,
+            max: this.chartMax,
+            min: 0,
             fontColor: "rgb(34, 34, 34)",
             fontFamily: "'PT Serif', 'Times New Roman', Times, serif",
             fontSize: 16

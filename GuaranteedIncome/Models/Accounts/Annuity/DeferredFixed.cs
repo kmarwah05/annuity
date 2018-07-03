@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 
 namespace GuaranteedIncome.Models
 {
-    public class DeferredFixed:Account
+    public class DeferredFixed
     {
-        
-        public override List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
+        public double CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
-
             double amountWithFees = amount;
             double principle = 0;
             Boolean isDeath;
-            if (Riders.Contains(Models.Riders.DeathBenefit))
+            if (Riders.Contains(Models.Riders.DeathBenefit))//rider for Death benefit, doesn't actually do anything except add to the fees
             {
                 isDeath = true;
                 amountWithFees -= amountWithFees * .005;
@@ -24,90 +22,77 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
 
-            List <double[]> trials= new List<double[]>();
-            
-            for (int i = 0; i < 1; i++)
+            double withdrawalPercentageFee = 0;
+
+            /*surrender fee:*/
+            //fee for withdrawaling funds too early
+            if (age + 7 < retireAge)
             {
-                double[] account = new double[deathAge - retireAge];
-                double temp = 0;
-                int count = 0;
-                double withdrawalSum = 0;
-
-
-                for (int j = age; j < deathAge; j++)
-                {
-                    double withdrawalPercentageFee;
-
-                    /*surrender fee:*/
-                    if (age < retireAge + 7)
-                    {
-                        withdrawalPercentageFee = 0.07;
-                    }
-                    else if(age < retireAge + 6)
-                    {
-                        withdrawalPercentageFee = 0.06;
-                    }
-                    else if(age < retireAge + 5)
-                    {
-                        withdrawalPercentageFee = 0.05;
-                    }
-                    else if(age < retireAge + 4)
-                    {
-                        withdrawalPercentageFee = 0.04;
-                    }
-                    else if(age < retireAge + 3)
-                    {
-                        withdrawalPercentageFee = 0.03;
-                    }
-                    else if(age < retireAge + 2)
-                    {
-                        withdrawalPercentageFee = 0.02;
-                    }
-                    else if(age < retireAge + 1)
-                    {
-                        withdrawalPercentageFee = 0.01;
-                    }
-                  
-                    /*surender fee:*/
-
-                    Random rand = new Random();
-                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
-                    //double rate = mean;
-                    if (j == retireAge)
-                    {
-                        double assetAtRetire = temp;
-                       
-                    }
-                    if (j < retireAge)
-                    {
-                        temp = (temp+amountWithFees) * Math.Pow(1 + rate, 1);
-                       // account[j] = temp;
-                        principle += amountWithFees;
-                    }else
-                    {
-                        //withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
-                       //Console.WriteLine("insert  " + j);
-                       //Console.WriteLine(CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge)));
-                        account[count] = CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                       //Console.WriteLine("account at " + account[count]);
-                        temp = temp - CalcWithdrawal(rate, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-
-                        temp = temp * Math.Pow(1 + rate, 1);
-                        count++;
-                    }
-                   
-                }
-                //trials[i] = withdrawalSum / (deathAge - retireAge);
-                // account[deathAge] = 0;
-                for (int k = 0; k < 20; k++)
-                {
-                    Console.WriteLine("k " + k + "  " + account[k]);
-                }
-                trials.Add(account);
+                withdrawalPercentageFee = 0.07;
             }
-            return trials;
+            else if (age + 6 < retireAge)
+            {
+                withdrawalPercentageFee = 0.06;
+            }
+            else if (age + 5 < retireAge)
+            {
+                withdrawalPercentageFee = 0.05;
+            }
+            else if (age + 4 < retireAge)
+            {
+                withdrawalPercentageFee = 0.04;
+            }
+            else if (age + 3 < retireAge)
+            {
+                withdrawalPercentageFee = 0.03;
+            }
+            else if (age + 2 < retireAge)
+            {
+                withdrawalPercentageFee = 0.02;
+            }
+            else if (age + 1 < retireAge)
+            {
+                withdrawalPercentageFee = 0.01;
+            }
+            /*surender fee:*/
+
+
+            double[] account = new double[deathAge - retireAge];
+            double temp = 0;//the amount in the account at year "j"
+            int count = 0;//counter for filling up array that is returned
+            for (int j = age; j < deathAge; j++)
+            {
+                if (j == retireAge)
+                {
+                    double assetAtRetire = temp;
+
+                }
+                if (j < retireAge)//when less than retire age, continue to deposit and no withdrawl
+                {
+                    temp = (temp + amountWithFees) * Math.Pow(1 + mean, 1);
+                    principle += amountWithFees;
+                }
+                else//when greater than retire age, stop depositing and start withdrawing
+                {
+                    double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));//withdrawal amoutn using payment calculator
+                    withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;//withdrawal fee for doing it early
+                    account[count] = withdrawal;
+                    temp = temp - withdrawal;
+                    temp = temp * Math.Pow(1 + mean, 1);//interest 
+                    count++;
+                }
+
+            }
+            double averageWithdrawal = 0;//just create average withdrawal amount for fixed
+            for (int i = 0; i < deathAge - retireAge; i++)
+            {
+                averageWithdrawal += account[i];
+            }
+            averageWithdrawal = averageWithdrawal / (deathAge - retireAge);
+
+            return averageWithdrawal;
         }
-        public override double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
+        public double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)//tax helper method
         {
             return TaxHelper.CalcTaxedWithdrawals(rate, presentValue, yearsWithdrawing, taxType, status, principle);
         }
