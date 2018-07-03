@@ -8,7 +8,7 @@ namespace GuaranteedIncome.Models
     public class ImmediateVariable:Account
     {
         public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
-        {
+        {//same as deferred variable except lumpsum instead of continuous payments
            
 
             double amountWithFees = amount;

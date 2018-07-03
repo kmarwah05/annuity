@@ -27,15 +27,14 @@ namespace GuaranteedIncome.Models
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
                 double temp = 0;
-                temp = amountWithFees;
-                double withdrawalSum = 0;
+                temp = amountWithFees;//starting amount is lumpsum
                 double principle = amountWithFees;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
                     //if rate is less than 1 
-                    if (rate < .01)
+                    if (rate < .01)//lower bound and upper boudn on interest rate for fixed indexed
                     {
                         rate = .01;
                     }
@@ -48,20 +47,18 @@ namespace GuaranteedIncome.Models
                     {
                         double assetAtRetire = temp;
                     }
-                    if (j < retireAge)
+                    if (j < retireAge)//interest grows on initial investment
                     {
                         temp = temp * Math.Pow(1 + rate, 1);
                     }
                     else
                     {
-                        // withdrawalSum += CalcWithdrawal(rate, temp, deathAge - j, taxType, status, amount);
                         account[count]= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
                         temp -= CalcWithdrawal(mean, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
                 }
-                //  trials[i] = withdrawalSum / (deathAge - retireAge);
                 trials.Add(account);
             }
             return trials;

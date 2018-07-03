@@ -11,6 +11,7 @@ namespace GuaranteedIncome.Models
         {
             double withdrawalPercentageFee = 0;
             /*surrender fee:*/
+            //fee for withdrawing early
             if (age + 7 < retireAge)
             {
                 withdrawalPercentageFee = 0.07;
@@ -43,7 +44,7 @@ namespace GuaranteedIncome.Models
 
             double amountWithFees = amount;
             Boolean isDeath;
-            if (Riders.Contains(Models.Riders.DeathBenefit))
+            if (Riders.Contains(Models.Riders.DeathBenefit))//death benefit rider, only increases fee
             {
                 isDeath = true;
                 amountWithFees -= amountWithFees * .005;
@@ -58,19 +59,16 @@ namespace GuaranteedIncome.Models
             for (int i = 0; i < 500; i++)
             {
                 double[] account = new double[deathAge-retireAge];
-                int count = 0;
-                double temp = 0;
-                double principle = 0;
+                int count = 0;//index of the array that withdrawal data is being input into
+                double temp = 0;//current amount in the annuity 
+                double principle = 0;//untaxable part of account
                 for (int j = age; j < deathAge; j++)
                 {
-
-                   
-
                     Random rand = new Random();
-                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);//random number from -3 to 3, 3 standard deviations is enough
 
                     //if rate is less than 1
-                    if (rate < .01)
+                    if (rate < .01)//fixed indexed has upper and lower bounds for rate
                     {
                         rate = .01;
                     }
@@ -83,22 +81,22 @@ namespace GuaranteedIncome.Models
                     {
                         double assetAtRetire = temp;
                     }
-                    if (j < retireAge)
+                    if (j < retireAge)//depositing only , no withdrawing
                     {
                         temp = (temp + amountWithFees) * Math.Pow(1 + rate, 1);
-                        principle += amountWithFees;
+                        principle += amountWithFees;//adds to amount invested
                     }
-                    if (j >= retireAge)
+                    if (j >= retireAge)//stop depositing and start withdrawing when retirement starts
                     {
-                        double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;
+                        double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));//withdrawal amoutn with taxes and loan payment calc
+                        withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;// subtract withdrawal early fee
                         account[count] = withdrawal;
                         temp -= withdrawal;
-                        temp = temp * Math.Pow(1 + rate, 1);
-                        count++;
+                        temp = temp * Math.Pow(1 + rate, 1);//interest
+                        count++;//increment array counter
                     }
                 }
-                trials.Add(account);
+                trials.Add(account);//adds one trial to the list
             }
             return trials;
         }
