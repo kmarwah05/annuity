@@ -14,14 +14,14 @@ namespace GuaranteedIncome.Models
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
-                double temp = lumpSum;
+                double temp = lumpSum;//sets temp to equal lumpsum, if deferred this is 0
                 double returns = 0;
                 double taxableAmount = 0;
                 double principle = lumpSum;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
-                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
+                    double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);//random number between -3 and 3, then multiplied by std deviation
 
                     if (j == retireAge)
                     {
@@ -30,9 +30,9 @@ namespace GuaranteedIncome.Models
                     if (j < retireAge)
                     {
                         principle += amount;
-                        returns= (temp + amount) * Math.Pow(1 + rate, 1);
-                        taxableAmount = returns - temp;
-                        temp= returns-Convert.ToDouble(IncomeTaxCalculator.CapitalGainsTaxFor(status, (decimal)taxableAmount, (decimal)income));
+                        returns= (temp + amount) * Math.Pow(1 + rate, 1);//total returns
+                        taxableAmount = returns - temp;//interest made of of returns
+                        temp= returns-Convert.ToDouble(IncomeTaxCalculator.CapitalGainsTaxFor(status, (decimal)taxableAmount, (decimal)income));//capitol gains tax subtracted from interest made
                     }
                     else
                     {

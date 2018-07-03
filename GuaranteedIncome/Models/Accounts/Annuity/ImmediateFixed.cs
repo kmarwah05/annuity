@@ -11,7 +11,7 @@ namespace GuaranteedIncome.Models
         {
             double amountWithFees = amount;
             Boolean isDeath;
-            if (Riders.Contains(Models.Riders.DeathBenefit))
+            if (Riders.Contains(Models.Riders.DeathBenefit))//death benefit rider
             {
                 isDeath = true;
                 amountWithFees -= amountWithFees * .005;
@@ -44,7 +44,7 @@ namespace GuaranteedIncome.Models
                     }
                 }
             double averageWithdrawal = 0;
-            for(int i = 0; i < deathAge - retireAge; i++)
+            for(int i = 0; i < deathAge - retireAge; i++)//calculates average withdrawal during retirement
             {
                 averageWithdrawal += account[i];
             }

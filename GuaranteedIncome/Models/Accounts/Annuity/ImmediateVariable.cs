@@ -8,7 +8,7 @@ namespace GuaranteedIncome.Models
     public class ImmediateVariable:Account
     {
         public override List<double[]> CalculateReturns(int age,int retireAge, int deathAge, double mean, double stdDeviation,double amount, TaxStatus taxType, FilingStatus status,double income,List<Riders> Riders)
-        {
+        {//same as deferred variable except lumpsum instead of continuous payments
            
 
             double amountWithFees = amount;
@@ -74,7 +74,10 @@ namespace GuaranteedIncome.Models
                     {
 
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        temp -= temp * .03;//adds 3% charge on withdrawals
+
+                        temp -= withdrawal;
+
+                        withdrawal = withdrawal - withdrawal * .03;
                         if (isGMWB)
                         {
                             if (withdrawal< minWithdrawal)
@@ -83,7 +86,6 @@ namespace GuaranteedIncome.Models
                             }
                         }
                         account[count] = withdrawal;
-                        temp -= withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
