@@ -23,9 +23,9 @@ namespace GuaranteedIncome.Models
         public double Amount { get; set; }
 
         [Required]
-        public List<Riders> Riders { get; set; }
+        public List<Riders> Riders { get; set; } = new List<Riders>();
 
-        [EnumDataType(typeof(FilingStatus))]
+        [EnumDataType(typeof(TaxStatus))]
         public TaxStatus TaxType { get; set; }//how the funds being added can be taxed : tax free, qualified, unqualified
 
         public int WithdrawalUntil { get; set; }//zero if you get withdrawal until death age . any other value for fixed withdrawal timeline
