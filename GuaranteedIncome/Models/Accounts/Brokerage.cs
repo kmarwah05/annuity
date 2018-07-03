@@ -10,7 +10,8 @@ namespace GuaranteedIncome.Models
         public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             List<double[]> trials = new List<double[]>();
-            for (int i = 0; i < 1; i++)
+            double[] MedianAverageWithdrawal = new double[500];
+            for (int i = 0; i < 500; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
@@ -18,6 +19,7 @@ namespace GuaranteedIncome.Models
                 double returns = 0;
                 double taxableAmount = 0;
                 double principle = lumpSum;
+                double withdrawalAmount = 0;
                 for (int j = age; j < deathAge; j++)
                 {
                     Random rand = new Random();
@@ -37,13 +39,17 @@ namespace GuaranteedIncome.Models
                     else
                     {
                         account[count] = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                        withdrawalAmount += account[count];
                         temp -= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle/(deathAge-retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
                 }
+                withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
+                MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
                 trials.Add(account);
             }
+            trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
             return trials;
         }
         public double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
