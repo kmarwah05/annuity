@@ -21,6 +21,7 @@ namespace GuaranteedIncome.Models
 
         public int WithdrawalUntil;
 
+
         public Setup(FormModel myModel)
         {
             age = myModel.CurrentAge;
@@ -43,14 +44,13 @@ namespace GuaranteedIncome.Models
                 Gender = Gender.Female;
             }
 
-
             (double age, double lifeExpectancy)[] life= LifeExpectancy.GenderLifeExpectancy(Gender);
 
             if (Gender == Gender.Male)
             {
                 deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
             }
-            else if(Gender  == Gender.Female)
+            else
             {
                 deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
             }
@@ -60,7 +60,6 @@ namespace GuaranteedIncome.Models
             isDeferred = myModel.isDeferred;
             amount = myModel.Amount;
         }
-
 
         public Data ReturnData()
         {
@@ -88,7 +87,6 @@ namespace GuaranteedIncome.Models
                 data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, 0,amount, TaxStatus.qualified, status, income,Riders);
             }
             return data;
-
         }
     }
 }
