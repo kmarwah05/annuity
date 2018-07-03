@@ -8,8 +8,6 @@ namespace GuaranteedIncomeTests
 {
     public class AnnuityTest
     {
-       
-        
 
         [Fact]
         public void DeffFixedTesting()
@@ -19,6 +17,7 @@ namespace GuaranteedIncomeTests
             //{
             //    Console.WriteLine("i: " + i + " value: " + arr[i]);
             //}
+
             FormModel myModel = new FormModel();
             myModel.CurrentAge = 61;
             myModel.RetireAge = 65;
@@ -36,10 +35,7 @@ namespace GuaranteedIncomeTests
             //double[] arrFI = data.FixedIndexed.First();
             //double[] b = data.Brokerage.First();
 
-
             Assert.Equal(114638, arrF[65]);
         }
-
     }
-
 }

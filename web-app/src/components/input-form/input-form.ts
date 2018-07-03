@@ -1,27 +1,31 @@
-import { bindable, Container } from "aurelia-framework";
-import { FundingSource, Sex, FilingStatus, AnnuityType, AnnuityDuration, Inputs } from "scripts/inputs";
-import { App } from "app";
+import { inject, bindable } from "aurelia-framework";
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { TaxType, FilingStatus, Inputs } from "scripts/inputs";
 
+@inject(EventAggregator)
 export class InputForm {
   // Bring types into VM scope
-  private Sex: typeof Sex = Sex;
   private FilingStatus: typeof FilingStatus = FilingStatus;
-  private FundingSource: typeof FundingSource = FundingSource;
-  private AnnuityType: typeof AnnuityType = AnnuityType;
-  private AnnuityDuration: typeof AnnuityDuration = AnnuityDuration;
+  private TaxType: typeof TaxType = TaxType;
 
   @bindable inputs: Inputs;
 
-  clickedSubmit() {
-    ((Container.instance as any).viewModel as App).onSubmit();
+  ea: EventAggregator;
+
+  constructor(EventAggregator) {
+    this.ea = EventAggregator;
   }
 
-  selected(type: AnnuityType) {
-    this.inputs.annuityType = type;
+  clickedSubmit() {
+    this.ea.publish("submit");
+  }
+
+  selected() {
+    this.inputs.isDeferred = !this.inputs.isDeferred;
     let immediate = document.getElementById("immediate");
     let deferred = document.getElementById("deferred");
     let label = document.getElementById("looking-for");
-    if (type == AnnuityType.Deferred) {
+    if (this.inputs.isDeferred) {
       label.innerHTML = "I'm looking for a";
       deferred.classList.add("form__tab-bar--selected");
       immediate.classList.remove("form__tab-bar--selected");

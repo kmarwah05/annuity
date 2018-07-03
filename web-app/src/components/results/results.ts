@@ -1,33 +1,39 @@
 import { Chart } from 'chart.js';
-import { Inputs } from 'scripts/inputs';
 import { Data } from 'scripts/data';
-import { bindable, Container } from 'aurelia-framework';
-import { App } from 'app';
+import { bindable, inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class Results {
-  chartMax: number = 10;
+  chartMax: number = 100000;
   
-  response: Data;
+  @bindable data: Data;
 
-  @bindable inputs: Inputs;
+  ea: EventAggregator;
 
-  attached() {
-    this.buildChart("Brokerage Account",
-      "brokerage-account-chart",
-      [[2, 3, 4, 1], [4, 5, 8, 3]],
-      true);
-    this.buildChart("Variable Annuity",
-      "variable-annuity-chart",
-      [[2, 3, 4, 2], [4, 5, 8, 7]],
-      false);
-    this.buildChart("Fixed Indexed Annuity",
-      "fixed-indexed-annuity-chart",
-      [[2, 3, 4, 6], [4, 6, 6, 8]],
-      false);
+  constructor(EventAggregator) {
+    this.ea = EventAggregator;
   }
 
   newInputs() {
-    ((Container.instance as any).viewModel as App).onNewInputs();
+    this.ea.publish("new inputs");
+  }
+
+  attached() {
+    // this.chartMax = this.data.brokerage[0].reduce((a, b) => a > b ? a : b);
+
+    this.buildChart("Brokerage Account",
+      "brokerage-account-chart",
+      this.data.brokerage,
+      true);
+    this.buildChart("Variable Annuity",
+      "variable-annuity-chart",
+      this.data.variable,
+      false);
+    this.buildChart("Fixed Indexed Annuity",
+      "fixed-indexed-annuity-chart",
+      this.data.fixedIndexed,
+      false);
   }
 
   buildChart(title: string,
