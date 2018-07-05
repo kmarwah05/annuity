@@ -84,6 +84,17 @@
       text-align: right;
       list-style: none;
     }
+
+    @media screen and (max-width: 1080px) {
+      &__categories, &__stats {
+        width: 100%;
+        margin: 5px;
+      }
+
+      &__stats {
+        text-align: center;
+      }
+    }
   }
 
   .riders {
@@ -95,7 +106,11 @@
     &__heading {
       font-family: $title-font-stack;
       font-size: 150%;
-      margin: 10px 0 40px 0;
+      margin: 10px 0 10px 0;
+    }
+
+    p {
+      margin-bottom: 40px;
     }
 
     label {
@@ -131,6 +146,12 @@
     }
   }
   
+
+  @media screen and (max-width: 760px) {
+    .riders, .stats {
+      width: 100%;
+    }
+  }
 }
 
 .new-inputs {
@@ -149,5 +170,9 @@
 
   &:hover {
     animation: "highlight" 0.1s forwards;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 100%;
   }
 }

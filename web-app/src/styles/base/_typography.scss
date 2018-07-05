@@ -4,4 +4,8 @@
 body {
   color: $text-color;
   font: normal 115% / 1.4 $text-font-stack;
+
+  @media screen and (max-width: 640px) {
+    font-size: 100%;
+  }
 }

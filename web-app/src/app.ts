@@ -4,6 +4,7 @@ import { EventAggregator, Subscription } from "aurelia-event-aggregator";
 import { inject } from "aurelia-framework";
 import { Data } from "scripts/data";
 import { APIRequest } from "scripts/api-request";
+import { isNullOrUndefined } from "util";
 
 @inject(EventAggregator)
 export class App {
@@ -42,12 +43,15 @@ export class App {
       this.currentPage = Pages.Input;
     });
 
-    this.onReloadWithRiders = this.ea.subscribe("reload", () => {
-      APIRequest.postInputs(this.inputs)
+    this.onReloadWithRiders = this.ea.subscribe("reload", r => {
+      if (isNullOrUndefined(r)) {
+        APIRequest.postInputs(this.inputs)
         .then(() => {
           this.data = APIRequest.response;
           this.currentPage = Pages.Results;
+          this.ea.publish("reload", "reloaded");
         });
+      }
     });
   }
 }
