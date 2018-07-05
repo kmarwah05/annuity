@@ -56,7 +56,7 @@ namespace GuaranteedIncome.Models
                 Gender = Gender.Female;
             }
 
-           
+            TaxType = myModel.TaxType;
 
             income = myModel.Income;
             status = myModel.FilingStatus;
