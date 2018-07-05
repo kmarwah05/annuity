@@ -10,7 +10,7 @@ namespace GuaranteedIncome.Models
         public static double calcAverageMedian(double[] averages)
         {
             averages = Sort.mergeSort(averages);//returns sorted array of averages in order to find the median
-            return averages[2000 / 2];//returns the median
+            return averages[5000 / 2];//returns the median
         }
 
         public static double calcPercentageAbove(double[]averages,double median)

@@ -21,9 +21,9 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
             List<double[]> trials = new List<double[]>();
-            double[] MedianAverageWithdrawal = new double[2000];
+            double[] MedianAverageWithdrawal = new double[5000];
 
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 5000; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
@@ -63,7 +63,7 @@ namespace GuaranteedIncome.Models
                         count++;
                     }
                 }
-                if (i < 50)
+                if (i < 100)
                 {
                     trials.Add(account);//adds one trial to the list
                 }

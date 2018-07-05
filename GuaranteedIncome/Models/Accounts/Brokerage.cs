@@ -10,8 +10,8 @@ namespace GuaranteedIncome.Models
         public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             List<double[]> trials = new List<double[]>();
-            double[] MedianAverageWithdrawal = new double[2000];
-            for (int i = 0; i < 2000; i++)
+            double[] MedianAverageWithdrawal = new double[5000];
+            for (int i = 0; i < 5000; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
