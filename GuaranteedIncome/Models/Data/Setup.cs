@@ -89,8 +89,8 @@ namespace GuaranteedIncome.Models
                 data.Brokerage = b.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.BrokerageRate, MarketData.BrokerageDeviation, amount,0, TaxStatus.qualified, status, income,Riders);
                 data.BrokerageMedian = AverageMedian.calcAverageMedian(data.Brokerage[data.Brokerage.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
 
-                data.FixedIndexAboveBrokerage =1- AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.FixedIndexedMedian);
-                data.VariableAboveBrokerage =1- AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.VariableMedian);
+                data.FixedIndexAboveBrokerage =1-AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.FixedIndexedMedian);
+                data.VariableAboveBrokerage =1-AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.VariableMedian);
                 data.BrokerageBelowFixed =1- AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.Fixed);
 
 
@@ -122,8 +122,8 @@ namespace GuaranteedIncome.Models
                 data.BrokerageMedian = AverageMedian.calcAverageMedian(data.Brokerage[data.Brokerage.Count - 1]);//accesses the last array in the list that stores the averages of all the trials, and inputs this into method that computes median
 
               
-                data.VariableAboveBrokerage = AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.VariableMedian);
-                data.FixedIndexAboveBrokerage = AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.FixedIndexedMedian);
+                data.VariableAboveBrokerage = 1-AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.VariableMedian);
+                data.FixedIndexAboveBrokerage = 1-AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.FixedIndexedMedian);
                 data.BrokerageBelowFixed =1- AverageMedian.calcPercentageAbove(data.Brokerage[data.Brokerage.Count - 1], data.Fixed);
 
                 data.Brokerage.RemoveAt(data.Brokerage.Count - 1);//removes the last elemtn of the list which was just used to calculate the median
