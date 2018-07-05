@@ -1,12 +1,17 @@
 export class Data {
   fixed: number;
-  variable: number[][];
-  fixedIndexed: number[][];
-  brokerage: number[][];
-
+  
+  variableLowerQuartile: number;
   variableMedian: number;
+  variableUpperQuartile: number;
+
+  fixedIndexedLowerQuartile: number;
   fixedIndexedMedian: number;
+  fixedIndexedUpperQuartile: number;
+
+  brokerageLowerQuartile: number;
   brokerageMedian: number;
+  brokerageUpperQuartile: number;
 
   fixedIndexAboveBrokerage: number;
   variableAboveBrokerage: number;

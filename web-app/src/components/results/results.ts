@@ -3,6 +3,7 @@ import { Data } from 'scripts/data';
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Inputs } from 'scripts/inputs';
+import { json } from 'aurelia-fetch-client';
 
 @inject(EventAggregator)
 export class Results {
@@ -48,34 +49,28 @@ export class Results {
       this.chart.destroy();
     }
 
+    console.log(json(this.data));
+
     let ctx = (document.getElementById("chart") as HTMLCanvasElement).getContext("2d");
-
-    let brokerageBars = this.data.brokerage.map(trial => trial.reduce((a, b) => a + b) / trial.length).sort((a, b) => a - b);
-    let variableBars = this.data.variable.map(trial => trial.reduce((a, b) => a + b) / trial.length).sort((a, b) => a - b);
-    let fixedIndexedBars = this.data.fixedIndexed.map(trial => trial.reduce((a, b) => a + b) / trial.length).sort((a, b) => a - b);
-
-    this.chartMax = Math.ceil(Math.max(...fixedIndexedBars) * 2 / 10000) * 10000;
-
-    let lowerQuartileIndex = Math.floor((brokerageBars.length - 1) * .25);
-    let upperQuartileIndex = Math.floor((brokerageBars.length - 1) * .75);
+    this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
 
     let data = {
       labels: ["Worst Case", "Median Case", "Best Case"],
       datasets: [{
         label: "Brokerage",
-        data: [brokerageBars[lowerQuartileIndex], this.data.brokerageMedian, brokerageBars[upperQuartileIndex]],
+        data: [this.data.brokerageLowerQuartile, this.data.brokerageMedian, this.data.brokerageUpperQuartile],
         backgroundColor: "rgb(148, 124, 176)",
         borderWidth: 0
       },
       {
         label: "Variable",
-        data: [variableBars[lowerQuartileIndex], this.data.variableMedian, variableBars[upperQuartileIndex]],
+        data: [this.data.variableLowerQuartile, this.data.variableMedian, this.data.variableUpperQuartile],
         backgroundColor: "rgb(89, 171, 227)",
         borderWidth: 0
       },
       {
         label: "Fixed Indexed",
-        data: [fixedIndexedBars[lowerQuartileIndex], this.data.fixedIndexedMedian, fixedIndexedBars[upperQuartileIndex]],
+        data: [this.data.fixedIndexedLowerQuartile, this.data.fixedIndexedMedian, this.data.fixedIndexedUpperQuartile],
         backgroundColor: "rgb(4, 147, 114)",
         borderWidth: 0
       },
