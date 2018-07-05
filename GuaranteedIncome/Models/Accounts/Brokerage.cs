@@ -10,8 +10,8 @@ namespace GuaranteedIncome.Models
         public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             List<double[]> trials = new List<double[]>();
-            double[] MedianAverageWithdrawal = new double[5000];
-            for (int i = 0; i < 5000; i++)
+            double[] MedianAverageWithdrawal = new double[4000];
+            for (int i = 0; i < 4000; i++)
             {
                 double[] account = new double[deathAge-retireAge];
                 int count = 0;
@@ -48,7 +48,7 @@ namespace GuaranteedIncome.Models
                 
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
-                if (i < 50)
+                if (i < 500)
                 {
                     trials.Add(account);
                 }
