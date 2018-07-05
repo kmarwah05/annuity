@@ -26,6 +26,18 @@ namespace GuaranteedIncome.Models
         {
             age = myModel.CurrentAge;
             retireAge = myModel.RetireAge;
+            (double age, double lifeExpectancy)[] life = LifeExpectancy.GenderLifeExpectancy(Gender);
+
+            if (Gender == Gender.Male)
+            {
+                deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
+            }
+            else
+            {
+                deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
+            }
+
+
             Riders = myModel.Riders;
             if (myModel.WithdrawalUntil==0)
             {
@@ -44,16 +56,7 @@ namespace GuaranteedIncome.Models
                 Gender = Gender.Female;
             }
 
-            (double age, double lifeExpectancy)[] life= LifeExpectancy.GenderLifeExpectancy(Gender);
-
-            if (Gender == Gender.Male)
-            {
-                deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
-            }
-            else
-            {
-                deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
-            }
+           
 
             income = myModel.Income;
             status = myModel.FilingStatus;
