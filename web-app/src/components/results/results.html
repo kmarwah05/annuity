@@ -1,37 +1,23 @@
 <template>
   <require from="../rider/rider"></require>
 
-  <section id="charts" style="display: none;" class="charts">
+  <section id="charts" class="charts">
     <div class="charts__hero">
-    <div class="charts__chart"><canvas id="brokerage-account-chart" width="100px" height="100px"></canvas></div>
-    <div class="charts__chart"><canvas id="variable-annuity-chart" width="100px" height="100px"></canvas></div>
-    <div class="charts__chart"><canvas id="fixed-indexed-annuity-chart" width="100px" height="100px"></canvas></div>
+    <div class="charts__chart"><canvas id="chart" width="300px" height="100px"></canvas></div>
     </div>
     <p>We ran through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Enable any rider to see its effect on yearly payout, or scroll down to read more details.</p>
   </section>
   <div class="details clearfix">
     <div class="stats">
-      <section class="stats__fixed clearfix">
+      <section class="stats__brokerage clearfix">
         <h3 class="stats__heading">Brokerage Account</h3>
         <h1 class="stats__number-large">$${ data.brokerageMedian.format(2, 3) }</h1>
         <p>Median average yearly payout, after tax.</p>
       </section>
       <hr />
       <section class="stats__variable clearfix">
-        <h3 class="stats__heading">Fixed Annuity</h3>
-        <h1 class="stats__percent-large">${ fixedPercentage }%</h1>
-        <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
-        <ul class="stats__categories">
-          <li>Median avg. yearly payout:</li>
-        </ul>
-        <ul class="stats__stats">
-          <li>$${ data.fixed.format(2, 3) }</li>
-        </ul>
-      </section>
-      <hr />
-      <section class="stats__fixed-indexed clearfix">
           <h3 class="stats__heading">Variable Annuity</h3>
-        <h1 class="stats__percent-large">${ variablePercentage }%</h1>
+        <h1 class="stats__percent-large stats__percent-large--variable">${ variablePercentage }%</h1>
         <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
         <ul class="stats__categories">
           <li>Median avg. yearly payout:</li>
@@ -41,15 +27,27 @@
         </ul>
       </section>
       <hr />
-      <section class="stats__brokerage">
+      <section class="stats__fixed-indexed clearfix">
           <h3 class="stats__heading">Fixed-Indexed Annuity</h3>
-        <h1 class="stats__percent-large">${ fixedIndexedPercentage }%</h1>
+        <h1 class="stats__percent-large stats__percent-large--fixed-indexed">${ fixedIndexedPercentage }%</h1>
         <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
         <ul class="stats__categories">
           <li>Median avg. yearly payout:</li>
         </ul>
         <ul class="stats__stats">
           <li>$${ data.fixedIndexedMedian.format(2, 3) }</li>
+        </ul>
+      </section>
+      <hr />
+      <section class="stats__variable clearfix">
+        <h3 class="stats__heading">Fixed Annuity</h3>
+        <h1 class="stats__percent-large stats__percent-large--fixed">${ fixedPercentage }%</h1>
+        <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
+        <ul class="stats__categories">
+          <li>Median avg. yearly payout:</li>
+        </ul>
+        <ul class="stats__stats">
+          <li>$${ data.fixed.format(2, 3) }</li>
         </ul>
       </section>
     </div>
