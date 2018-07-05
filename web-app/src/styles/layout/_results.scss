@@ -95,7 +95,11 @@
     &__heading {
       font-family: $title-font-stack;
       font-size: 150%;
-      margin: 10px 0 40px 0;
+      margin: 10px 0 10px 0;
+    }
+
+    p {
+      margin-bottom: 40px;
     }
 
     label {

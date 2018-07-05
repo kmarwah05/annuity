@@ -5,7 +5,7 @@
     <div class="charts__hero">
     <div class="charts__chart"><canvas id="chart" width="300px" height="100px"></canvas></div>
     </div>
-    <p>We ran through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Enable any rider to see its effect on yearly payout, or scroll down to read more details.</p>
+    <p>We run through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Because we are generating random scenarios every time, your results may not be consistent, even if you enter the same inputs. Please remember that this tool exists to provide general guidance, and it does not guarantee results of any kind.</p>
   </section>
   <div class="details clearfix">
     <div class="stats">
@@ -52,18 +52,19 @@
       </section>
     </div>
     <section id="riders" class="riders">
-      <h2 class="riders__heading">Add some riders!</h2>
+      <h2 class="riders__heading">Riders</h2>
+      <p>Riders are protections built into an annuity that keep your money safe even in the event of economic collapse. Experiment below to see the effects of a few common riders on your average payout.</p>
       <rider rider="DeathBenefit" riders.two-way="inputs.riders">
         <label slot="name">Death Benefit</label>
-        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+        <p slot="caption">Ensures that in case you die before the end of your plan, payouts continue to a beneficiary.</p>
       </rider>
       <rider rider="GMAB" riders.two-way="inputs.riders">
-        <label slot="name">GMAB</label>
-        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+        <label slot="name">Guaranteed Minimum Accumulation Benefit</label>
+        <p slot="caption">If the market declines while you're paying into your annuity, you are guaranteed at least the sum of your payments to your annuity when you start withdrawing.</p>
       </rider>
       <rider rider="GMWB" riders.two-way="inputs.riders">
-        <label slot="name">GMWB</label>
-        <p slot="caption">This cool thing here does some shit that you won't believe. Seriously, your mind is about to get fucking blown by the increbility of this motherfucking thing.</p>
+        <label slot="name">Guaranteed Minimum Withdrawal Benefit</label>
+        <p slot="caption">If the market declines while you're withdrawaing from your annuity, your withdrawal rate will be at least a fixed percentage of your principal.</p>
       </rider>
     </section>
     <button class="new-inputs" click.trigger="newInputs()">

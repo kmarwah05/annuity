@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 .header {
-background-color: $bg-color;
+  background-color: $bg-color;
 
   text-align: center;
 
@@ -15,6 +15,18 @@ background-color: $bg-color;
 
     &--flair {
       color: $brand-color;
+    }
+
+    @media screen and (max-width: 1080px) {
+      font-size: 150%;
+    }
+
+    @media screen and (max-width: 840px) {
+      font-size: 100%;
+    }
+
+    @media screen and (max-width: 640px) {
+      font-size: 50%;
     }
   }
 }

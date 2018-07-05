@@ -30,8 +30,10 @@ export class Results {
   }
 
   attached() {
-    this.ea.subscribe("reload", () => {
-      this.buildChart();
+    this.ea.subscribe("reload", r => {
+      if (r === "reloaded") {
+        this.buildChart();
+      }
     });
 
     this.buildChart();
@@ -122,7 +124,7 @@ export class Results {
         text: "Average yearly payout (USD)",
         fontColor: "rgb(34, 34, 34)",
         fontFamily: "'PT Sans', 'Helvetica Neue', Helvetica, sans-serif",
-        fontSize: 36,
+        fontSize: 30,
         padding: 30
       },
       maintainAspectRatio: true,
