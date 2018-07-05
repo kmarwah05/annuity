@@ -84,6 +84,17 @@
       text-align: right;
       list-style: none;
     }
+
+    @media screen and (max-width: 1080px) {
+      &__categories, &__stats {
+        width: 100%;
+        margin: 5px;
+      }
+
+      &__stats {
+        text-align: center;
+      }
+    }
   }
 
   .riders {
@@ -135,6 +146,12 @@
     }
   }
   
+
+  @media screen and (max-width: 760px) {
+    .riders, .stats {
+      width: 100%;
+    }
+  }
 }
 
 .new-inputs {
@@ -153,5 +170,9 @@
 
   &:hover {
     animation: "highlight" 0.1s forwards;
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 100%;
   }
 }
