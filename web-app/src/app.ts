@@ -32,9 +32,7 @@ export class App {
       if (Validator.areValidInputs(this.inputs)) {
         APIRequest.postInputs(this.inputs)
         .then(() => {
-          console.log(APIRequest.response);
           this.data = APIRequest.response;
-          console.log(this.data);
           this.currentPage = Pages.Results;
         });
       }
@@ -45,7 +43,11 @@ export class App {
     });
 
     this.onReloadWithRiders = this.ea.subscribe("reload", () => {
-      this.currentPage = Pages.Input;
+      APIRequest.postInputs(this.inputs)
+        .then(() => {
+          this.data = APIRequest.response;
+          this.currentPage = Pages.Results;
+        });
     });
   }
 }

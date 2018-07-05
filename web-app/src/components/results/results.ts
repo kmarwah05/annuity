@@ -2,21 +2,31 @@ import { Chart } from 'chart.js';
 import { Data } from 'scripts/data';
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { Inputs } from 'scripts/inputs';
 
 @inject(EventAggregator)
 export class Results {
-  chartMax: number = 100000;
+  chartMax: number = 15000;
   
+  @bindable inputs: Inputs;
   @bindable data: Data;
 
   ea: EventAggregator;
 
-  constructor(EventAggregator) {
-    this.ea = EventAggregator;
+  get fixedPercentage() {
+    return Math.round(this.data.brokerageBelowFixed * 100);
   }
 
-  newInputs() {
-    this.ea.publish("new inputs");
+  get variablePercentage() {
+    return Math.round(this.data.variableAboveBrokerage * 100);
+  }
+
+  get fixedIndexedPercentage() {
+    return Math.round(this.data.fixedIndexAboveBrokerage * 100);
+  }
+
+  constructor(EventAggregator) {
+    this.ea = EventAggregator;
   }
 
   attached() {
@@ -36,28 +46,27 @@ export class Results {
       false);
   }
 
+  newInputs() {
+    this.ea.publish("new inputs");
+  }
+
   buildChart(title: string,
     target: string,
     trials: number[][],
     isFirst: boolean) {
     let ctx = (document.getElementById(target) as HTMLCanvasElement).getContext("2d");
     
+    let bars = trials.map(trial => trial.reduce((a, b) => a + b) / trial.length);
+      console.log(bars);
     let data = {
-      labels: trials[0].map((_, index) => String(index)),
-      datasets: []
+      labels: bars.map((_, index) => String(index)),
+      datasets: [{
+        label: "Trials",
+        data: bars,
+        backgroundColor: "#2ecc71",
+        borderWidth: 0
+      }]
     };
-
-    trials.forEach(trial => {
-      data.datasets.push({
-        data: trial,
-        fill: false,
-        borderColor: "rgba(0, 150, 0, 0.15)",
-        pointRadius: 0,
-        pointHitRadius: 0,
-        pointHoverRadius: 0
-      })
-    }
-    )
 
     let options = {
       layout: {
@@ -74,33 +83,33 @@ export class Results {
         fontSize: 28
       },
       events: [],
-      elements: {
-        line: {
-          tension: 0
-        }
-      },
       animation: {
         duration: 0
       },
       responsiveAnimationDuration: 0,
       scales: {
         xAxes: [{
+          gridLines: {
+            display: false
+          },
           ticks: {
             display: false
-          }
+          },
+          barPercentage: 1.0,
+          categoryPercentage: 1.0
         }],
         yAxes: [{
           scaleLabel: {
             display: isFirst,
-            labelString: "Yearly payout (USD)",
+            max: this.chartMax,
+            min: 0,
+            labelString: "Average yearly payout (USD)",
             fontColor: "rgb(34, 34, 34)",
             fontFamily: "'PT Serif', 'Times New Roman', Times, serif",
             fontSize: 18
           },
           ticks: {
             display: isFirst,
-            max: this.chartMax,
-            min: 0,
             fontColor: "rgb(34, 34, 34)",
             fontFamily: "'PT Serif', 'Times New Roman', Times, serif",
             fontSize: 16
@@ -110,9 +119,14 @@ export class Results {
     };
     
     new Chart(ctx, {
-      type: "line",
+      type: "bar",
       data: data,
       options: options
     });
   }
 }
+
+Number.prototype["format"] = function(n, x) {
+  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+  return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
