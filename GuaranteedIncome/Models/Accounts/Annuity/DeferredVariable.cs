@@ -7,7 +7,7 @@ namespace GuaranteedIncome.Models
 {
     public class DeferredVariable
     {
-        public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
+        public double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income,List<Riders> Riders)
         {
             double withdrawalPercentageFee = 0;
             /*surrender fee:*/
@@ -78,7 +78,7 @@ namespace GuaranteedIncome.Models
                 isDeath = false;
             }
 
-            List<double[]> trials = new List<double[]>();
+           // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
             for (int i = 0; i < 4000; i++)
             {
@@ -131,15 +131,15 @@ namespace GuaranteedIncome.Models
                         
                     }
                 }
-                if (i < 500)
-                {
-                    trials.Add(account);
-                }
+                //if (i < 500)
+                //{
+                //    trials.Add(account);
+                //}
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }
-            trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
-            return trials;
+           // trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
+            return MedianAverageWithdrawal;
         }
 
 

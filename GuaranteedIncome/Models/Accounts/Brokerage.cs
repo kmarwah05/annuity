@@ -7,9 +7,9 @@ namespace GuaranteedIncome.Models
 {
     public class Brokerage
     {
-        public List<double[]> CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
+        public double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
-            List<double[]> trials = new List<double[]>();
+           // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
             for (int i = 0; i < 4000; i++)
             {
@@ -48,14 +48,14 @@ namespace GuaranteedIncome.Models
                 
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
-                if (i < 500)
-                {
-                    trials.Add(account);
-                }
+                //if (i < 500)
+                //{
+                //    trials.Add(account);
+                //}
             }
             
-            trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
-            return trials;
+           // trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
+            return MedianAverageWithdrawal;
         }
         public double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
