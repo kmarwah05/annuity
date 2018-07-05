@@ -80,7 +80,7 @@ namespace GuaranteedIncome.Models
 
                         temp -= withdrawal;
 
-                        withdrawal = withdrawal - withdrawal * .04;
+                        withdrawal = withdrawal - withdrawal * .03;
                         if (isGMWB)
                         {
                             if (withdrawal< minWithdrawal)
