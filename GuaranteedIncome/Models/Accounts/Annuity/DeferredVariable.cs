@@ -80,7 +80,6 @@ namespace GuaranteedIncome.Models
 
             List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[2000];
-
             for (int i = 0; i < 2000; i++)
             {
                 double[] account = new double[deathAge-retireAge];

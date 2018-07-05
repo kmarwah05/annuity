@@ -12,8 +12,9 @@ namespace GuaranteedIncome.Models
         public double BrokerageMedian;
 
 
-       // public 
-
+        public double FixedIndexAboveBrokerage;//fixed index is above average brokerage
+        public double VariableAboveBrokerage;
+        public double BrokerageBelowFixed;//amount of time brokerage is less than fixed
 
 
         public double Fixed;
