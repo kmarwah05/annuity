@@ -33,6 +33,7 @@ namespace GuaranteedIncome.Models
                     if (j >= retireAge)
                     {
                         account[count]= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
+                    double Taxamount = TaxHelper.CalcTaxes(TaxHelper.CalcWithdrawalAmount(rate, temp, deathAge-retireAge), taxType, status, principle);
                         temp -= CalcWithdrawal(mean, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
