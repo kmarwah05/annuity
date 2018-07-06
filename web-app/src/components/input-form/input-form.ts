@@ -26,24 +26,6 @@ export class InputForm {
 
   bind() {
     ValidationRules
-      .customRule(
-        'integerRange',
-        (value, _, min, max) => {
-          let num = Number.parseInt(value);
-          return num === null || num === undefined || (Number.isInteger(num) && num >= min && num <= max);
-        },
-        "${ $displayName } must be between ${ $config.min } and ${$config.max }.",
-        (min, max) => ({ min, max })
-      );
-    ValidationRules
-      .customRule(
-        'currencyRange',
-        (value, _, min, max) => isNullOrUndefined(value) || value >= min && value <= max,
-        "${ $displayName } must be at least $${ $config.min.format(2, 3) } and at most $${ $config.max.format(2, 3) }.",
-        (min, max) => ({ min, max })
-      );
-
-    ValidationRules
       .ensure("amount")
         .required()
         .satisfiesRule("currencyRange", 0, 1000000000)
@@ -63,23 +45,17 @@ export class InputForm {
         .required()
         .satisfiesRule("currencyRange", 0, 1000000000)
       .on(this.inputs);
-
-    this.ea.subscribe("submit", () => {
-      this.ea.publish("send");
-
-      // this.vController.validate()
-      // .then(result => {
-      //   if (result.valid) {
-      //     this.ea.publish("send");
-      //   } else {
-      //     console.log(this.vController.errors);
-      //   }
-      // });
-    });
   }
 
   clickedSubmit() {
-    this.ea.publish("submit");
+    this.vController.validate()
+    .then(result => {
+      if (result.valid) {
+        this.ea.publish("send");
+      } else {
+        console.log(this.vController.errors);
+      }
+    });
   }
 
   selected() {
@@ -99,6 +75,24 @@ export class InputForm {
     }
   }
 }
+
+ValidationRules
+  .customRule(
+    'integerRange',
+    (value, _, min, max) => {
+      let num = Number.parseInt(value);
+      return num === null || num === undefined || (Number.isInteger(num) && num >= min && num <= max);
+    },
+    "${ $displayName } must be between ${ $config.min } and ${$config.max }.",
+    (min, max) => ({ min, max })
+  );
+ValidationRules
+  .customRule(
+    'currencyRange',
+    (value, _, min, max) => isNullOrUndefined(value) || value >= min && value <= max,
+    "${ $displayName } must be at least $${ $config.min.format(2, 3) } and at most $${ $config.max.format(2, 3) }.",
+    (min, max) => ({ min, max })
+  );
 
 Number.prototype["format"] = function(n, x) {
   var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
