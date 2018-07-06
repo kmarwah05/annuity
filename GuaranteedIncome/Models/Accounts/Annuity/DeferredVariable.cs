@@ -102,7 +102,7 @@ namespace GuaranteedIncome.Models
                             temp = principle;
                         }
                         minWithdrawal = CalcWithdrawal(mean, principle, deathAge - retireAge+1, taxType, status, principle);//minimum withdrawal used for GMWB rider
-                        Console.WriteLine(minWithdrawal);
+                       // Console.WriteLine(minWithdrawal);
                     }
                     if (j < retireAge)
                     {

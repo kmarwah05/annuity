@@ -38,7 +38,7 @@ namespace GuaranteedIncome.Models
                 deathAge = Convert.ToInt32(age + life[age - 11].lifeExpectancy);
             }
 
-
+            Console.WriteLine("death Age= " + deathAge);
             Riders = myModel.Riders;
             if (myModel.WithdrawalUntil==0)
             {
