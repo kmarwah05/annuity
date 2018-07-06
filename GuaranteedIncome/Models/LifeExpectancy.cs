@@ -43,7 +43,7 @@ namespace GuaranteedIncome.Models
                 default:
                     Console.WriteLine("Invalid Life Expectancy Age");
                     return null;
-            }
+            }    
         }
     }
 }
