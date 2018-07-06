@@ -18,7 +18,7 @@
       <section class="stats__variable clearfix">
           <h3 class="stats__heading">Variable Annuity</h3>
         <h1 class="stats__percent-large stats__percent-large--variable">${ variablePercentage }%</h1>
-        <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
+        <caption>of the time, a variable annuity pays out more than a brokerage account.</caption>
         <ul class="stats__categories">
           <li>Median avg. yearly payout:</li>
         </ul>
@@ -30,7 +30,7 @@
       <section class="stats__fixed-indexed clearfix">
           <h3 class="stats__heading">Fixed-Indexed Annuity</h3>
         <h1 class="stats__percent-large stats__percent-large--fixed-indexed">${ fixedIndexedPercentage }%</h1>
-        <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
+        <caption>of the time, a fixed-indexed annuity pays out more than a brokerage account.</caption>
         <ul class="stats__categories">
           <li>Median avg. yearly payout:</li>
         </ul>
@@ -54,15 +54,15 @@
     <section id="riders" class="riders">
       <h2 class="riders__heading">Riders</h2>
       <p>Riders are protections built into an annuity that keep your money safe even in the event of economic collapse. Experiment below to see the effects of a few common riders on your average payout.</p>
-      <rider rider="DeathBenefit" riders.two-way="inputs.riders">
+      <rider rider="DeathBenefit" riders.two-way="riders">
         <label slot="name">Death Benefit</label>
         <p slot="caption">Ensures that in case you die before the end of your plan, payouts continue to a beneficiary.</p>
       </rider>
-      <rider rider="GMAB" riders.two-way="inputs.riders">
+      <rider rider="GMAB" riders.two-way="riders">
         <label slot="name">Guaranteed Minimum Accumulation Benefit</label>
         <p slot="caption">If the market declines while you're paying into your annuity, you are guaranteed at least the sum of your payments to your annuity when you start withdrawing.</p>
       </rider>
-      <rider rider="GMWB" riders.two-way="inputs.riders">
+      <rider rider="GMWB" riders.two-way="riders">
         <label slot="name">Guaranteed Minimum Withdrawal Benefit</label>
         <p slot="caption">If the market declines while you're withdrawaing from your annuity, your withdrawal rate will be at least a fixed percentage of your principal.</p>
       </rider>
