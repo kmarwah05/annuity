@@ -27,7 +27,7 @@
 
   </section>
   <section class="form__main">
-  <section class="form__section" if.bind="vController.errors">
+  <section class="form__section" if.bind="vController.errors.length > 0">
     <p>Please enter valid data.</p>
     <ul><li repeat.for="error of vController.errors">${ error.message }&nbsp;</li></ul>
   </section>

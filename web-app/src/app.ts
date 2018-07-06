@@ -43,7 +43,6 @@ export class App {
     this.onReloadWithRiders = this.ea.subscribe("reload", r => {
       if (r.withRiders) {
         this.inputs.riders = r.withRiders;
-        console.log(this.inputs.riders);
         APIRequest.postInputs(this.inputs)
         .then(() => {
           this.data = APIRequest.response;
