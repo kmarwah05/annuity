@@ -17,10 +17,16 @@ namespace GuaranteedIncome.Models
             }
             else if(TaxStatus.qualified == taxType)//taxed on all withdrawals
             {
+                double x=Convert.ToDouble(IncomeTaxCalculator.TotalIncomeTaxFor(status, (decimal)yearlyIncome, 0));
                 return Convert.ToDouble(IncomeTaxCalculator.TotalIncomeTaxFor(status, (decimal)yearlyIncome, 0));
             }
             else//taxed on only gains, not taxed on principle
             {
+                if (yearlyIncome < principle)
+                {
+                    return 0;
+                }
+                double y = Convert.ToDouble(IncomeTaxCalculator.TotalIncomeTaxFor(status, (decimal)(yearlyIncome - principle), 0));
                 return Convert.ToDouble(IncomeTaxCalculator.TotalIncomeTaxFor(status, (decimal)(yearlyIncome-principle), 0));
 
             }
@@ -38,6 +44,9 @@ namespace GuaranteedIncome.Models
         public static double CalcTaxedWithdrawals(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
             //Console.WriteLine(rate+ "     rate    "+presentValue+"    PV    "+CalcTaxes(CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing), taxType, status, principle));
+            
+            double withdrawal = CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing);
+            double taxes =CalcTaxes(withdrawal, taxType, status, principle);
             return CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - CalcTaxes(CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing), taxType,status,principle);
         }
 

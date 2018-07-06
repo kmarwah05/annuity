@@ -70,7 +70,7 @@ namespace GuaranteedIncome.Models
                     {
 
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-
+                        double taxes= TaxHelper.CalcTaxes(TaxHelper.CalcWithdrawalAmount(rate, temp, deathAge-retireAge+1), taxType, status, principle);
                         temp -= withdrawal;
 
                         withdrawal = withdrawal - withdrawal * .03;
