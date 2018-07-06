@@ -10,18 +10,11 @@ namespace GuaranteedIncome.Models
         public double CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             double amountWithFees = amount;
-            double principle = 0;
-            Boolean isDeath;
+
             if (Riders.Contains(Models.Riders.DeathBenefit))//rider for Death benefit, doesn't actually do anything except add to the fees
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
             }
-            else
-            {
-                isDeath = false;
-            }
-
             double withdrawalPercentageFee = 0;
 
             /*surrender fee:*/
@@ -56,6 +49,7 @@ namespace GuaranteedIncome.Models
             }
             /*surender fee:*/
 
+            double principle = 0;
 
             double[] account = new double[deathAge - retireAge];
             double temp = 0;//the amount in the account at year "j"

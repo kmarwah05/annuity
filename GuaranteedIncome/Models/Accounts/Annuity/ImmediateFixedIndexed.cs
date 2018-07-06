@@ -10,22 +10,15 @@ namespace GuaranteedIncome.Models
         public double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             double amountWithFees = amount;
-            Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
             }
-            else
-            {
-                isDeath = false;
-            }
-           // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
 
             for (int i = 0; i < 4000; i++)
             {
-                double[] account = new double[deathAge-retireAge];
+                //double[] account = new double[deathAge-retireAge];
                 int count = 0;
                 double temp = 0;
                 temp = amountWithFees;//starting amount is lumpsum
@@ -55,8 +48,7 @@ namespace GuaranteedIncome.Models
                     }
                     else
                     {
-                        account[count]= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        withdrawalAmount += account[count];
+                        withdrawalAmount += CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
                         temp -= CalcWithdrawal(mean, temp, deathAge - j+1, taxType, status, principle / (deathAge - retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
 

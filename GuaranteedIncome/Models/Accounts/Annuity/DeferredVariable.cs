@@ -44,7 +44,6 @@ namespace GuaranteedIncome.Models
 
 
             double amountWithFees = amount;
-            double principle = 0;
             Boolean isGMWB;
             if (Riders.Contains(Models.Riders.GMWB))//Checks to see if GMWB is a rider and charges fee
             {
@@ -67,22 +66,18 @@ namespace GuaranteedIncome.Models
                 isGMAB = false;
             }
 
-            Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))//checks to see if death benefit is a rider and charges fee
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
-            }
-            else
-            {
-                isDeath = false;
             }
 
            // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
             for (int i = 0; i < 4000; i++)
             {
-                double[] account = new double[deathAge-retireAge];
+                double principle = 0;
+
+                //double[] account = new double[deathAge-retireAge];
                 int count = 0;
                 double temp = 0;
                 double minWithdrawal = 0;//minimum withdrawal. used if they have the GMWB rider
@@ -100,7 +95,8 @@ namespace GuaranteedIncome.Models
                             assetAtRetire = principle;
                             temp = principle;
                         }
-                        minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);//minimum withdrawal used for GMWB rider
+                        minWithdrawal = CalcWithdrawal(mean, principle, deathAge - retireAge+1, taxType, status, principle);//minimum withdrawal used for GMWB rider
+                       // Console.WriteLine(minWithdrawal);
                     }
                     if (j < retireAge)
                     {
@@ -123,7 +119,7 @@ namespace GuaranteedIncome.Models
                             }
                         }
 
-                        account[count] = withdrawal;
+                       // account[count] = withdrawal;
                         withdrawalAmount+= withdrawal;
                        
                         temp = temp * Math.Pow(1 + rate, 1);
