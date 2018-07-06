@@ -3,12 +3,18 @@ import { Data } from 'scripts/data';
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
+
+// Defined here instead of the end so you don't have to scroll through the valley of the shadow of Chart.js
+Number.prototype["format"] = function(n, x) {
+  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+  return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
 @inject(EventAggregator)
 export class Results {
   @bindable data: Data;
 
   ea: EventAggregator;
-  chart: Chart;
   chartMax: number;
   riders: string[] = [];
 
@@ -31,12 +37,10 @@ export class Results {
   attached() {
     this.ea.subscribe("reload", r => {
       if (r === "reloaded") {
-        this.buildChart();
         this.buildCharts();
       }
     });
 
-    this.buildChart();
     this.buildCharts();
   }
 
@@ -44,11 +48,61 @@ export class Results {
     this.ea.publish("new inputs");
   }
 
-  buildChart() {
-    if (this.chart) {
-      this.chart.destroy();
-    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*********************************************************************
+
+    ********************************************************************
+    ********************************************************************
+    *****                                                          *****
+    *****                    ***WARNING***                         *****
+    *****                                                          *****
+    *****                                                          *****
+    *****           ***CHART.JS CONFIGURATION AHEAD***             *****
+    *****                                                          *****
+    *****                                                          *****
+    *****             ***CONTINUE AT YOUR OWN RISK***              *****
+    *****   Seriously, don't read past this if you don't have to   *****
+    *****                                                          *****
+    ********************************************************************
+    ********************************************************************
+   
+  **********************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  buildChart() {
     let ctx = (document.getElementById("chart") as HTMLCanvasElement).getContext("2d");
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
 
@@ -156,7 +210,7 @@ export class Results {
       }
     };
     
-    this.chart = new Chart(ctx, {
+    new Chart(ctx, {
       type: "bar",
       data: data,
       options: options
@@ -164,6 +218,8 @@ export class Results {
   }
 
   buildCharts() {
+    this.buildChart();
+
     let lowerCtx = (document.getElementById("lower-q-chart") as HTMLCanvasElement).getContext("2d");
     let medianCtx = (document.getElementById("median-chart") as HTMLCanvasElement).getContext("2d");
     let upperCtx = (document.getElementById("upper-q-chart") as HTMLCanvasElement).getContext("2d");
@@ -350,8 +406,3 @@ export class Results {
     };
   }
 }
-
-Number.prototype["format"] = function(n, x) {
-  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-  return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-};
