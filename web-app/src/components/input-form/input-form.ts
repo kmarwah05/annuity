@@ -1,14 +1,14 @@
 import { inject, bindable, NewInstance } from "aurelia-framework";
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { ValidationController, validateTrigger, ValidationRules } from 'aurelia-validation';
-import { TaxType, FilingStatus, Inputs } from "scripts/inputs";
+import { TaxStatus, FilingStatus, Inputs } from "scripts/inputs";
 import { isNullOrUndefined } from "util";
 
 @inject(EventAggregator, NewInstance.of(ValidationController))
 export class InputForm {
   // Bring types into VM scope
   private FilingStatus: typeof FilingStatus = FilingStatus;
-  private TaxType: typeof TaxType = TaxType;
+  private TaxStatus: typeof TaxStatus = TaxStatus;
 
   @bindable inputs: Inputs;
   @bindable isFixed: boolean;
