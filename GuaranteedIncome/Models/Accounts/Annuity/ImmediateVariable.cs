@@ -48,14 +48,15 @@ namespace GuaranteedIncome.Models
 
             for (int i = 0; i < 4000; i++)
             {
-                double[] account = new double[deathAge-retireAge];
+              //  double[] account = new double[deathAge-retireAge];
                 int count = 0;
                 double temp = amountWithFees;
                 double principle = amountWithFees;
                 double minWithdrawal = 0;
                 double withdrawalAmount = 0;
                 for (int j = age; j < deathAge; j++)
-                { Random rand = new Random();
+                {
+                    Random rand = new Random();
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
                     if (j == retireAge)
                     {
@@ -66,7 +67,7 @@ namespace GuaranteedIncome.Models
                             temp = principle;
                         }
 
-                         minWithdrawal = CalcWithdrawal(rate, assetAtRetire, deathAge - j + 1, taxType, status, principle);
+                         minWithdrawal = CalcWithdrawal(mean, assetAtRetire, deathAge - j + 1, taxType, status, principle);
                     }
                 
                     if (j < retireAge)
@@ -88,16 +89,12 @@ namespace GuaranteedIncome.Models
                                 withdrawal = minWithdrawal;
                             }
                         }
-                        account[count] = withdrawal;
                         withdrawalAmount += withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);
                         count++;
                     }
                 }
-                //if (i < 500)
-                //{
-                //    trials.Add(account);
-                //}
+              
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }

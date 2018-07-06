@@ -24,6 +24,7 @@ namespace GuaranteedIncome.Models
 
         public Setup(FormModel myModel)
         {
+            
             age = myModel.CurrentAge;
             retireAge = myModel.RetireAge;
             (double age, double lifeExpectancy)[] life = LifeExpectancy.GenderLifeExpectancy(Gender);

@@ -58,7 +58,7 @@ namespace GuaranteedIncome.Models
             double[] MedianAverageWithdrawal = new double[4000];
             for (int i = 0; i < 4000; i++)
             {
-                double[] account = new double[deathAge-retireAge];
+              //  double[] account = new double[deathAge-retireAge];
                 int count = 0;//index of the array that withdrawal data is being input into
                 double temp = 0;//current amount in the annuity 
                 double principle = 0;//untaxable part of account
@@ -92,17 +92,14 @@ namespace GuaranteedIncome.Models
                     {
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));//withdrawal amoutn with taxes and loan payment calc
                         withdrawal = withdrawal - withdrawal * withdrawalPercentageFee;// subtract withdrawal early fee
-                        account[count] = withdrawal;
+                       // account[count] = withdrawal;
                         withdrawalAmount += withdrawal;
                         temp -= withdrawal;
                         temp = temp * Math.Pow(1 + rate, 1);//interest
                         count++;//increment array counter
                     }
                 }
-                //if (i < 500)
-                //{
-                //    trials.Add(account);//adds one trial to the list
-                //}
+               
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
             }
