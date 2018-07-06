@@ -66,15 +66,9 @@ namespace GuaranteedIncome.Models
                 isGMAB = false;
             }
 
-            Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))//checks to see if death benefit is a rider and charges fee
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
-            }
-            else
-            {
-                isDeath = false;
             }
 
            // List<double[]> trials = new List<double[]>();

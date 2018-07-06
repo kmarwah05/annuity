@@ -33,17 +33,10 @@ namespace GuaranteedIncome.Models
             {
                 isGMAB = false;
             }
-            Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
             }
-            else
-            {
-                isDeath = false;
-            }
-          //  List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
 
             for (int i = 0; i < 4000; i++)

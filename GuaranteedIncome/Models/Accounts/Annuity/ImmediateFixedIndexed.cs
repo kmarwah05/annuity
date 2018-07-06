@@ -10,17 +10,10 @@ namespace GuaranteedIncome.Models
         public double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
             double amountWithFees = amount;
-            Boolean isDeath;
             if (Riders.Contains(Models.Riders.DeathBenefit))
             {
-                isDeath = true;
                 amountWithFees -= amountWithFees * .005;
             }
-            else
-            {
-                isDeath = false;
-            }
-           // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
 
             for (int i = 0; i < 4000; i++)
