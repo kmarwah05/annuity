@@ -24,7 +24,7 @@ namespace GuaranteedIncome.Models
 
         public Setup(FormModel myModel)
         {
-            
+
             age = myModel.CurrentAge;
             retireAge = myModel.RetireAge;
             if (myModel.isMale)
@@ -66,6 +66,10 @@ namespace GuaranteedIncome.Models
             status = myModel.FilingStatus;
             isDeferred = myModel.isDeferred;
             amount = myModel.Amount;
+            if (isDeferred)
+            {
+                TaxType = TaxStatus.unqualified;
+            }
         }
 
         public Data ReturnData()
