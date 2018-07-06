@@ -2,17 +2,15 @@ import { Chart } from 'chart.js';
 import { Data } from 'scripts/data';
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { Inputs } from 'scripts/inputs';
-import { json } from 'aurelia-fetch-client';
 
 @inject(EventAggregator)
 export class Results {
-  @bindable inputs: Inputs;
   @bindable data: Data;
 
   ea: EventAggregator;
   chart: Chart;
-  chartMax: number = 50000;
+  chartMax: number;
+  riders: string[] = [];
 
   get fixedPercentage() {
     return Math.round(this.data.brokerageBelowFixed * 100);
@@ -48,8 +46,6 @@ export class Results {
     if (this.chart) {
       this.chart.destroy();
     }
-
-    console.log(json(this.data));
 
     let ctx = (document.getElementById("chart") as HTMLCanvasElement).getContext("2d");
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;

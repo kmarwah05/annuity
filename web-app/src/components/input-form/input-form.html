@@ -27,6 +27,10 @@
 
   </section>
   <section class="form__main">
+  <section class="form__section" if.bind="vController.errors">
+    <p>Please enter valid data.</p>
+    <ul><li repeat.for="error of vController.errors">${ error.message }&nbsp;</li></ul>
+  </section>
   <section class="form__section form__switch" if.bind="isDeferred">
 
     <currency-field input-value.two-way="amount" label-text="I will annually set aside"></currency-field>

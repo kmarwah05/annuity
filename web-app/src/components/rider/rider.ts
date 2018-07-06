@@ -27,6 +27,8 @@ export class Rider {
       this.riders.push(this.rider);
     }
 
-    this.ea.publish("reload");
+    this.ea.publish("reload", {
+      withRiders: this.riders
+    });
   }
 }

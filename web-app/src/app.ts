@@ -1,5 +1,4 @@
 import { Inputs } from "scripts/inputs";
-import { Validator } from "scripts/validator";
 import { EventAggregator, Subscription } from "aurelia-event-aggregator";
 import { inject } from "aurelia-framework";
 import { Data } from "scripts/data";
@@ -27,16 +26,14 @@ export class App {
   }
 
   attached() {
-    this.onSubmit = this.ea.subscribe("submit", () => {
+    this.onSubmit = this.ea.subscribe("send", () => {
       this.inputs.complete(this.isFixed, this.endAge);
 
-      if (Validator.areValidInputs(this.inputs)) {
-        APIRequest.postInputs(this.inputs)
-        .then(() => {
-          this.data = APIRequest.response;
-          this.currentPage = Pages.Results;
-        });
-      }
+      APIRequest.postInputs(this.inputs)
+      .then(() => {
+        this.data = APIRequest.response;
+        this.currentPage = Pages.Results;
+      });
     });
 
     this.onNewInputs = this.ea.subscribe("new inputs", () => {
@@ -44,7 +41,9 @@ export class App {
     });
 
     this.onReloadWithRiders = this.ea.subscribe("reload", r => {
-      if (isNullOrUndefined(r)) {
+      if (r.withRiders) {
+        this.inputs.riders = r.withRiders;
+        console.log(this.inputs.riders);
         APIRequest.postInputs(this.inputs)
         .then(() => {
           this.data = APIRequest.response;
