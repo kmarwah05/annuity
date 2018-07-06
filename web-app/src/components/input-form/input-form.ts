@@ -67,14 +67,14 @@ export class InputForm {
     this.ea.subscribe("submit", () => {
       this.ea.publish("send");
 
-      // this.vController.validate()
-      // .then(result => {
-      //   if (result.valid) {
-      //     this.ea.publish("send");
-      //   } else {
-      //     console.log(this.vController.errors);
-      //   }
-      // });
+       this.vController.validate()
+      .then(result => {
+      if (result.valid) {
+         this.ea.publish("send");
+       } else {
+         console.log(this.vController.errors);
+         }
+       });
     });
   }
 
