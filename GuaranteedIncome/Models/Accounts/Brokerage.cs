@@ -9,12 +9,9 @@ namespace GuaranteedIncome.Models
     {
         public double[] CalculateReturns(int age, int retireAge, int deathAge, double mean, double stdDeviation, double amount,double lumpSum, TaxStatus taxType, FilingStatus status, double income, List<Riders> Riders)
         {
-           // List<double[]> trials = new List<double[]>();
             double[] MedianAverageWithdrawal = new double[4000];
             for (int i = 0; i < 4000; i++)
             {
-                double[] account = new double[deathAge-retireAge];
-                int count = 0;
                 double temp = lumpSum;//sets temp to equal lumpsum, if deferred this is 0
                 double returns = 0;
                 double taxableAmount = 0;
@@ -38,23 +35,15 @@ namespace GuaranteedIncome.Models
                     }
                     else
                     {
-                        account[count] = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-                        withdrawalAmount += account[count];
+                        withdrawalAmount += CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
                         temp -= CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle/(deathAge-retireAge));
                         temp = temp * Math.Pow(1 + rate, 1);
-                        count++;
                     }
                 }
                 
                 withdrawalAmount = withdrawalAmount / (deathAge - retireAge);//calculates average withdrawal
                 MedianAverageWithdrawal[i] = withdrawalAmount;//stores the average withdrawal for this trial
-                //if (i < 500)
-                //{
-                //    trials.Add(account);
-                //}
             }
-            
-           // trials.Add(MedianAverageWithdrawal);//adds an array of the averages to the end of the lsit, will be taken out later and used
             return MedianAverageWithdrawal;
         }
         public double CalcWithdrawal(double rate, double presentValue, int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)

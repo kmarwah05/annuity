@@ -118,9 +118,9 @@ namespace GuaranteedIncome.Models
             {
 
 
-                DeferredFixed df = new DeferredFixed();
-                DeferredVariable dv = new DeferredVariable();
-                DeferredFixedIndexed dfi = new DeferredFixedIndexed();
+                ImmediateFixed df = new ImmediateFixed();
+                ImmediateVariable dv = new ImmediateVariable();
+                ImmediateFixedIndexed dfi = new ImmediateFixedIndexed();
                 Brokerage b = new Brokerage();
 
                 data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate, MarketData.FixedDeviation, amount, TaxType, status, income, Riders);
