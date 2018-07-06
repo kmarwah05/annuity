@@ -37,6 +37,7 @@ namespace GuaranteedIncome.Models
 
         public static double CalcTaxedWithdrawals(double rate, double presentValue,int yearsWithdrawing, TaxStatus taxType, FilingStatus status, double principle)
         {
+            //Console.WriteLine(rate+ "     rate    "+presentValue+"    PV    "+CalcTaxes(CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing), taxType, status, principle));
             return CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - CalcTaxes(CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing), taxType,status,principle);
         }
 
