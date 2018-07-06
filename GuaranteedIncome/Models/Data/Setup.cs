@@ -31,7 +31,7 @@ namespace GuaranteedIncome.Models
 
             if (Gender == Gender.Male)
             {
-                deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
+               deathAge = Convert.ToInt32(age + life[age - 6].lifeExpectancy);
             }
             else
             {
