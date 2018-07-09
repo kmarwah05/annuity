@@ -25,119 +25,61 @@ export class ChartsMobile {
   }
 
   buildCharts() {
-    let worstCtx = (document.getElementById("worst-chart") as HTMLCanvasElement).getContext("2d");
     let lowerCtx = (document.getElementById("lower-q-chart") as HTMLCanvasElement).getContext("2d");
-    let medianCtx = (document.getElementById("median-chart") as HTMLCanvasElement).getContext("2d");
     let upperCtx = (document.getElementById("upper-q-chart") as HTMLCanvasElement).getContext("2d");
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
 
-    let worstData = {
-      labels: ["Worst Case"],
-      datasets: [{
-        label: "Brokerage",
-        data: [this.data.brokerageWorstCase],
-        backgroundColor: "rgb(148, 124, 176)",
-        borderWidth: 0
-      },
-      {
-        label: "Variable",
-        data: [this.data.variableWorstCase],
-        backgroundColor: "rgb(89, 171, 227)",
-        borderWidth: 0
-      },
-      {
-        label: "Fixed Indexed",
-        data: [this.data.fixedIndexedWorstCase],
-        backgroundColor: "rgb(4, 147, 114)",
-        borderWidth: 0
-      },
-      {
-        label: "Fixed",
-        data: [this.data.fixed],
-        backgroundColor: "rgb(135, 211, 124)",
-        borderWidth: 0
-      }]
-    };
-
     let lowerData = {
-      labels: ["Lower Quartile"],
+      labels: ["Worst Case", "Lower Quartile"],
       datasets: [{
         label: "Brokerage",
-        data: [this.data.brokerageLowerQuartile],
+        data: [this.data.brokerageWorstCase, this.data.brokerageLowerQuartile],
         backgroundColor: "rgb(148, 124, 176)",
         borderWidth: 0
       },
       {
         label: "Variable",
-        data: [this.data.variableLowerQuartile],
+        data: [this.data.variableWorstCase, this.data.variableLowerQuartile],
         backgroundColor: "rgb(89, 171, 227)",
         borderWidth: 0
       },
       {
         label: "Fixed Indexed",
-        data: [this.data.fixedIndexedLowerQuartile],
+        data: [this.data.fixedIndexedWorstCase, this.data.fixedIndexedLowerQuartile],
         backgroundColor: "rgb(4, 147, 114)",
         borderWidth: 0
       },
       {
         label: "Fixed",
-        data: [this.data.fixed],
-        backgroundColor: "rgb(135, 211, 124)",
-        borderWidth: 0
-      }]
-    };
-
-    let medianData = {
-      labels: ["Median"],
-      datasets: [{
-        label: "Brokerage",
-        data: [this.data.brokerageMedian],
-        backgroundColor: "rgb(148, 124, 176)",
-        borderWidth: 0
-      },
-      {
-        label: "Variable",
-        data: [this.data.variableMedian],
-        backgroundColor: "rgb(89, 171, 227)",
-        borderWidth: 0
-      },
-      {
-        label: "Fixed Indexed",
-        data: [this.data.fixedIndexedMedian],
-        backgroundColor: "rgb(4, 147, 114)",
-        borderWidth: 0
-      },
-      {
-        label: "Fixed",
-        data: [this.data.fixed],
+        data: [this.data.fixed, this.data.fixed],
         backgroundColor: "rgb(135, 211, 124)",
         borderWidth: 0
       }]
     };
 
     let upperData = {
-      labels: ["Upper Quartile"],
+      labels: ["Median", "Upper Quartile"],
       datasets: [{
         label: "Brokerage",
-        data: [this.data.brokerageUpperQuartile],
+        data: [this.data.brokerageMedian, this.data.brokerageUpperQuartile],
         backgroundColor: "rgb(148, 124, 176)",
         borderWidth: 0
       },
       {
         label: "Variable",
-        data: [this.data.variableUpperQuartile],
+        data: [this.data.variableMedian, this.data.variableUpperQuartile],
         backgroundColor: "rgb(89, 171, 227)",
         borderWidth: 0
       },
       {
         label: "Fixed Indexed",
-        data: [this.data.fixedIndexedUpperQuartile],
+        data: [this.data.fixedIndexedMedian, this.data.fixedIndexedUpperQuartile],
         backgroundColor: "rgb(4, 147, 114)",
         borderWidth: 0
       },
       {
         label: "Fixed",
-        data: [this.data.fixed],
+        data: [this.data.fixed, this.data.fixed],
         backgroundColor: "rgb(135, 211, 124)",
         borderWidth: 0
       }]
@@ -147,12 +89,6 @@ export class ChartsMobile {
       type: "bar",
       data: lowerData,
       options: this.getMobileChartOptions(true, false)
-    });
-
-    new C(medianCtx, {
-      type: "bar",
-      data: medianData,
-      options: this.getMobileChartOptions(false, false)
     });
 
     new C(upperCtx, {

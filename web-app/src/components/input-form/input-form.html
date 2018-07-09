@@ -4,7 +4,7 @@
 <require from="../form-fields/form-field.html"></require>
 <require from="../form-fields/dropdown"></require>
 
-<form class="form" role="form" with.bind="inputs & validate" submit.trigger="clickedSubmit()">
+<form class="form" role="form" with.bind="inputs" submit.trigger="clickedSubmit()">
   <!-- These are not the forms you are looking for -->
   <!--
         .---.  
@@ -78,7 +78,7 @@
   <hr />
   <section class="form__section">
 
-    <input type="submit" value="Submit" class="form__submit" click.delegate="submitButton()">
+    <input type="submit" value="Submit" class="form__submit">
 
   </section>
   </section>
