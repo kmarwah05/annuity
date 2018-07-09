@@ -48,10 +48,6 @@
       border-bottom-right-radius: 3px;
       
       z-index: 1;
-
-      @media screen and (max-width: 1028px) {
-        width: 80%;
-      }
       
       & button:last-child {
         border-bottom-left-radius: 3px;
