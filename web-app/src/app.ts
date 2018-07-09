@@ -30,9 +30,16 @@ export class App {
       this.inputs.complete(this.isFixed, this.endAge);
 
       APIRequest.postInputs(this.inputs)
+      .catch(error => {
+        console.log(error);
+        APIRequest.response = null;
+        this.ea.publish("invalid inputs");
+      })
       .then(() => {
-        this.data = APIRequest.response;
-        this.currentPage = Pages.Results;
+        if (APIRequest.response != null) {
+          this.data = APIRequest.response;
+          this.currentPage = Pages.Results;
+        }
       });
     });
 

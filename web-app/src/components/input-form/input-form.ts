@@ -16,12 +16,21 @@ export class InputForm {
 
   ea: EventAggregator;
   vController: ValidationController = null;
+  hasError: boolean;
 
   constructor(EventAggregator, controller: ValidationController) {
     this.ea = EventAggregator;
     this.vController = controller;
 
     this.vController.validateTrigger = validateTrigger.manual;
+  }
+
+  attached() {
+    this.hasError = false;
+    
+    this.ea.subscribe("invalid inputs", () => {
+      this.hasError = true;
+    });
   }
 
   bind() {
