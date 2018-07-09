@@ -41,7 +41,6 @@ namespace GuaranteedIncome.Models
                 deathAge = Convert.ToInt32(age + life[age].lifeExpectancy);
             
 
-            Console.WriteLine("death Age= " + deathAge);
             Riders = myModel.Riders;
             if (myModel.WithdrawalUntil==0)
             {
@@ -61,7 +60,7 @@ namespace GuaranteedIncome.Models
             }
 
             TaxType = myModel.TaxType;
-
+            Console.WriteLine(myModel.TaxType);
             income = myModel.Income;
             status = myModel.FilingStatus;
             isDeferred = myModel.isDeferred;
@@ -125,7 +124,7 @@ namespace GuaranteedIncome.Models
 
                 data.Fixed = df.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedRate, MarketData.FixedDeviation, amount, TaxType, status, income, Riders);
 
-
+                Console.WriteLine(TaxType);
                 //Variable calculations
                 double[] VariableSorted = Sort.mergeSort(dv.CalculateReturns(age, retireAge, WithdrawalUntil, MarketData.FixedIndexedRate, MarketData.FixedIndexedDeviation, amount, TaxType, status, income, Riders));
                 data.VariableMedian = VariableSorted[4000 / 2];

@@ -51,7 +51,7 @@ export class Results {
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
 
     let data = {
-      labels: ["Worst Case", "Median Case", "Best Case"],
+      labels: ["Lower Quartile", "Median", "Upper Quartile"],
       datasets: [{
         label: "Brokerage",
         data: [this.data.brokerageLowerQuartile, this.data.brokerageMedian, this.data.brokerageUpperQuartile],

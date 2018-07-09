@@ -42,9 +42,9 @@
 
     <currency-field input-value.two-way="amount" label-text="I plan to invest"></currency-field>
     <dropdown label-text="The money I will invest is" placeholder-text="Choose a tax status" dropdown-id="tax-type">
-      <button type="button" click.trigger="taxType = TaxType.qualified">Qualified</button>
-      <button type="button" click.trigger="taxType = TaxType.unqualified">Non-qualified</button>
-      <button type="button" click.trigger="taxType = TaxType.roth">Tax-free</button>
+      <button type="button" click.trigger="taxType = TaxStatus.qualified">Qualified</button>
+      <button type="button" click.trigger="taxType = TaxStatus.unqualified">Non-qualified</button>
+      <button type="button" click.trigger="taxType = TaxStatus.roth">Tax-free</button>
     </dropdown>
 
   </section>

@@ -89,14 +89,13 @@ namespace GuaranteedIncome.Models
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);//random number from -3 to 3 
                     if (j == retireAge)
                     {
-                        double assetAtRetire = temp;
-                        if (assetAtRetire < principle && isGMAB)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
+                        if (isGMAB && (principle > temp))
                         {
-                            assetAtRetire = principle;
                             temp = principle;
                         }
-                        minWithdrawal = CalcWithdrawal(mean, principle, deathAge - retireAge+1, taxType, status, principle);//minimum withdrawal used for GMWB rider
-                       // Console.WriteLine(minWithdrawal);
+                        minWithdrawal = principle / (deathAge - retireAge);
+                        //minWithdrawal = CalcWithdrawal(mean, principle, deathAge - retireAge+1, taxType, status, principle);//minimum withdrawal used for GMWB rider
+                        // Console.WriteLine(minWithdrawal);
                     }
                     if (j < retireAge)
                     {

@@ -13,7 +13,7 @@ export class Inputs {
   amount: number = undefined;
 
   // Immediate
-  taxType: TaxType = undefined;
+  taxType: number = undefined;
 
   // Deferred
   retireAge: number = undefined;
@@ -35,10 +35,10 @@ export class Inputs {
   }
 }
 
-export enum TaxType {
-  unqualified = 0,
-  qualified,
-  roth
+export enum TaxStatus {
+  roth = 0,
+  unqualified=1,
+  qualified=2
 }
 
 export enum FilingStatus {

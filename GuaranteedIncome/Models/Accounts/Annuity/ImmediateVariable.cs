@@ -53,14 +53,13 @@ namespace GuaranteedIncome.Models
                     double rate = mean + stdDeviation * (rand.NextDouble() * (6) - 3);
                     if (j == retireAge)
                     {
-                        double assetAtRetire = temp;
-                        if (assetAtRetire < principle && isGMAB)//if they have GMAB then set Amount in Annuity equal to principle. (only if amount is less than principle)
+                        if (isGMAB && (principle > temp))
                         {
-                            assetAtRetire = principle;
                             temp = principle;
                         }
 
-                         minWithdrawal = CalcWithdrawal(mean, assetAtRetire, deathAge - j + 1, taxType, status, principle);
+
+                        minWithdrawal = principle / (deathAge - retireAge);// CalcWithdrawal(mean, principle, deathAge - j + 1, taxType, status, principle);
                     }
                 
                     if (j < retireAge)
@@ -71,7 +70,7 @@ namespace GuaranteedIncome.Models
                     {
 
                         double withdrawal = CalcWithdrawal(mean, temp, deathAge - j + 1, taxType, status, principle / (deathAge - retireAge));
-
+                        double taxes= TaxHelper.CalcTaxes(TaxHelper.CalcWithdrawalAmount(rate, temp, deathAge-retireAge+1), taxType, status, principle);
                         temp -= withdrawal;
 
                         withdrawal = withdrawal - withdrawal * .03;
