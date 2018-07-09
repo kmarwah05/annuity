@@ -106,6 +106,11 @@ namespace GuaranteedIncome.Models
                 data.BrokerageUpperQuartile = BrokerageSorted[4000*3 / 4];
 
 
+                //worst cases
+                data.VariableWorstCase = VariableSorted[0];
+                data.FixedIndexedWorstCase = FixedIndexedSorted[0];
+                data.BrokerageWorstCase = BrokerageSorted[0];
+
 
                 data.FixedIndexAboveBrokerage =1-AverageMedian.calcPercentageAbove(BrokerageSorted, data.FixedIndexedMedian);
                 data.VariableAboveBrokerage =1-AverageMedian.calcPercentageAbove(BrokerageSorted, data.VariableMedian);
