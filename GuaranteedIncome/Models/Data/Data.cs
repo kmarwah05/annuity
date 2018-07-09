@@ -12,14 +12,19 @@ namespace GuaranteedIncome.Models
         public double VariableLowerQuartile;
         public double VariableMedian;
         public double VariableUpperQuartile;
+        public double VariableWorstCase;
+
 
         public double FixedIndexedLowerQuartile;
         public double FixedIndexedMedian;
         public double FixedIndexedUpperQuartile;
+        public double FixedIndexedWorstCase;
 
         public double BrokerageLowerQuartile;
         public double BrokerageMedian;
         public double BrokerageUpperQuartile;
+        public double BrokerageWorstCase;
+
 
         public double FixedIndexAboveBrokerage;//fixed index is above average brokerage
         public double VariableAboveBrokerage;
