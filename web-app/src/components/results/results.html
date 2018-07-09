@@ -4,6 +4,11 @@
   <section id="charts" class="charts">
     <div class="charts__hero">
     <div class="charts__chart"><canvas id="chart" width="300px" height="100px"></canvas></div>
+    <div class="charts__mobile">
+      <div><canvas id="lower-q-chart" width="100px" height="100px"></canvas></div>
+      <div><canvas id="median-chart" width="100px" height="85px"></canvas></div>
+      <div><canvas id="upper-q-chart" width="100px" height="95px"></canvas></div>
+    </div>
     </div>
     <p>We run through 1000 potential market scenarios to determine the payouts that each annuity will likely give you. Because we are generating random scenarios every time, your results may not be consistent, even if you enter the same inputs. Please remember that this tool exists to provide general guidance, and it does not guarantee results of any kind.</p>
   </section>
@@ -44,7 +49,7 @@
         <h1 class="stats__percent-large stats__percent-large--fixed">${ fixedPercentage }%</h1>
         <caption>of the time, a fixed annuity pays out more than a brokerage account.</caption>
         <ul class="stats__categories">
-          <li>Median avg. yearly payout:</li>
+          <li>Yearly payout:</li>
         </ul>
         <ul class="stats__stats">
           <li>$${ data.fixed.format(2, 3) }</li>
@@ -68,7 +73,7 @@
       </rider>
     </section>
     <button class="new-inputs" click.trigger="newInputs()">
-      Or enter new inputs
+      Change inputs
     </button>
   </div>
 

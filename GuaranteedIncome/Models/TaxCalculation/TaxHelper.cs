@@ -47,7 +47,7 @@ namespace GuaranteedIncome.Models
             
             double withdrawal = CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing);
             double taxes =CalcTaxes(withdrawal, taxType, status, principle);
-            return CalcWithdrawalAmount(rate, presentValue, yearsWithdrawing) - CalcTaxes(CalcWithdrawalAmount(rate, presentValue,yearsWithdrawing), taxType,status,principle);
+            return withdrawal-taxes;
         }
 
     }

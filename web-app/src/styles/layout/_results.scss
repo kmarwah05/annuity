@@ -15,7 +15,30 @@
 
   &__chart {
     width: 100%;
-    height: 10%;
+  }
+
+  &__mobile {
+    display: none;
+    width: 100%;
+    
+    div {
+      width: 60%;
+      margin: 0 auto;
+
+      @media screen and (max-width: 540px) {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    &__mobile {
+      display: block;
+    }
+
+    &__chart {
+      display: none;
+    }
   }
 }
 
