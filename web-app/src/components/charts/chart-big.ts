@@ -7,6 +7,7 @@ import { Chart as C } from 'chart.js';
 export class ChartBig {
   @bindable data: Data;
 
+  chart: C;
   ea: EventAggregator;
   chartMax: number;
 
@@ -25,6 +26,10 @@ export class ChartBig {
   }
 
   buildChart() {
+    if (this.chart != null) {
+      this.chart.destroy();
+    }
+
     let ctx = (document.getElementById("chart") as HTMLCanvasElement).getContext("2d");
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
 
@@ -132,7 +137,7 @@ export class ChartBig {
       }
     };
     
-    new C(ctx, {
+    this.chart = new C(ctx, {
       type: "bar",
       data: data,
       options: options
