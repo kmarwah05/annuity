@@ -7,6 +7,8 @@ import { Chart as C } from 'chart.js';
 export class ChartsMobile {
   @bindable data: Data;
 
+  upperChart: C;
+  lowerChart: C;
   ea: EventAggregator;
   chartMax: number;
 
@@ -25,6 +27,13 @@ export class ChartsMobile {
   }
 
   buildCharts() {
+    if (this.upperChart != null) {
+      this.upperChart.destroy();
+    }
+    if (this.lowerChart != null) {
+      this.lowerChart.destroy();
+    }
+
     let lowerCtx = (document.getElementById("lower-q-chart") as HTMLCanvasElement).getContext("2d");
     let upperCtx = (document.getElementById("upper-q-chart") as HTMLCanvasElement).getContext("2d");
     this.chartMax = Math.ceil(Math.max(this.data.fixedIndexedUpperQuartile) * 2.5 / 10000) * 10000;
@@ -85,13 +94,13 @@ export class ChartsMobile {
       }]
     };
 
-    new C(lowerCtx, {
+    this.lowerChart = new C(lowerCtx, {
       type: "bar",
       data: lowerData,
       options: this.getMobileChartOptions(true, false)
     });
 
-    new C(upperCtx, {
+    this.upperChart = new C(upperCtx, {
       type: "bar",
       data: upperData,
       options: this.getMobileChartOptions(false, true)

@@ -3,7 +3,6 @@ import { EventAggregator, Subscription } from "aurelia-event-aggregator";
 import { inject } from "aurelia-framework";
 import { Data } from "scripts/data";
 import { APIRequest } from "scripts/api-request";
-import { isNullOrUndefined } from "util";
 
 @inject(EventAggregator)
 export class App {
@@ -28,7 +27,7 @@ export class App {
   attached() {
     this.onSubmit = this.ea.subscribe("send", () => {
       this.inputs.complete(this.isFixed, this.endAge);
-
+      
       APIRequest.postInputs(this.inputs)
       .catch(error => {
         console.log(error);
