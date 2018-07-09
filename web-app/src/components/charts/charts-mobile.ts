@@ -18,7 +18,8 @@ export class ChartsMobile {
 
   attached() {
     this.ea.subscribe("reload", r => {
-      if (r === "reloaded") {
+      if (r.mesaage === "reloaded") {
+        this.data = r.data;
         this.buildCharts();
       }
     });

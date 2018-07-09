@@ -17,7 +17,8 @@ export class ChartBig {
 
   attached() {
     this.ea.subscribe("reload", r => {
-      if (r === "reloaded") {
+      if (r.message === "reloaded") {
+        this.data = r.data;
         this.buildChart();
       }
     });

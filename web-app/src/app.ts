@@ -16,16 +16,13 @@ export class App {
   endAge: number;
 
   ea: EventAggregator;
-  onSubmit: Subscription;
-  onNewInputs: Subscription;
-  onReloadWithRiders: Subscription;
 
   constructor(EventAggregator) {
     this.ea = EventAggregator;
   }
 
   attached() {
-    this.onSubmit = this.ea.subscribe("send", () => {
+    this.ea.subscribe("send", () => {
       this.inputs.complete(this.isFixed, this.endAge);
       
       APIRequest.postInputs(this.inputs)
@@ -42,18 +39,23 @@ export class App {
       });
     });
 
-    this.onNewInputs = this.ea.subscribe("new inputs", () => {
+    this.ea.subscribe("new inputs", () => {
       this.currentPage = Pages.Input;
     });
 
-    this.onReloadWithRiders = this.ea.subscribe("reload", r => {
+    this.ea.subscribe("reload", r => {
       if (r.withRiders) {
         this.inputs.riders = r.withRiders;
         APIRequest.postInputs(this.inputs)
         .then(() => {
           this.data = APIRequest.response;
           this.currentPage = Pages.Results;
-          this.ea.publish("reload", "reloaded");
+        })
+        .then(() => {
+          this.ea.publish("reload", {
+            message: "reloaded",
+            data: this.data
+          });
         });
       }
     });
